@@ -26,7 +26,10 @@ async def desc_with_footer(channel, desc: str, footer: str, timestamp: str):
     embed = discord.Embed()
     embed.description = desc
     embed.set_footer(text=footer)
-    embed.timestamp = datetime_from_struct_time(timestamp)
+    try:
+        embed.timestamp = datetime_from_struct_time(timestamp)
+    except TypeError:
+        pass  # hurr durr type error
     await channel.send(embed=embed)
 
 

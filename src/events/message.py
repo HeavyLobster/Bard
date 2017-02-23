@@ -1,6 +1,6 @@
 import re
 
-from src.util import ClickableEmbed
+from src.events import reactions
 from src.util import config_holder
 from src.util import embeds
 
@@ -31,6 +31,7 @@ async def currency_cmd(msg):
 
 embed = None
 
+
 async def custom_reaction_cmd(msg):
     msg.content = msg.content[1:]
     if msg.content.startswith('add') and msg.content[4:7] != 'add':  # the famous !add add
@@ -45,15 +46,17 @@ async def custom_reaction_cmd(msg):
             return
         await embeds.desc_only(msg.channel, f'Added new Reaction called {msg.content.split()[1]}.')
         await msg.delete()
+
     elif msg.content.startswith('listall'):
         custom_reactions = data.get_all_custom_reactions_on_guild(msg.guild.id)
         if custom_reactions is None:
             await embeds.desc_only(msg.channel, 'Sorry, no Quotes were found for this Server.')
         else:
-            # Create Table
-            global embed
-            embed = ClickableEmbed.ClickableEmbed(f'- All Custom Reactions on {msg.guild.name} - ', custom_reactions)
-            await embed.send(msg.channel)
+            await reactions.create_custom_reaction_embed(f'- All Custom Reactions on {msg.guild.name} - ',
+                                                         custom_reactions, msg.channel,
+                                                         'https://cdn.discordapp.com/attachments/172251363110027264/'
+                                                         '284429672748548096/finebard_by_kuglu-da3ul5m.png')
+        msg.delete()
 
     else:
         reaction = data.get_custom_reaction(msg.guild.id, msg.content.split()[0])

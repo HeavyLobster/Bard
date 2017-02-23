@@ -1,7 +1,7 @@
 import discord
 import os
 
-from src.events import message, members
+from src.events import message, members, reactions
 
 print('Loading Bot...')
 
@@ -36,15 +36,15 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_reaction_add(reaction, user):
-    if message.embed is None:
-        return
     if user.id != client.user.id:
-        if reaction.message.id == message.embed.id:
-            if reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-                await message.embed.move(True, user)
-            elif reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
-                await message.embed.move(False, user)
-
+        try:
+            if reaction.message.id == reactions.get_custom_reaction_embed().id:
+                if reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
+                    await reactions.move_custom_reaction_embed(True, user)
+                elif reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
+                    await reactions.move_custom_reaction_embed(False, user)
+        except AttributeError:
+            pass
 
 @client.event
 async def on_reaction_remove(reaction, user):
