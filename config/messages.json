@@ -1,6 +1,7 @@
 {
   "prefixes": {
     "currency": "$",
-    "custom_reactions": "!"
+    "custom_reactions": "!",
+    "hugemoji": "-hm"
   }
 }

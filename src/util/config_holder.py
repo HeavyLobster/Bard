@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import random
@@ -39,6 +40,13 @@ class ConfigHolder:
             print(f'done.')
         print('Done saving Configs.')
 
+    def get_prefix(self, key: str):
+        try:
+            return self._configs['messages']['prefixes'][key]
+        except KeyError:
+            print(f'Error trying to access Prefixes at key {key}')
+            return None
+
     def get_config(self, file, key=''):
         if key == '':
             try:
@@ -51,28 +59,44 @@ class ConfigHolder:
             except KeyError:
                 print(f'Error trying to access Config {file} at key \'{key}\'.')
 
-    def add_custom_reaction(self, server_id: str, name: str, contents: str):
-        if server_id not in self._configs['custom_reactions']:
-            self._configs['custom_reactions'][server_id] = dict()
-        if name not in self._configs['custom_reactions'][server_id]:
-            self._configs['custom_reactions'][server_id][name] = []
-        self._configs['custom_reactions'][server_id][name].append(contents)
-        print(f'Added new Custom Reaction for {server_id} named {name}')
+    def add_custom_reaction(self, guild_id: str, name: str, contents: str, added_by: str):
+        guild_id = str(guild_id)
+        name = name.lower()
+        if guild_id not in self._configs['custom_reactions']:
+            self._configs['custom_reactions'][guild_id] = dict()
+        if name not in self._configs['custom_reactions'][guild_id]:
+            self._configs['custom_reactions'][guild_id][name] = []
+        self._configs['custom_reactions'][guild_id][name].append([contents, added_by,
+                                                                  str(datetime.datetime.now())[:-7]])
+        print(f'Added new Custom Reaction for {guild_id} named {name}')
 
-    def remove_custom_reaction(self, server_id, name):
+    def remove_custom_reaction(self, guild_id, name):
         # return true or false based on success
         pass
 
-    def get_custom_reaction(self, server_id: str, name: str):
+    def get_custom_reaction(self, guild_id: int, name: str):
+        guild_id = str(guild_id)
+        name = name.lower()
         try:
-            server = self._configs['custom_reactions'][server_id]
+            guild = self._configs['custom_reactions'][guild_id]
         except KeyError:
-            return 'There are **no Quotes** for this Server.'
+            return 'There are **no Quotes** for this guild.'
         else:
             try:
-                reaction = server[name]
-                print(reaction)
+                reaction = guild[name]
             except KeyError:
                 return 'No Quote found.'
             else:
                 return reaction[random.randrange(0, len(reaction))]
+
+    def get_all_custom_reactions_on_guild(self, guild_id: int):
+        guild_id = str(guild_id)
+        all_custom_reactions = list()
+        try:
+            for namespace in self._configs['custom_reactions'][guild_id]:
+                for custom_reaction in self._configs['custom_reactions'][guild_id][namespace]:
+                    all_custom_reactions.append([custom_reaction[0], custom_reaction[1], custom_reaction[2]])
+        except KeyError:
+            return None
+        else:
+            return all_custom_reactions

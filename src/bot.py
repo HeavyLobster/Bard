@@ -36,7 +36,14 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_reaction_add(reaction, user):
-    pass
+    if message.embed is None:
+        return
+    if user.id != client.user.id:
+        if reaction.message.id == message.embed.id:
+            if reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
+                await message.embed.move(True, user)
+            elif reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
+                await message.embed.move(False, user)
 
 
 @client.event
@@ -66,7 +73,7 @@ async def on_channel_update(before, after):
 
 @client.event
 async def on_member_join(member):
-    members.join(member)
+    await members.join(member)
 
 
 @client.event
