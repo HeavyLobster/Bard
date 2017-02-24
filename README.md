@@ -10,7 +10,7 @@ Source Code for the Discord Bot of the Bardians Discord Server. If you're here t
 - [ ] League Commands
 
 ### How it works
-Not at all, currently.
+You need to export an environment variable calle `DISCORD_TOKEN` which the bot will use to login.
 
 ### Setup
 *Dependencies:*
