@@ -1,5 +1,6 @@
-import discord
 import random
+
+import discord
 
 from src.util import embeds
 
@@ -41,8 +42,6 @@ class ClickableEmbed:
         except IndexError:
             self.index = 0
         else:
-            await self.embedded_message.add_reaction('\N{BLACK LEFT-POINTING TRIANGLE}')
-            await self.embedded_message.add_reaction('\N{BLACK RIGHT-POINTING TRIANGLE}')
             await self.embedded_message.edit(embed=next_contents)
 
     async def remove(self):

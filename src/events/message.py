@@ -1,12 +1,16 @@
 import re
 
+import bs4
+import json
+import urllib
+
 from src.events import reactions
-from src.util import config_holder
+from src.util import data_cruncher
 from src.util import embeds
 
 print('Loading Message Event Handler...')
 
-data = config_holder.ConfigHolder()
+data = data_cruncher.data
 
 
 async def handle_message(msg):
@@ -19,6 +23,9 @@ async def handle_message(msg):
     elif msg.content.startswith(data.get_prefix('custom_reactions')):
         await custom_reaction_cmd(msg)
 
+    elif msg.content.startswith('-'):
+        pass
+
     elif msg.content.startswith(data.get_prefix('hugemoji')):
         await hugemoji_cmd(msg)
 
@@ -27,9 +34,6 @@ async def handle_message(msg):
 
 async def currency_cmd(msg):
     pass
-
-
-embed = None
 
 
 async def custom_reaction_cmd(msg):
@@ -42,9 +46,19 @@ async def custom_reaction_cmd(msg):
             data.add_custom_reaction(msg.guild.id, msg.content.split()[1],
                                      ' '.join(msg.content.split()[2:]), msg.author.name)
         except IndexError:
-            pass
             return
         await embeds.desc_only(msg.channel, f'Added new Reaction called {msg.content.split()[1]}.')
+        await msg.delete()
+
+    elif msg.content == 'meow':
+        link = json.load(urllib.request.urlopen('http://random.cat/meow'))['file']
+        await embeds.img_only(msg.channel, link)
+        await msg.delete()
+
+    elif msg.content == 'woof':
+        link = bs4.BeautifulSoup(urllib.request.urlopen('http://random.dog').read(),
+                                 'html.parser').findAll('img')[0].get('src')
+        await embeds.img_only(msg.channel, f'http://random.dog/{link}')
         await msg.delete()
 
     elif msg.content.startswith('listall'):
@@ -54,16 +68,20 @@ async def custom_reaction_cmd(msg):
         else:
             await reactions.create_custom_reaction_embed(f'- All Custom Reactions on {msg.guild.name} - ',
                                                          custom_reactions, msg.channel,
-                                                         'https://cdn.discordapp.com/attachments/172251363110027264/'
-                                                         '284429672748548096/finebard_by_kuglu-da3ul5m.png')
-        msg.delete()
+                                                         'https://lh3.googleusercontent.com/'
+                                                         'BvIDv_HYH8HnHubWn_lle2eC5lm5lY3kAGI'
+                                                         'kFniSk8x_SDpbUr0dlNTe6P6j_C8f4cSmH-d'
+                                                         '0rtuSlUU=w1441-h740')
+        await msg.delete()
 
     else:
         reaction = data.get_custom_reaction(msg.guild.id, msg.content.split()[0])
-        if reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
-            await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
-        else:
+        if reaction is None:
+            await embeds.desc_only(msg.channel, f'Sorry. no Quote named "{msg.content.split()[0]}" found.')
+        elif reaction[0] != '':
             await embeds.desc_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+        elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
+            await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
         await msg.delete()
 
 

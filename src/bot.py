@@ -1,6 +1,8 @@
-import discord
 import os
 
+import discord
+
+from src import twitch
 from src.events import message, members, reactions
 
 print('Loading Bot...')
@@ -11,7 +13,8 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('Logged in.')
+    print('Logged in, starting Twitch Subscription Listener...')
+    client.loop.create_task(twitch.update_streams())
 
 
 @client.event

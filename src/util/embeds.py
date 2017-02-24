@@ -1,6 +1,7 @@
 import datetime
-import discord.embeds
 from time import strptime, mktime
+
+import discord.embeds
 
 
 def datetime_from_struct_time(struct_time):
@@ -33,9 +34,17 @@ async def desc_with_footer(channel, desc: str, footer: str, timestamp: str):
     await channel.send(embed=embed)
 
 
-async def img_with_footer(channel, link: str, footer: str, timestamp: str):
+async def img_with_footer(channel, link: str, footer: str, timestamp):
     embed = discord.Embed()
     embed.set_image(url=link)
     embed.set_footer(text=footer)
     embed.timestamp = datetime_from_struct_time(timestamp)
+    await channel.send(embed=embed)
+
+
+async def url_with_desc(channel, url: str, desc: str):
+    embed = discord.Embed()
+    embed.url = url
+    embed.description = desc
+    embed.timestamp = datetime.datetime.now()
     await channel.send(embed=embed)

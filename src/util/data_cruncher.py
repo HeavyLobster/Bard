@@ -1,13 +1,16 @@
 import datetime
-import json
 import os
 import random
+from urllib.error import URLError
+from urllib.request import urlopen
 
-print('Loading Config Holder...')
+import json
+
+print('Loading Data Holder...')
 config_dir = os.path.join(os.getcwd(), 'config')
 
 
-class ConfigHolder:
+class DataCruncher:
     def __init__(self):
         # Load all Configs
         self._configs = dict()
@@ -16,7 +19,8 @@ class ConfigHolder:
             # Remove .json Extension for simpler access
             self._configs[file_name[:-5]] = self.load_config(file_name)
             print('done.')
-        print('Done loading Config Holder.')
+        self._streams = self.get_streams_status()
+        print('Done loading Data Holder.')
 
     def load_config(self, file_path):
         path = os.path.join(config_dir, file_path)
@@ -80,12 +84,12 @@ class ConfigHolder:
         try:
             guild = self._configs['custom_reactions'][guild_id]
         except KeyError:
-            return 'There are **no Quotes** for this guild.'
+            return None
         else:
             try:
                 reaction = guild[name]
             except KeyError:
-                return 'No Quote found.'
+                return None
             else:
                 return reaction[random.randrange(0, len(reaction))]
 
@@ -100,3 +104,39 @@ class ConfigHolder:
             return None
         else:
             return all_custom_reactions
+
+    def get_twitch_subscriptions(self):
+        try:
+            return self._configs['twitch']['subscriptions']
+        except KeyError:
+            return None
+
+    def get_streams_status(self):
+        streams = list()
+        url = 'https://api.twitch.tv/kraken/streams/'
+        print('Getting Twitch Stream Status... ', end='')
+        for streamer in self.get_twitch_subscriptions():
+            try:
+                resp = json.load(urlopen(f'{url}{streamer}?client_id={os.environ["TWITCH_TOKEN"]}',
+                                         timeout=5))
+            except URLError:
+                print(f'Error trying to fetch Stream Data for {streamer}')
+            else:
+                if resp['stream'] is None:
+                    streams.append([streamer, False])
+                else:
+                    streams.append([streamer, True])
+        print('done.')
+        return streams
+
+    def get_streams(self):
+        return self._streams
+
+    def get_stream_announcement_channel(self):
+        return int(self._configs['twitch']['announcement_channel'])
+
+    def add_stream(self):
+        pass
+
+
+data = DataCruncher()

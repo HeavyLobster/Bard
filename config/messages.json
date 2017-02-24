@@ -1,5 +1,6 @@
 {
   "prefixes": {
+    "administration": "/",
     "currency": "$",
     "custom_reactions": "!",
     "hugemoji": "-hm"
