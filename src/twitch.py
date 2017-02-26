@@ -1,5 +1,6 @@
-import aiohttp
 import asyncio
+
+import aiohttp
 import os
 
 from src import bot
@@ -44,7 +45,8 @@ async def update_streams(channel):
                     await url_with_desc(channel,
                                         f'Twitch: {curr_streamer[0]}',
                                         f'http://twitch.tv/{curr_streamer[0]}',
-                                        f'**{curr_streamer[0]}** is now {"online" if curr_streamer[1] else "offline"}!')
+                                        f'**{curr_streamer[0]}** is now {"online" if curr_streamer[1] else "offline"}!'
+                                        f'\n Check it out here: http://twitch.tv/{curr_streamer[0]}')
                 curr_streamers.append(curr_streamer)
                 await asyncio.sleep(1)  # Rate limit is around 1 request per second
             last_streamers = curr_streamers

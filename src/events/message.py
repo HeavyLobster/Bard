@@ -1,9 +1,10 @@
 import asyncio
-import discord
 import json
 import re
-import requests
 import urllib
+
+import discord
+import requests
 
 from src.events import reactions
 from src.util import data_cruncher
@@ -18,7 +19,7 @@ async def handle_message(msg):
     if msg.author.id == 226612862620008448:  # message by bot itself
         return
 
-    elif msg.author.id == data.get_owner() and msg.content.startswith('!ttwitch'):
+    elif msg.author.id == data.get_owner()[0] and msg.content.startswith('!ttwitch'):
         # evaluation command for me
         try:
             await embeds.desc_only(msg.channel, eval(msg.content[5:]))
@@ -79,7 +80,7 @@ async def administration_cmd(msg):
                 await embeds.desc_only(msg.channel, f'Removed {str(msg.mentions[0])} from Moderators '
                                                     f'for this Server.')
 
-    if msg.author.id != data.get_owner():  # Owner-Only Commands
+    if msg.author.id != data.get_owner()[0]:  # Owner-Only Commands
         return
 
     if msg.content.startswith('addadmin'):
