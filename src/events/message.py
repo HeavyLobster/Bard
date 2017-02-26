@@ -1,13 +1,14 @@
 import asyncio
-import discord
 import json
 import re
-import requests
 import urllib
-from src.util import data_cruncher
-from src.util import embeds
+
+import discord
+import requests
 
 from src.events import reactions
+from src.util import data_cruncher
+from src.util import embeds
 
 print('Loading Message Event Handler... ', end='')
 
@@ -121,7 +122,7 @@ async def role_cmd(msg):
         return True
 
     async def get_role_by_name(name):
-        return discord.utils.find(lambda r: r.name == name, msg.guild.roles)
+        return discord.utils.find(lambda r: r.name == (' '.join(name) if type(name) is list else name), msg.guild.roles)
 
     async def get_comma_separated_roles():
         comma_separated_roles = list()
@@ -131,7 +132,6 @@ async def role_cmd(msg):
             single_role = await get_role_by_name(single_role)
             comma_separated_roles.append([single_role, role_name])
         return comma_separated_roles
-
     role = await get_role_by_name(msg.content.split()[1:])
     if msg.content.startswith('assign'):
         if not await self_assigning_enabled():
@@ -194,9 +194,20 @@ async def role_cmd(msg):
         elif not success:
             await embeds.desc_only(msg.channel, 'Role is not self-assignable, can\'t remove.')
         elif success:
-            await embeds.desc_only(msg.channel, f'Role {role.name} is no longer self-assignable.')
+            await embeds.desc_only(msg.channel, f'Role `{role.name} is no longer self-assignable.')
 
-    await msg.delete()
+    if msg.guild.id in data.get_role_servers() \
+            and msg.author.id not in data.get_admins_and_above(msg.guild.id):  # Admin and Above commands
+        return
+
+    if msg.content == 'switch':
+        new_state = data.switch_role_self_assigning_state(msg.guild.id)
+        if new_state is None:
+            await embeds.desc_only(msg.channel, 'No self-assignable Roles set for this Server.')
+        else:
+            await embeds.desc_only(msg.channel, f'Self-Assigning Roles is now '
+                                                f'**{"enabled" if new_state else "disabled"}**.')
+            # await msg.delete()
 
 
 async def currency_cmd(msg):
@@ -204,7 +215,7 @@ async def currency_cmd(msg):
 
 
 async def custom_reaction_cmd(msg):
-    msg.content = msg.content[2:]
+    msg.content = msg.content[1:]
     if msg.content.startswith('add') and msg.content[4:7] != 'add':  # the famous !add add
         try:
             if len(msg.content.split()[2:]) <= 1:
@@ -225,7 +236,6 @@ async def custom_reaction_cmd(msg):
     elif msg.content == 'woof':
         url = requests.get('https://api.giphy.com/v1/gifs/random?'
                            'api_key=dc6zaTOxFJmzC&tag=dog').json()['data']['image_original_url']
-        print(url)
         await embeds.img_only(msg.channel, f'{url}')
         await msg.delete()
 
@@ -243,14 +253,19 @@ async def custom_reaction_cmd(msg):
         await msg.delete()
 
     else:
-        reaction = data.get_custom_reaction(msg.guild.id, msg.content.split()[0])
-        if reaction is None:
-            await embeds.desc_only(msg.channel, f'Sorry. no Custom Reaction named "{msg.content.split()[0]}" found.')
-        elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
-            await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
-        elif reaction[0] != '':
-            await embeds.desc_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
-        await msg.delete()
+        try:
+            reaction = data.get_custom_reaction(msg.guild.id, msg.content.split()[0])
+        except IndexError:
+            pass
+        else:
+            if reaction is None:
+                pass
+            elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
+                await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+                await msg.delete()
+            elif reaction[0] != '':
+                await embeds.desc_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+                await msg.delete()
 
 
 async def hugemoji_cmd(msg):

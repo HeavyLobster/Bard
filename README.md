@@ -2,6 +2,7 @@
 Source Code for the Discord Bot of the Bardians Discord Server. If you're here to propose new Features, please open an Issue!
 
 ### Planned Features
+- [X] Role-Assignment for Users
 - [ ] Currency Generation & Gambling 
 - [ ] Minigames
 - [ ] Administration Commands
@@ -18,8 +19,8 @@ You need to export an environment variable called `DISCORD_TOKEN` which the bot 
 - dataset
 - stuf
 
-Most importantly, enter your Discord Token in options.json. Without it, the Bot is not able to login.
-Administrators and Moderators need to be supplied via the Arrays in options.json, refer to those as an example. Get their User ID via Discord Developer Mode and right click - Copy ID. 
+
+Additionally, set your ID in `users.json` so you can add Administrators and Moderators.
 
 ### Questions, requests, anything?
 Open an issue!

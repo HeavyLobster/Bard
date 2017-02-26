@@ -152,11 +152,18 @@ class DataCruncher:
             return None
         return self._configs['roles'][guild_id]['roles']
 
-    def get_role_self_assigning_state(self, guild_id: str):
+    def get_role_self_assigning_state(self, guild_id: int):
         guild_id = str(guild_id)
         if guild_id not in self._configs['roles']:
             return None
         return self._configs['roles'][guild_id]['enabled']
+
+    def switch_role_self_assigning_state(self, guild_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['roles']:
+            return None
+        self._configs['roles'][guild_id]['enabled'] = not self._configs['roles'][guild_id]['enabled']
+        return self.get_role_self_assigning_state(guild_id)
 
     def add_moderator(self, guild_id: int, moderator_user_id: int):
         guild_id = str(guild_id)
