@@ -1,10 +1,9 @@
 import asyncio
+import discord
 import json
 import re
-import urllib
-
-import discord
 import requests
+import urllib
 
 from src.events import reactions
 from src.util import data_cruncher
@@ -19,7 +18,8 @@ async def handle_message(msg):
     if msg.author.id == 226612862620008448:  # message by bot itself
         return
 
-    elif msg.author.id == 196989358165852160 and msg.content.startswith('!eval'):  # evaluation command for me
+    elif msg.author.id == data.get_owner() and msg.content.startswith('!ttwitch'):
+        # evaluation command for me
         try:
             await embeds.desc_only(msg.channel, eval(msg.content[5:]))
         except (TypeError, NameError, AttributeError) as e:
@@ -165,7 +165,7 @@ async def role_cmd(msg):
                 await embeds.desc_only(msg.channel, f'**There\'s a total of {len(role_names)} self-assignable '
                                                     f'Roles:**\n {", ".join((x.name for x in role_names))}')
 
-    elif msg.guild.id in data.get_role_servers() \
+    elif str(msg.guild.id) in data.get_role_servers() \
             and msg.author.id not in data.get_moderators_and_above(msg.guild.id):  # Moderator and above Commands
         return
 
@@ -196,7 +196,7 @@ async def role_cmd(msg):
         elif success:
             await embeds.desc_only(msg.channel, f'Role `{role.name} is no longer self-assignable.')
 
-    if msg.guild.id in data.get_role_servers() \
+    if str(msg.guild.id) in data.get_role_servers() \
             and msg.author.id not in data.get_admins_and_above(msg.guild.id):  # Admin and Above commands
         return
 

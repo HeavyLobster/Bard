@@ -111,6 +111,7 @@ class DataCruncher:
         return int(self._configs['twitch']['announcement_channel'])
 
     def get_moderators_and_above(self, guild_id: int):
+        guild_id = str(guild_id)
         try:
             return self._configs['users'][guild_id]['moderators'] \
                    + self._configs['users'][guild_id]['administrators'] \
@@ -120,6 +121,7 @@ class DataCruncher:
             return None
 
     def get_admins_and_above(self, guild_id: int):
+        guild_id = str(guild_id)
         try:
             return self._configs['users'][guild_id]['administrators'] \
                    + self._configs['users']['owner']
