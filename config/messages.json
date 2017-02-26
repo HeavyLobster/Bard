@@ -1,8 +1,9 @@
 {
-  "prefixes": {
-    "administration": "/",
-    "currency": "$",
-    "custom_reactions": "!",
-    "hugemoji": "-hm"
-  }
+    "prefixes": {
+        "administration": "/",
+        "roles": ".",
+        "currency": "$",
+        "custom_reactions": "!!",
+        "hugemoji": "-hm"
+    }
 }

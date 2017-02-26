@@ -1,11 +1,11 @@
-import os
-
 import discord
+import os
 
 from src import twitch
 from src.events import message, members, reactions
+from src.util.data_cruncher import data
 
-print('Loading Bot...')
+print('Loading Bot... ', end='')
 
 # All Events go through here.
 client = discord.Client()
@@ -13,8 +13,8 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('Logged in, starting Twitch Subscription Listener...')
-    client.loop.create_task(twitch.update_streams())
+    print('Logged in, starting Twitch Stream Update Listener...')
+    client.loop.create_task(twitch.update_streams(client.get_channel(data.get_stream_announcement_channel())))
 
 
 @client.event
@@ -48,6 +48,7 @@ async def on_reaction_add(reaction, user):
                     await reactions.move_custom_reaction_embed(False, user)
         except AttributeError:
             pass
+
 
 @client.event
 async def on_reaction_remove(reaction, user):
@@ -147,3 +148,7 @@ async def on_member_unban(server, user):
 def start():
     client.run(os.environ['DISCORD_TOKEN'])
     message.data.save_all()
+
+
+print('done.')
+print('All Modules Loaded. Establishing Connection to Discord...')

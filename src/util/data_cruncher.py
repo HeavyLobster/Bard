@@ -1,10 +1,7 @@
 import datetime
+import json
 import os
 import random
-from urllib.error import URLError
-from urllib.request import urlopen
-
-import json
 
 print('Loading Data Holder...')
 config_dir = os.path.join(os.getcwd(), 'config')
@@ -19,7 +16,6 @@ class DataCruncher:
             # Remove .json Extension for simpler access
             self._configs[file_name[:-5]] = self.load_config(file_name)
             print('done.')
-        self._streams = self.get_streams_status()
         print('Done loading Data Holder.')
 
     def load_config(self, file_path):
@@ -111,32 +107,93 @@ class DataCruncher:
         except KeyError:
             return None
 
-    def get_streams_status(self):
-        streams = list()
-        url = 'https://api.twitch.tv/kraken/streams/'
-        print('Getting Twitch Stream Status... ', end='')
-        for streamer in self.get_twitch_subscriptions():
-            try:
-                resp = json.load(urlopen(f'{url}{streamer}?client_id={os.environ["TWITCH_TOKEN"]}',
-                                         timeout=5))
-            except URLError:
-                print(f'Error trying to fetch Stream Data for {streamer}')
-            else:
-                if resp['stream'] is None:
-                    streams.append([streamer, False])
-                else:
-                    streams.append([streamer, True])
-        print('done.')
-        return streams
-
-    def get_streams(self):
-        return self._streams
-
     def get_stream_announcement_channel(self):
         return int(self._configs['twitch']['announcement_channel'])
 
-    def add_stream(self):
-        pass
+    def get_moderators_and_above(self, guild_id: int):
+        try:
+            return self._configs['users'][guild_id]['moderators'] \
+                   + self._configs['users'][guild_id]['administrators'] \
+                   + self._configs['users']['owner']
+        except KeyError:
+            print(f'Failed to fetch Moderators for Server with ID {guild_id}.')
+            return None
+
+    def get_admins_and_above(self, guild_id: int):
+        try:
+            return self._configs['users'][guild_id]['administrators'] \
+                   + self._configs['users']['owner']
+        except KeyError:
+            print(f'Failed to fetch Admins for Server with ID {guild_id}.')
+
+    def get_owner(self):
+        return self._configs['users']['owner']
+
+    def add_self_assignable_role(self, guild_id: int, role_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['roles']:
+            self._configs['roles'][guild_id] = {'enabled': True, 'roles': [role_id]}
+        else:
+            self._configs['roles'][guild_id]['roles'].append(role_id)
+
+    def remove_self_assignable_role(self, guild_id: int, role_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['roles']:
+            return None
+        try:
+            self._configs['roles'][guild_id]['roles'].remove(role_id)
+        except ValueError:
+            return False
+        return True
+
+    def get_self_assignable_roles(self, guild_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['roles']:
+            return None
+        return self._configs['roles'][guild_id]['roles']
+
+    def get_role_self_assigning_state(self, guild_id: str):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['roles']:
+            return None
+        return self._configs['roles'][guild_id]['enabled']
+
+    def add_moderator(self, guild_id: int, moderator_user_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['users']:
+            self._configs['users'][guild_id] = {'administrators': [], 'moderators': [moderator_user_id]}
+        elif moderator_user_id not in self._configs['users'][guild_id]['moderators']:
+            self._configs['users'][guild_id]['moderators'].append(moderator_user_id)
+
+    def remove_moderator(self, guild_id: int, moderator_user_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['users']:
+            return None
+        try:
+            self._configs['users'][guild_id]['moderators'].remove(moderator_user_id)
+        except ValueError:
+            return False
+        return True
+
+    def add_administrator(self, guild_id: int, administrator_user_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['users']:
+            self._configs['users'][guild_id] = {'administrators': [administrator_user_id], 'moderators': []}
+        elif administrator_user_id not in self._configs['users'][guild_id]['administrators']:
+            self._configs['users'][guild_id]['administrators'].append(administrator_user_id)
+
+    def remove_administrator(self, guild_id: int, administrator_user_id: int):
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['users']:
+            return None
+        try:
+            self._configs['users'][guild_id]['administrators'].remove(administrator_user_id)
+        except ValueError:
+            return False
+        return True
+
+    def get_role_servers(self):
+        return self._configs['roles']
 
 
 data = DataCruncher()

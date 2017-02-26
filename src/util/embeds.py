@@ -1,7 +1,6 @@
 import datetime
-from time import strptime, mktime
-
 import discord.embeds
+from time import strptime, mktime
 
 
 def datetime_from_struct_time(struct_time):
@@ -14,13 +13,28 @@ def datetime_from_struct_time(struct_time):
 async def desc_only(channel, desc: str):
     embed = discord.Embed()
     embed.description = desc
-    await channel.send(embed=embed)
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        print(f'Failed to send Description only, contents: {desc}')
 
 
 async def img_only(channel, link: str):
     embed = discord.Embed()
     embed.set_image(url=link)
-    await channel.send(embed=embed)
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        print(f'Failed to send Image with link: {link}.')
+
+
+async def video_only(channel, link: str):
+    embed = discord.Embed()
+    embed.video.url = link
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        print(f'Failed to send Video with link: {link}')
 
 
 async def desc_with_footer(channel, desc: str, footer: str, timestamp: str):
@@ -31,7 +45,7 @@ async def desc_with_footer(channel, desc: str, footer: str, timestamp: str):
         embed.timestamp = datetime_from_struct_time(timestamp)
     except TypeError:
         pass  # hurr durr type error
-    await channel.send(embed=embed)
+    return await channel.send(embed=embed)
 
 
 async def img_with_footer(channel, link: str, footer: str, timestamp):
@@ -39,12 +53,15 @@ async def img_with_footer(channel, link: str, footer: str, timestamp):
     embed.set_image(url=link)
     embed.set_footer(text=footer)
     embed.timestamp = datetime_from_struct_time(timestamp)
-    await channel.send(embed=embed)
+    return await channel.send(embed=embed)
 
 
-async def url_with_desc(channel, url: str, desc: str):
+async def url_with_desc(channel, title: str, url: str, desc: str):
     embed = discord.Embed()
-    embed.url = url
+    embed.author.name = title
+    embed.author.url = url
     embed.description = desc
-    embed.timestamp = datetime.datetime.now()
-    await channel.send(embed=embed)
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        print(f'Couldn\'t send Embed with Link {url}, description: {desc}')
