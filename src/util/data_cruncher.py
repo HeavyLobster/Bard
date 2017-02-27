@@ -204,5 +204,27 @@ class DataCruncher:
     def get_role_servers(self):
         return self._configs['roles']
 
+    def get_currency_server(self, guild_id: int):
+        return self._configs['currency'].get(str(guild_id))
+
+    def _get_currency_user(self, guild_id: int, player_id: int, money=0):
+        server = self.get_currency_server(guild_id)
+        if server is None:
+            self._configs[guild_id] = {player_id: money}  # Starts at 0
+        elif player_id not in self._configs[guild_id]:
+            self._configs[guild_id].update({player_id: money})
+        else:
+            if self._configs[guild_id][player_id] + money <= 0:
+                print(f'Can\'t change money of {player_id} on {guild_id} by {money}, would be negative.')
+            else:
+                self._configs[guild_id][player_id] += money
+        return self._configs[guild_id][player_id]
+
+    def get_currency_of_user(self, guild_id: int, player_id: int):
+        return self._get_currency_user(guild_id, player_id, 0)
+
+    def change_currency_of_user(self, guild_id: int, player_id: int, amount: int):
+        self._get_currency_user(guild_id, player_id, amount)
+
 
 data = DataCruncher()
