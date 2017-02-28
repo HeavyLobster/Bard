@@ -227,4 +227,6 @@ class DataCruncher:
         self._get_currency_user(guild_id, player_id, amount)
 
 
+# One central data Object to prevent Errors with the Configurations
 data = DataCruncher()
+

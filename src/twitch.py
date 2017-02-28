@@ -1,7 +1,7 @@
 import asyncio
-import os
 
 import aiohttp
+import os
 
 from src import bot
 from src.util.data_cruncher import data
@@ -21,6 +21,7 @@ async def get_stream(stream_name: str):
                         stream = [stream_name, True]
                 except KeyError:
                     print(f'Failed to access Stream data for {stream_name}.')
+                    # Something is wrong here with the Twitch API.
                     return [stream_name, None]
         except aiohttp.errors.ClientOSError:
             print('Can\'t fetch Stream Data...')
@@ -45,8 +46,8 @@ async def update_streams(channel):
                     await url_with_desc(channel,
                                         f'Twitch: {curr_streamer[0]}',
                                         f'http://twitch.tv/{curr_streamer[0]}',
-                                        f'**{curr_streamer[0]}** is now {"online" if curr_streamer[1] else "offline"}!'
-                                        f'\n http://twitch.tv/{curr_streamer[0]}')
+                                        f'**{curr_streamer[0]}** is now {"online!" if curr_streamer[1] else "offline."}'
+                                        f'\n {f"http://twitch.tv/{curr_streamer[0]}" if curr_streamer[1] else ""}')
                 curr_streamers.append(curr_streamer)
                 await asyncio.sleep(1)  # Rate limit is around 1 request per second
             last_streamers = curr_streamers

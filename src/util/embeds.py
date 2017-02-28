@@ -58,7 +58,6 @@ async def img_with_footer(channel, link: str, footer: str, timestamp):
 
 async def url_with_desc(channel, title: str, url: str, desc: str):
     embed = discord.Embed()
-    print(f'Sending Embed titled {title}, url {url}')
     embed.url = url
     embed.description = desc
     try:

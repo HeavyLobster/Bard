@@ -147,7 +147,7 @@ async def on_member_unban(server, user):
 
 def start():
     client.run(os.environ['DISCORD_TOKEN'])
-    message.data.save_all()
+    message.data_cruncher.data.save_all()
 
 
 print('done.')
