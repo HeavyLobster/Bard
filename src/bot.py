@@ -34,7 +34,7 @@ async def on_message_delete(msg):
 
 @client.event
 async def on_message_edit(before, after):
-    pass
+    await message.handle_message(after)
 
 
 @client.event

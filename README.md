@@ -11,7 +11,7 @@ Source Code for the Discord Bot of the Bardians Discord Server. If you're here t
 - [ ] League Commands
 
 ### How it works
-You need to export an environment variable called `DISCORD_TOKEN` which the bot will use to login, and one called `TWITCH_TOKEN` which is your Twitch API Client ID.
+You need to export an environment variable called `DISCORD_TOKEN` which the bot will use to login, and one called `TWITCH_TOKEN` which is your Twitch API Client ID, and another one called `LEAGUE_TOKEN` which is your LoL API Token.
 
 ### Setup
 *Dependencies:*

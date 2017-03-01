@@ -50,6 +50,14 @@ async def change_activity(msg):
 
 
 @permission_checks.check_if_admin
+async def set_log_channel(msg):
+    if data.set_log_channel(msg.guild.id, msg.channel.id):
+        return await embeds.desc_only(msg.channel, 'Log Channel set to **this channel**.')
+    else:
+        return await embeds.desc_only(msg.channel, 'Failed to set Log channel.')
+
+
+@permission_checks.check_if_admin
 async def add_mod(msg):
     # issue: if multiple roles in the owner - admin - mod hierarchy are assigned, the topmost must be removed first
     if not len(msg.mentions):  # No User Mentioned
@@ -72,6 +80,11 @@ async def remove_mod(msg):
         data.remove_moderator(msg.guild.id, msg.mentions[0].id)
         print(f'Removed {msg.mentions[0].name} (ID: {msg.mentions[0].id}) from Moderators for Guild {msg.guild.name}.')
         return await embeds.desc_only(msg.channel, f'Removed **{msg.mentions[0].name}** from Moderators.')
+
+
+@permission_checks.check_if_admin
+async def shutdown():
+    await bot.client.close()
 
 
 @permission_checks.check_if_owner

@@ -18,12 +18,14 @@ class DataCruncher:
             print('done.')
         print('Done loading Data Holder.')
 
-    def load_config(self, file_path):
+    @staticmethod
+    def load_config(file_path):
         path = os.path.join(config_dir, file_path)
         with open(path) as f:
             return json.load(f)
 
-    def save_config(self, json_data, file_path):
+    @staticmethod
+    def save_config(json_data, file_path):
         path = os.path.join(config_dir, file_path)
         print(f'Saving Config in {path}... ', end='')
         with open(file_path, 'w') as f:
@@ -134,7 +136,7 @@ class DataCruncher:
     def add_self_assignable_role(self, guild_id: int, role_id: int):
         guild_id = str(guild_id)
         if guild_id not in self._configs['roles']:
-            self._configs['roles'][guild_id] = {'enabled': True, 'roles': [role_id]}
+            self._configs['roles'][guild_id] = {'enabled': True, 'roles': [role_id], 'log': 0}
         else:
             self._configs['roles'][guild_id]['roles'].append(role_id)
 
@@ -165,7 +167,16 @@ class DataCruncher:
         if guild_id not in self._configs['roles']:
             return None
         self._configs['roles'][guild_id]['enabled'] = not self._configs['roles'][guild_id]['enabled']
-        return self.get_role_self_assigning_state(guild_id)
+        return self.get_role_self_assigning_state(int(guild_id))
+
+    def set_log_channel(self, guild_id: int, channel_id: int):
+        if str(guild_id) not in self._configs['roles']:
+            return False
+        self._configs['roles'][str(guild_id)]['log'] = channel_id
+        return True
+
+    def get_log_channel(self, guild_id: int):
+        return self._configs['roles'].get(str(guild_id))['log']
 
     def add_moderator(self, guild_id: int, moderator_user_id: int):
         guild_id = str(guild_id)
@@ -204,29 +215,7 @@ class DataCruncher:
     def get_role_servers(self):
         return self._configs['roles']
 
-    def get_currency_server(self, guild_id: int):
-        return self._configs['currency'].get(str(guild_id))
 
-    def _get_currency_user(self, guild_id: int, player_id: int, money=0):
-        server = self.get_currency_server(guild_id)
-        if server is None:
-            self._configs[guild_id] = {player_id: money}  # Starts at 0
-        elif player_id not in self._configs[guild_id]:
-            self._configs[guild_id].update({player_id: money})
-        else:
-            if self._configs[guild_id][player_id] + money <= 0:
-                print(f'Can\'t change money of {player_id} on {guild_id} by {money}, would be negative.')
-            else:
-                self._configs[guild_id][player_id] += money
-        return self._configs[guild_id][player_id]
-
-    def get_currency_of_user(self, guild_id: int, player_id: int):
-        return self._get_currency_user(guild_id, player_id, 0)
-
-    def change_currency_of_user(self, guild_id: int, player_id: int, amount: int):
-        self._get_currency_user(guild_id, player_id, amount)
-
-
-# One central data Object to prevent Errors with the Configurations
+# One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
 
