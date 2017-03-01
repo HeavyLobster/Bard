@@ -35,6 +35,31 @@ async def ban(msg):
         return await embeds.desc_only(msg.channel, 'Gone!')
 
 
+@permission_checks.check_if_mod
+async def purge(msg):
+    try:
+        amount = int(msg.content.split()[1])
+    except (ValueError, IndexError):
+        amount = 20
+    if len(msg.mentions) == 1:
+        purge_this_user = msg.mentions[0]
+    try:
+        def check_if_wanted_user(m):
+            return m.author == purge_this_user
+
+        if 'purge_this_user' in locals():
+            deleted = await msg.channel.purge(limit=amount, check=check_if_wanted_user)
+        else:
+            deleted = await msg.channel.purge(limit=amount)
+        resp = f'Purged a total of **{len(deleted)} Messages**' \
+               f'{"." if "purge_this_user" not in locals() else f" from **{purge_this_user.name}**."}'
+        return await embeds.desc_only(msg.channel, resp)
+    except discord.Forbidden:
+        return await embeds.desc_only(msg.channel, f'I don\'t have the required Permissions to purge Messages.')
+    except discord.HTTPException:
+        return await embeds.desc_only(msg.channel, 'Got HTTP Exception trying to delete Messages.')
+
+
 @permission_checks.check_if_admin
 async def change_activity(msg):
     # TODO: add new config file for global settings like the last activity etc

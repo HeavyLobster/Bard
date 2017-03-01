@@ -17,6 +17,9 @@ replies = {
         'shutdown': administration.shutdown,
         'kill': administration.shutdown,
         'kick': administration.kick,
+        'purge': administration.purge,
+        'prune': administration.purge,
+        'clear': administration.purge,
         'ban': administration.ban
     },
     data_cruncher.data.get_prefix('roles'): {

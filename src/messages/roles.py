@@ -163,8 +163,10 @@ async def get_league_role(msg):
             return await add_league_role_with_log(msg, '100k')
         elif 250000 <= champion_points < 500000:
             return await add_league_role_with_log(msg, '250k')
-        elif 500000 <= champion_points < 1000000:
+        elif 500000 <= champion_points < 750000:
             return await add_league_role_with_log(msg, '500k')
+        elif 750000 <= champion_points < 1000000:
+            return await add_league_role_with_log(msg, '750k')
         elif 1000000 <= champion_points < 1500000:
             return await add_league_role_with_log(msg, '1M')
         elif champion_points >= 1500000:
