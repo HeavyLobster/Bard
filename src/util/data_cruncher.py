@@ -120,7 +120,7 @@ class DataCruncher:
                    + self._configs['users']['owner']
         except KeyError:
             print(f'Failed to fetch Moderators for Server with ID {guild_id}.')
-            return None
+            return self._configs['users']['owner']
 
     def get_admins_and_above(self, guild_id: int):
         guild_id = str(guild_id)
@@ -129,6 +129,7 @@ class DataCruncher:
                    + self._configs['users']['owner']
         except KeyError:
             print(f'Failed to fetch Admins for Server with ID {guild_id}.')
+            return self._configs['users']['owner']
 
     def get_owner(self):
         return self._configs['users']['owner']

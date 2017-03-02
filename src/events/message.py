@@ -35,7 +35,8 @@ replies = {
         'addselfassignable': roles.add_self_assignable,
         'asar': roles.add_self_assignable,
         'removeselfassignable': roles.remove_self_assignable,
-        'rsar': roles.remove_self_assignable
+        'rsar': roles.remove_self_assignable,
+        'switch': roles.switch_self_assignment
     },
     data_cruncher.data.get_prefix('custom_reactions'): {
         'add': custom_reactions.add,

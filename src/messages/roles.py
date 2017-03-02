@@ -96,11 +96,12 @@ async def add_self_assignable(msg):
     for role in roles:
         if role[0] is None:
             await embeds.desc_only(msg.channel, f'Couldn\t find `{role[1]}`.')
-        elif role[0].id in data.get_self_assignable_roles(msg.guild.id):
-            await embeds.desc_only(msg.channel, f'`{role[1]}` is already self-assignable.')
         elif role[0].position >= msg.guild.me.top_role.position:
             await embeds.desc_only(msg.channel, f'The Role `{role[1]}` stands higher or equal to mine, '
                                                 f'can\'t make self-assignable.')
+        elif data.get_self_assignable_roles(msg.guild.id) is not None \
+                and role[0].id in data.get_self_assignable_roles(msg.guild.id):
+            await embeds.desc_only(msg.channel, f'`{role[1]}` is already self-assignable.')
         else:
             data.add_self_assignable_role(msg.guild.id, role[0].id)
             updated_roles.append(role[0].name)
