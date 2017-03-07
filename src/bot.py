@@ -1,9 +1,7 @@
 import discord
 import os
 
-from src import twitch
-from src.events import message, members, reactions
-from src.util.data_cruncher import data
+from src.events import message, members, reactions, ready
 
 print('Loading Bot... ', end='')
 
@@ -13,8 +11,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('Logged in, starting Twitch Stream Update Listener...')
-    client.loop.create_task(twitch.update_streams(client.get_channel(data.get_stream_announcement_channel())))
+    await ready.on_ready()
 
 
 @client.event

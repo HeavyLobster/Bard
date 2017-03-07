@@ -56,12 +56,10 @@ async def handle_message(msg):
     except (AttributeError, IndexError):  # NoneType object has no attribute get blah blah blah, means no command found
         return
 
-    if not reply_func and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
+    if reply_func is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
         try:
-
             if await custom_reactions.get_one(msg):
                 await msg.delete()
-            return
         except TypeError:  # auto-delete successfully grabbed custom reactions
             return
 

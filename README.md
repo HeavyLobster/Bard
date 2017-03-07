@@ -16,7 +16,6 @@ You need to export an environment variable called `DISCORD_TOKEN` which the bot 
 ### Setup
 *Dependencies:*
 - discord.py, rewrite branch
-- dataset
 - stuf
 
 

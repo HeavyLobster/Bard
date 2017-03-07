@@ -28,7 +28,7 @@ async def ban(msg):
         try:
             await msg.guild.ban(msg.mentions[0])
             if len(msg.content.split()) >= 3:  # if a ban message is specified
-                await msg.mentions[0].send(f'**You have been kicked from {msg.guild.name}, reason:** \n'
+                await msg.mentions[0].send(f'**You have been banned from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\’t ban:** {err}.')
@@ -108,7 +108,8 @@ async def remove_mod(msg):
 
 
 @permission_checks.check_if_admin
-async def shutdown():
+async def shutdown(msg):
+    await embeds.desc_only(msg.channel, 'Shutting Down...')
     await bot.client.close()
 
 

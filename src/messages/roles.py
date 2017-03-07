@@ -2,6 +2,7 @@ import cassiopeia
 import discord
 
 from src import bot
+from src.events import message
 from src.util import embeds, permission_checks, lolapi
 from src.util.data_cruncher import data
 
@@ -33,7 +34,6 @@ def get_comma_separated_roles(msg):
     msg.content = msg.content[5:]  # Ignore the command part
     for single_role in msg.content.split(', '):
         role_name = single_role.lstrip()
-        print('getting ' + role_name)
         single_role = _get_role_by_name(role_name, msg.guild.roles)
         comma_separated_roles.append([single_role, role_name])
     return comma_separated_roles
@@ -65,9 +65,10 @@ async def remove(msg):
     role = await _perform_checks(msg)
     if not isinstance(role, discord.Role):
         return role  # why am I returning this
-
     try:
-        if role in msg.author.roles[1:]:  # first element is always @everyone, so skip it
+        if role.id not in data.get_self_assignable_roles(msg.guild.id):
+            return await embeds.desc_only(msg.channel, 'That Role is not self-assignable.')
+        elif role in msg.author.roles[1:]:  # first element is always @everyone, so skip it
             await msg.author.remove_roles(role)
         else:
             return await embeds.desc_only(msg.channel, 'You don\'t have that Role assigned.')
@@ -147,8 +148,8 @@ async def get_league_role(msg):
 
     try:
         champion_points = lolapi.get_mastery_points(name, server)
-    except ValueError:
-        return await embeds.desc_only(msg.channel, 'Some error occured, keep in mind: it\'s .getmyrole <server> <name>')
+    # except ValueError:
+    #    return await embeds.desc_only(msg.channel, 'Some error occured, keep in mind: it\'s .getmyrole <server> <name>')
     except cassiopeia.type.api.exception.APIError:
         return await embeds.desc_only(msg.channel, 'Riot Games API returned an API Error trying to fetch your score.')
     except IndexError:
@@ -172,3 +173,15 @@ async def get_league_role(msg):
             return await add_league_role_with_log(msg, '1M')
         elif champion_points >= 1500000:
             return await add_league_role_with_log(msg, '1.5M')
+
+
+async def fetch_role_assignment_messages():
+    print('Fetching 40 Messages in #role-assignment...')
+    try:
+        async for msg in bot.client.logs_from(bot.client.get_channel(265551115901206528), limit=40, reverse=True):
+            await message.handle_message(msg)
+        print("Done.")
+    except AttributeError:
+        print('Unable to fetch messages in #role-assignment.')
+    else:
+        print('Done')

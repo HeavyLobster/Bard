@@ -24,8 +24,8 @@ async def meow(msg):
 
 async def woof(msg):
     url = requests.get('https://api.giphy.com/v1/gifs/random?'
-                       'api_key=dc6zaTOxFJmzC&tag=dog').json()['data_cruncher.data']['image_original_url']
-    return await embeds.img_only(msg.channel, f'{url}')
+                       'api_key=dc6zaTOxFJmzC&tag=dog').json()['data']['image_original_url']
+    return await msg.channel.send(url)
 
 
 async def get_one(msg):
