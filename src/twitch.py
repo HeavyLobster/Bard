@@ -1,9 +1,10 @@
-import aiohttp
 import asyncio
+
+import aiohttp
 import os
+from src.util.data_cruncher import data
 
 from src import bot
-from src.util.data_cruncher import data
 from src.util.embeds import url_with_desc
 
 url = 'https://api.twitch.tv/kraken/streams/'
@@ -32,7 +33,7 @@ async def update_streams(channel):
     try:
         os.environ['TWITCH_TOKEN']
     except KeyError:
-        print('No Twitch Token found in Environment Variables. Not Starting...')
+        print('No Twitch Token found in Environment Variables. Can\'t initialize Twitch Stream Update Listener...')
     else:
         await bot.client.wait_until_ready()
         last_streamers, curr_streamers = [], []
@@ -41,6 +42,8 @@ async def update_streams(channel):
                 curr_streamer = await get_stream(streamer_name)
                 if curr_streamer[1] is None:
                     print(f'Couldn\'t update Stream State of {curr_streamer[0]}')
+                elif last_streamers != [] and last_streamers[idx][1] is None:
+                    print(f'Will not update about Stream of {last_streamers[idx][0]}, got None.')
                 elif last_streamers != [] and curr_streamer[1] != last_streamers[idx][1]:
                     await url_with_desc(channel,
                                         f'Twitch: {curr_streamer[0]}',

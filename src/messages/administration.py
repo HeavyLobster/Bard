@@ -1,8 +1,8 @@
 import discord
-
-from src import bot
 from src.util import embeds, permission_checks
 from src.util.data_cruncher import data
+
+from src import bot
 
 
 @permission_checks.check_if_mod
@@ -109,7 +109,7 @@ async def remove_mod(msg):
 
 @permission_checks.check_if_admin
 async def shutdown(msg):
-    await embeds.desc_only(msg.channel, 'Shutting Down...')
+    await embeds.desc_only(msg.channel, '*emulates windows xp shutdown sound*')
     await bot.client.close()
 
 

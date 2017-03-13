@@ -1,10 +1,10 @@
 import cassiopeia
 import discord
-
-from src import bot
 from src.events import message
 from src.util import embeds, permission_checks, lolapi
 from src.util.data_cruncher import data
+
+from src import bot
 
 
 async def _perform_checks(msg: discord.Message):
@@ -176,12 +176,17 @@ async def get_league_role(msg):
 
 
 async def fetch_role_assignment_messages():
-    print('Fetching 40 Messages in #role-assignment...')
+    print('Fetching up to 25 Messages in #role-assignment... ', end='')
     try:
-        async for msg in bot.client.logs_from(bot.client.get_channel(265551115901206528), limit=40, reverse=True):
+        ctr = 0
+        async for msg in bot.client.get_channel(265551115901206528).history(limit=25):
+            if msg.author.id == bot.client.user.id:
+                print(f' - stopped, message #{ctr} - ', end='')
+                break
             await message.handle_message(msg)
-        print("Done.")
-    except AttributeError:
-        print('Unable to fetch messages in #role-assignment.')
+            await msg.delete()
+            ctr += 1
+    except AttributeError as e:
+        print('it failed...')
     else:
-        print('Done')
+        print('done.')
