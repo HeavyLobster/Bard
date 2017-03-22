@@ -1,41 +1,41 @@
+import asyncio
+from concurrent.futures import TimeoutError
 import discord
 import random
 from src.util.data_cruncher import data
-from src.util import embeds, permission_checks
+from src.util import embeds, checks
+from src import bot
 
 
-@permission_checks.check_if_admin
-async def toggle_cg(msg):
+async def get_money(msg):
     """
-    Toggle Currency Generation in the Channel in which this Command was invoked.
+    Get the amount of money / currency / chimes a User possesses.
     
-    :param msg: The Message invoking the Command
-    :return: A Message indicating whether it was successful or not
+    :param msg: The Message invoking the Command 
+    :return: A Message containing the Money the User has
     """
-    if not isinstance(msg.channel, discord.abc.GuildChannel):
-        return await embeds.desc_only(msg.channel, 'This Command must be used on a Guild.')
 
-    if msg.channel.id in data.get_currency_channels(msg.guild.id):
-        data.remove_currency_channel(msg.guild.id, msg.channel.id)
-        return await embeds.desc_only(msg.channel, 'Currency Generation is now **disabled** in this Channel.')
-
-    data.add_currency_channel(msg.guild.id, msg.channel.id)
-    return await embeds.desc_only(msg.channel, 'Currency Generation is now **enabled** in this Channel.')
+    if len(msg.mentions) == 1:
+        return await embeds.desc_only(msg.channel, f'**{msg.mentions[0].name}** has a '
+                                      f'total of **{data.get_currency_of_user(msg.guild.id, msg.mentions[0])} '
+                                      f'Chimes**!')
+    return await embeds.desc_only(msg.channel, f'You (**{msg.author.name}**) have a total of '
+                                  f'**{data.get_currency_of_user(msg.guild.id, msg.author)} Chimes**!')
 
 
 async def generator(msg):
     """
     Generate Currency based on different Parameters and a bit of Magic.
     
+    The Bot first runs various checks to make sure it's good to spawn a Chime. 
+    It then sends out an Embed informing about the appearance of a Chime.
+    If it was not picked up within 10 seconds, the original Message will be deleted.
+    
     :param msg: The original Message 
-    :return: 
     """
-    if not isinstance(msg.channel, discord.abc.GuildChannel):
-        # Message not coming from within a Guild!
-        return
 
-    if msg.channel.id not in data.get_currency_channels(msg.guild.id):
-        # Currency Generation not enabled!
+    if msg.channel.id not in data.get_currency_channels(msg.guild.id) or msg.author.id == bot.client.user.id:
+        # Currency Generation not enabled, or it was a Message by the Bot!
         return
 
     if not random.uniform(0, 1) <= data.get_currency_chance(msg.guild.id) / 100:
@@ -49,6 +49,77 @@ async def generator(msg):
          'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
     ])
     data.currency_increment_count(msg.guild.id)
-    await embeds.desc_with_img(msg.channel, '**A Chime has appeared!** Type $pick to collect it!', chime_image,
-                               f'This is Chime #{data.get_currency_total(msg.guild.id)} for this Guild.')
+    appearance = await embeds.desc_with_img(msg.channel, '**A Chime has appeared!** Type $pick to collect it!',
+                                            chime_image,
+                                            f'This is Chime #{data.get_currency_total(msg.guild.id)} for this Guild.')
 
+    def validate_pickup(m):
+        """
+        A Helper Function to validate the Pickup of a Chime.
+        
+        :param m: The message to check 
+        :return: a bool
+        """
+        return m.channel == msg.channel and m.content == '$pick'
+
+    try:
+        resp = await bot.client.wait_for('message', check=validate_pickup, timeout=10)
+    except TimeoutError:
+        if appearance is not None:  # ???
+            return await appearance.delete()
+    else:
+        await appearance.delete()
+        await resp.delete()
+        data.modify_currency_of_user(msg.guild.id, resp.author, 1)
+        confirmation = await embeds.desc_only(msg.channel, f'**{resp.author.name}** picked up a Chime!')
+        await asyncio.sleep(3)
+        await confirmation.delete()
+
+
+@checks.is_admin
+async def add_money(msg):
+    """
+    Add Chimes to a mentioned User or otherwise to the Author.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot
+    """
+    print('invoke dis')
+    if len(msg.content.split()) + len(msg.mentions) < 2:
+        print('wot')
+        return await embeds.desc_only(msg.channel, '**Cannot add Chimes**: No Amount specified.')
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'That\'s not a valid Amount.')
+    print(f'Amount: {amount}')
+    if amount <= 0:
+        print('dot')
+        return await embeds.desc_only(msg.channel, '**Cannot add Chimes**: Do I look like a Math Bot?')
+    elif len(msg.mentions) == 1:
+        print('mot')
+        data.modify_currency_of_user(msg.guild.id, msg.mentions[0], amount)
+        return await embeds.desc_only(msg.channel, f'Added **{amount} Chimes** to **{msg.mentions[0].name}**.')
+    else:
+        print('wololo')
+        data.modify_currency_of_user(msg.guild.id, msg.author, amount)
+        return await embeds.desc_only(msg.channel, f'Added **{amount} Chimes** to yourself!')
+
+
+@checks.is_admin
+async def toggle_cg(msg):
+    """
+    Toggle Currency Generation in the Channel in which this Command was invoked.
+    
+    :param msg: The Message invoking the Command
+    :return: A Message indicating what happened
+    """
+    if not isinstance(msg.channel, discord.abc.GuildChannel):
+        return await embeds.desc_only(msg.channel, 'This Command must be used on a Guild.')
+
+    if msg.channel.id in data.get_currency_channels(msg.guild.id):
+        data.remove_currency_channel(msg.guild.id, msg.channel.id)
+        return await embeds.desc_only(msg.channel, 'Currency Generation is now **disabled** in this Channel.')
+
+    data.add_currency_channel(msg.guild.id, msg.channel.id)
+    return await embeds.desc_only(msg.channel, 'Currency Generation is now **enabled** in this Channel.')

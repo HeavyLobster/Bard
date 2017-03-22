@@ -21,7 +21,11 @@ async def on_resumed():
 
 @client.event
 async def on_message(msg):
-    await message.handle_message(msg)
+    try:
+        await message.handle_message(msg)
+    except TypeError:
+        # Message wasn't sent in a Guild
+        pass
 
 
 @client.event

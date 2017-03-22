@@ -1,7 +1,7 @@
 import cassiopeia
 import discord
 from src.events import message
-from src.util import embeds, permission_checks, lolapi
+from src.util import embeds, checks, lolapi
 from src.util.data_cruncher import data
 
 from src import bot
@@ -90,7 +90,7 @@ async def list_self_assignable(msg):
                                                    f'Roles:**\n {", ".join((x.name for x in role_names))}')
 
 
-@permission_checks.check_if_mod
+@checks.is_mod
 async def add_self_assignable(msg):
     roles = get_comma_separated_roles(msg)
     updated_roles = []
@@ -113,7 +113,7 @@ async def add_self_assignable(msg):
         return await embeds.desc_only(msg.channel, f'Role `{role[0].name}` is now self-assignable.')
 
 
-@permission_checks.check_if_mod
+@checks.is_mod
 async def remove_self_assignable(msg):
     role = await _perform_checks(msg)
     if not isinstance(role, discord.Role):
@@ -123,7 +123,7 @@ async def remove_self_assignable(msg):
     return await embeds.desc_only(msg.channel, f'Removed **{role.name}** from self-assignable Roles!')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def switch_self_assignment(msg):
     new_state = data.switch_role_self_assigning_state(msg.guild.id)
     if new_state is None:

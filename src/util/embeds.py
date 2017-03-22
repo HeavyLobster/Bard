@@ -26,28 +26,26 @@ async def img_only(channel, link: str):
     except discord.errors.HTTPException:
         pass
 
-async def desc_with_img(channel, desc: str, link: str, thumb: str='', footer: str=''):
+async def desc_with_img(channel, desc: str, link: str, footer: str=''):
     """
     Send an Embed with a Description and Image.
     
     :param channel: The Channel in which to send the Embed
     :param desc: The Description that the Embed should contain
     :param link: A Link to the Image that should be displayed
-    :param thumb: A Link to a Thumbnail to be used, optional
     :param footer: An optional Footer to be put at the Bottom of the Embed
-    :return: A discord.Message Object containing the sent Embed
+    :return: A discord.Message Object containing the sent Embed, or None if sending it failed.
     """
     embed = discord.Embed()
     embed.description = desc
     embed.set_image(url=link)
-    if thumb != '':
-        embed.set_thumbnail(url=thumb)
     if footer != '':
         embed.set_footer(text=footer)
     try:
         return await channel.send(embed=embed)
-    except discord.errors.HTTPException:
-        pass
+    except discord.errors.HTTPException as e:
+        print(e)
+        return None
 
 async def video_only(channel, link: str):
     embed = discord.Embed()

@@ -1,5 +1,5 @@
 from src.messages import administration, custom_reactions, currency, roles
-from src.util import data_cruncher
+from src.util import checks, data_cruncher
 
 print('Loading Message Event Handler... ', end='')
 
@@ -47,16 +47,19 @@ replies = {
         'hm': custom_reactions.hugemoji
     },
     data_cruncher.data.get_prefix('currency'): {
+        '$$': currency.get_money,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
-        'cg': currency.toggle_cg
+        'cg': currency.toggle_cg,
+        'grant': currency.add_money
     }
 }
 
 
+@checks.is_in_guild
 async def handle_message(msg):
     """
-    Handles a Message passed through various Checks.
+    Handles a Message passed through various Checks. The Bot only responds on Guilds.
     
     Tries to get a function to reply with as saved in the dictionary shown above.
     If this fails, it will return. Otherwise, it continues to check whether it started with a known prefix

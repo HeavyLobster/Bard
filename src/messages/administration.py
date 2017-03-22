@@ -1,11 +1,11 @@
 import discord
-from src.util import embeds, permission_checks
+from src.util import embeds, checks
 from src.util.data_cruncher import data
 
 from src import bot
 
 
-@permission_checks.check_if_mod
+@checks.is_mod
 async def kick(msg):
     """
     Kick a mentioned User from the Guild.
@@ -24,12 +24,14 @@ async def kick(msg):
             if len(msg.content.split()) >= 3:  # if a kick message is specified
                 await msg.mentions[0].send(f'**You have been kicked from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
+            else:
+                await msg.mentions[0].send(f'You have been kicked from {msg.guild.name}!')
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\'t kick**: {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')
 
 
-@permission_checks.check_if_mod
+@checks.is_mod
 async def ban(msg):
     """
     Ban a mentioned User from the Guild.
@@ -48,12 +50,14 @@ async def ban(msg):
             if len(msg.content.split()) >= 3:  # if a ban message is specified
                 await msg.mentions[0].send(f'**You have been banned from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
+            else:
+                await msg.mentions[0].send(f'You have been banned from {msg.guild.name}!')
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\’t ban:** {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')
 
 
-@permission_checks.check_if_mod
+@checks.is_mod
 async def purge(msg):
     """
     Purge a specified amount of Messages.
@@ -87,7 +91,7 @@ async def purge(msg):
         return await embeds.desc_only(msg.channel, 'Got HTTP Exception trying to delete Messages.')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def change_activity(msg):
     """
     Change the Activity, or also named "playing state", of the Bot.
@@ -107,7 +111,7 @@ async def change_activity(msg):
         return await embeds.desc_only(msg.channel, 'Changed Activity.')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def set_log_channel(msg):
     """
     Set a Log Channel which is used to inform about various Events. 
@@ -123,7 +127,7 @@ async def set_log_channel(msg):
         return await embeds.desc_only(msg.channel, 'Failed to set Log channel.')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def add_mod(msg):
     """
     Add a Moderator for the Guild in which the Message was sent.
@@ -145,7 +149,7 @@ async def add_mod(msg):
         return await embeds.desc_only(msg.channel, f'Added **{msg.mentions[0].name}** to Moderators.')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def remove_mod(msg):
     """
     Remove a Moderator for the Guild in which the Message was sent.
@@ -163,7 +167,7 @@ async def remove_mod(msg):
         return await embeds.desc_only(msg.channel, f'Removed **{msg.mentions[0].name}** from Moderators.')
 
 
-@permission_checks.check_if_admin
+@checks.is_admin
 async def shutdown(msg):
     """
     Shutdown the Bot.
@@ -175,7 +179,7 @@ async def shutdown(msg):
     await bot.client.close()
 
 
-@permission_checks.check_if_owner
+@checks.is_owner
 async def add_admin(msg):
     """
     Add an Administrator for the Guild in which the Message was sent.
@@ -196,7 +200,7 @@ async def add_admin(msg):
         return await embeds.desc_only(msg.channel, f'Added **{msg.mentions[0].name}** to Administrators.')
 
 
-@permission_checks.check_if_owner
+@checks.is_owner
 async def remove_admin(msg):
     """
     Remove an Administrator for the Guild in which the Message was sent.

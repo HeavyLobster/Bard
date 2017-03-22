@@ -1,4 +1,5 @@
 import datetime
+import discord
 import json
 import os
 import random
@@ -227,8 +228,23 @@ class DataCruncher:
         :return: The Guild-specific Currency Configuration
         """
         if guild_id not in self._configs['currency']:
-            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': []}
+            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': {}}
         return self._configs['currency'][guild_id]
+
+    def _get_currency_user(self, user_id: str, guild_id: str):
+        """
+        A Helper function to ease getting Currency Data from a User.
+        
+        :param user_id: The User ID for which to get Data  
+        :return: Data about the User
+        """
+        guild = self._get_currency_guild(guild_id)
+        if user_id not in guild['users']:
+            guild['users'][user_id] = {
+                'name': '',
+                'amount': 0
+            }
+        return guild['users'][user_id]
 
     def get_currency_channels(self, guild_id: int):
         """
@@ -282,6 +298,29 @@ class DataCruncher:
         """
         return self._get_currency_guild(str(guild_id))['total']
 
+    def get_currency_of_user(self, guild_id: int, member: discord.Member):
+        """
+        Get the Amount of Currency a User has.
+        
+        :param guild_id: The Guild in which to check for his Currency 
+        :param member: The Member for which to get the Currency
+        :return: The amount of Currency the Member has
+        """
+        return self._get_currency_user(str(member.id), str(guild_id))['amount']
+
+    def modify_currency_of_user(self, guild_id: int, member: discord.Member, amount: int):
+        """
+        Modify the Currency of the specified User.
+        
+        :param guild_id: The Guild on which to modify his Currency. 
+        :param member: The User whose Currency should be modified.
+        :param amount: The amount by which to modify the Currency
+        :return The new amount of Currency from the User.
+        """
+        user = self._get_currency_user(str(member.id), str(guild_id))
+        user['name'] = member.display_name
+        user['amount'] += amount
+        return user['amount']
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
