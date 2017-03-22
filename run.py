@@ -1,3 +1,6 @@
 from src import bot
 
-bot.start()
+bot = BardBot()
+
+bot.configure()
+bot.connect()
