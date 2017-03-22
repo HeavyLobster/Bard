@@ -52,7 +52,8 @@ replies = {
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
-        'grant': currency.add_money
+        'grant': currency.add_money,
+        'give': currency.give_money
     }
 }
 

@@ -34,9 +34,12 @@ async def give_money(msg):
         return await embeds.desc_only(msg.channel, 'You need to mention a User for this Command!')
     elif len(msg.mentions) > 1:
         return await embeds.desc_only(msg.channel, 'You can\'t give money to multiple Users!')
-    elif len(msg.content.split()) < 3:
+    elif len(msg.content.split()) + len(msg.mentions) < 3:
         return await embeds.desc_only(msg.channel, 'You need to specify an Amount for this Command!')
-    amount = int(msg.content.split()[1])
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'You need to specify an Amount for this Command!')
     if amount <= 0:
         return await embeds.desc_only(msg.channel, 'That is not a valid Amount to give.')
     author_money = data.get_currency_of_user(msg.guild.id, msg.author)
