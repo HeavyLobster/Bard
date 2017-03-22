@@ -104,3 +104,14 @@ async def hugemoji(msg):
         return await embeds.desc_only(msg.channel, 'Sorry, something went wrong.')
     else:
         return await embeds.img_only(msg.channel, f'https://cdn.discordapp.com/emojis/{emoji_id.group(0)}.png')
+
+
+async def help(msg):
+    """
+    Send a Message with a Link to Bard's Wiki.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object with the hopefully helpful Message.
+    """
+    return await embeds.desc_only(msg.channel, "**You can view Bard's Commands here:** "
+                                               "https://github.com/Volcyy/Bard/wiki")

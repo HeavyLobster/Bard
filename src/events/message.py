@@ -44,17 +44,18 @@ replies = {
         'woof': custom_reactions.woof,
         'viewall': custom_reactions.build_list,
         'showall': custom_reactions.build_list,
-        'hm': custom_reactions.hugemoji
+        'hm': custom_reactions.hugemoji,
+        'help': custom_reactions.help
     },
     data_cruncher.data.get_prefix('currency'): {
         'c': currency.get_money,
         'chime': currency.get_money,
         'chimes': currency.get_money,
+        'give': currency.give_money,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
         'grant': currency.add_money,
-        'give': currency.give_money,
         'take': currency.remove_money
     }
 }
