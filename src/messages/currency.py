@@ -48,7 +48,7 @@ async def generator(msg):
          'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
     ])
     data.currency_increment_count(msg.guild.id)
-    appearance = await embeds.desc_with_img(msg.channel, '**A Chime has appeared!** Type $pick to collect it!',
+    appearance = await embeds.desc_with_img(msg.channel, '**A Chime has appeared!** Type >pick to collect it!',
                                             chime_image,
                                             f'This is Chime #{data.get_currency_total(msg.guild.id)} for this Guild.')
 
@@ -59,7 +59,7 @@ async def generator(msg):
         :param m: The message to check 
         :return: a bool
         """
-        return m.channel == msg.channel and m.content == '$pick'
+        return m.channel == msg.channel and m.content == '>pick'
 
     try:
         resp = await bot.client.wait_for('message', check=validate_pickup, timeout=10)

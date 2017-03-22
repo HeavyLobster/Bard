@@ -3,7 +3,6 @@
         "administration": "/",
         "roles": ".",
         "currency": "$",
-        "custom_reactions": "!",
-        "hugemoji": "-hm"
+        "custom_reactions": ">"
     }
 }
