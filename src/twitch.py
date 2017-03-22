@@ -11,6 +11,16 @@ url = 'https://api.twitch.tv/kraken/streams/'
 
 
 async def get_stream(stream_name: str):
+    """
+    Helper Function to get information about the state of a single Channel.
+    
+    An interesting Note is that sometimes the Twitch API will return some weird JSON thing I have not figured out yet.
+    In that case, it the second Item in the List returned is None to indicate that the requested Stream is neither
+    offline nor online, but rather that the Twitch API returned something weird.
+    
+    :param stream_name: The Streamer Name for which to obtain Information. 
+    :return: 
+    """
     with aiohttp.ClientSession() as session:
         try:
             async with session.get(f'{url}{stream_name}?client_id={os.environ["TWITCH_TOKEN"]}') as resp:
@@ -20,7 +30,6 @@ async def get_stream(stream_name: str):
                     else:
                         stream = [stream_name, True]
                 except KeyError:
-                    print(f'Failed to access Stream data for {stream_name}.')
                     # Something is wrong here with the Twitch API.
                     return [stream_name, None]
         except aiohttp.errors.ClientOSError:
@@ -30,6 +39,14 @@ async def get_stream(stream_name: str):
 
 
 async def update_streams(channel):
+    """
+    Starts the Stream Update Listener towards the Twitch API. 
+    
+    If TWITCH_TOKEN is not found in the Environment Variables, it will not start.
+    Otherwise, it will enter a loop running until the connected Discord Client logs off.
+    
+    :param channel: The Channel in which to send announcements about a stream going online / offline.
+    """
     try:
         os.environ['TWITCH_TOKEN']
     except KeyError:
@@ -40,10 +57,8 @@ async def update_streams(channel):
         while not bot.client.is_closed():
             for idx, streamer_name in enumerate(data.get_twitch_subscriptions()):
                 curr_streamer = await get_stream(streamer_name)
-                if curr_streamer[1] is None:
-                    print(f'Couldn\'t update Stream State of {curr_streamer[0]}')
-                elif last_streamers != [] and last_streamers[idx][1] is None:
-                    print(f'Will not update about Stream of {last_streamers[idx][0]}, got None.')
+                if curr_streamer[1] is None or last_streamers != [] and last_streamers[idx][1] is None:
+                    continue
                 elif last_streamers != [] and curr_streamer[1] != last_streamers[idx][1]:
                     await url_with_desc(channel,
                                         f'Twitch: {curr_streamer[0]}',
@@ -54,3 +69,4 @@ async def update_streams(channel):
                 await asyncio.sleep(5)
             last_streamers = curr_streamers
             curr_streamers = []  # Reset List so it doesn't fill up infinitely
+        print('Shut Down Twitch Stream Update Listener, Bot logged off.')
