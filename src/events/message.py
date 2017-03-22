@@ -51,16 +51,28 @@ replies = {
 
 
 async def handle_message(msg):
+    """
+    Handles a Message passed through various Checks.
+    
+    Tries to get a function to reply with as saved in the dictionary shown above.
+    If this fails, it will return. Otherwise, it continues to check whether it started with a known prefix
+    - in this case, this is the prefix for Custom Reactions. It then tries to obtain a Custom Reaction.
+    If it found one, it deletes the Message invoking the Command. Otherwise, nothing happens.
+    After this process, the message is passed to the Currency Module which uses non-Commands as triggers for 
+    potential Currency spawning. The Commands exposed by the Module are specified in the Dictionary above.
+    
+    :param msg: A discord.Message Object with which this Function should actuate. 
+    """
     try:
         reply_func = replies.get(msg.content[:1]).get(msg.content[1:].split()[0])  # Only pass the Command Part
-    except (AttributeError, IndexError):  # NoneType object has no attribute get blah blah blah, means no command found
+    except (AttributeError, IndexError):  # no matching command found
         return
 
     if reply_func is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
         try:
             if await custom_reactions.get_one(msg):
                 await msg.delete()
-        except TypeError:  # auto-delete successfully grabbed custom reactions
+        except TypeError:
             return
 
     if msg.author.id == 226612862620008448:  # message by bot itself, for safety
