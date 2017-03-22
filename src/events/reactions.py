@@ -1,4 +1,4 @@
-from src.util import ClickableEmbed
+from src.util import ClickableCustomReactionEmbed
 
 # Clickable Embed Storage to keep maximum one of each embed type in memory
 clickable_embed_storage = {
@@ -17,10 +17,10 @@ def get_quotes_embed():
 
 async def create_custom_reaction_embed(title: str, contents: list, channel, icon_link: str = ''):
     embed = clickable_embed_storage['custom-reaction']
-    if isinstance(embed, ClickableEmbed.ClickableEmbed):
+    if isinstance(embed, ClickableCustomReactionEmbed.ClickableCustomReactionEmbed):
         await embed.remove()
         print('Deleted Old Custom Reaction Embed.')
-    clickable_embed_storage['custom-reaction'] = ClickableEmbed.ClickableEmbed(title, contents, icon_link)
+    clickable_embed_storage['custom-reaction'] = ClickableCustomReactionEmbed.ClickableCustomReactionEmbed(title, contents, icon_link)
     await get_custom_reaction_embed().send(channel)
 
 

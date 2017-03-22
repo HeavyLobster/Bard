@@ -180,8 +180,8 @@ async def fetch_role_assignment_messages():
     try:
         ctr = 0
         async for msg in bot.client.get_channel(265551115901206528).history(limit=25):
-            if msg.author.id == bot.client.user.id:
-                print(f' - stopped, message #{ctr} - ', end='')
+            if msg.author.id == bot.client.user.id or msg.author.id == 290324118665166849:  # darb or bard
+                print(f'- stopped, message #{ctr} - ', end='')
                 break
             await message.handle_message(msg)
             await msg.delete()

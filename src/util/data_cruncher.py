@@ -92,12 +92,20 @@ class DataCruncher:
                 return reaction[random.randrange(0, len(reaction))]
 
     def get_all_custom_reactions_on_guild(self, guild_id: int):
+        """
+        Returns a List of all Custom Reactions on a Guild, in the following format:
+        [ [contents, author, creation date, name], ... ]
+        
+        :param guild_id: The Guild for which to get all Custom Reactions. 
+        :return: A List of all Custom Reactions, or None if none were found for the specified Guild.
+        """
         guild_id = str(guild_id)
         all_custom_reactions = list()
         try:
             for namespace in self._configs['custom_reactions'][guild_id]:
                 for custom_reaction in self._configs['custom_reactions'][guild_id][namespace]:
-                    all_custom_reactions.append([custom_reaction[0], custom_reaction[1], custom_reaction[2]])
+                    all_custom_reactions.append([custom_reaction[0], custom_reaction[1],
+                                                 custom_reaction[2], namespace])
         except KeyError:
             return None
         else:
