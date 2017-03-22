@@ -88,6 +88,12 @@ async def build_list(msg):
 
 
 async def hugemoji(msg):
+    """
+    Sends a "hugified" version of the Emoji given in the Message. Only works for Custom Emojis.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object with a huge version of the Emoji.
+    """
     emoji_id = re.search('[0-9]+', msg.content)
     # Make sure it also works when there's a number in the ID!
     try:
