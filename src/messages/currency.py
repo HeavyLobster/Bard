@@ -12,7 +12,7 @@ async def get_money(msg):
     Get the amount of money / currency / chimes a User possesses.
     
     :param msg: The Message invoking the Command 
-    :return: A Message containing the Money the User has
+    :return: A Message containing Information about the Money the User has
     """
 
     if len(msg.mentions) == 1:
@@ -21,6 +21,31 @@ async def get_money(msg):
                                       f'Chimes**!')
     return await embeds.desc_only(msg.channel, f'You (**{msg.author.name}**) have a total of '
                                   f'**{data.get_currency_of_user(msg.guild.id, msg.author)} Chimes**!')
+
+
+async def give_money(msg):
+    """
+    Give money to a mentioned User.
+    
+    :param msg: The Message invoking the Command 
+    :return: A Message containing the response
+    """
+    if len(msg.mentions) < 1:
+        return await embeds.desc_only(msg.channel, 'You need to mention a User for this Command!')
+    elif len(msg.mentions) > 1:
+        return await embeds.desc_only(msg.channel, 'You can\'t give money to multiple Users!')
+    elif len(msg.content.split()) < 3:
+        return await embeds.desc_only(msg.channel, 'You need to specify an Amount for this Command!')
+    amount = int(msg.content.split()[1])
+    if amount <= 0:
+        return await embeds.desc_only(msg.channel, 'That is not a valid Amount to give.')
+    author_money = data.get_currency_of_user(msg.guild.id, msg.author)
+    if amount > author_money:
+        return await embeds.desc_only(msg.channel, f'You are missing **{amount - author_money}** Chimes for that!')
+    data.modify_currency_of_user(msg.guild.id, msg.author, -amount)
+    data.modify_currency_of_user(msg.guild.id, msg.mentions[0], amount)
+    return await embeds.desc_only(msg.channel, f'You ({msg.author.name}) gave **{amount} Chimes** '
+                                               f'to {msg.mentions[0].mention}!')
 
 
 async def generator(msg):

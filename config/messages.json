@@ -2,7 +2,7 @@
     "prefixes": {
         "administration": "/",
         "roles": ".",
-        "currency": "$",
-        "custom_reactions": ">"
+        "currency": ">",
+        "custom_reactions": "!"
     }
 }

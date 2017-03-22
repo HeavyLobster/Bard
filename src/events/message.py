@@ -74,24 +74,15 @@ async def handle_message(msg):
     if msg.author.id == 226612862620008448:  # message by bot itself, for safety
         return
 
-    try:
-        reply_func = replies.get(msg.content[:1]).get(msg.content[1:].split()[0])  # Only pass the Command Part
-    except (AttributeError, IndexError):  # no matching command found
-        await currency.generator(msg)
-        return
-
-    if reply_func is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
-        try:
+    valid_prefix_commands = replies.get(msg.content[:1], None)
+    if valid_prefix_commands is not None:  # No message of interest
+        valid_response = valid_prefix_commands.get(msg.content[1:].split()[0])
+        if valid_response is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
             if await custom_reactions.get_one(msg):
                 await msg.delete()
-        except TypeError:
-            return
-
-    try:
-        reply = await reply_func(msg)
-    except TypeError:
-        pass
-        # Delete reply after time, if set
+        elif valid_response is not None:
+            reply = await valid_response(msg)
+            # Delete reply after a set time
 
 
 print('done.')

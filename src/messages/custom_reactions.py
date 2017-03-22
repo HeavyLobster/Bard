@@ -54,18 +54,19 @@ async def get_one(msg):
     :return: None if no Custom Reaction was found, otherwise a discord.Message Object containing the Custom Reaction.
     """
     try:
-        reaction = data.get_custom_reaction(msg.guild.id, msg.content[1:].split()[0])
+        name = msg.content[1:].split()[0]
+        reaction = data.get_custom_reaction(msg.guild.id, name)
     except IndexError:
-        pass
+        return None
     else:
         if reaction is None:
             return None
         elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
             return await embeds.img_with_footer(msg.channel, reaction[0],
-                                                f'{reaction[3]} | Added by {reaction[1]}', reaction[2])
+                                                f'"{name}" | Added by {reaction[1]}', reaction[2])
         elif reaction[0] != '':
             return await embeds.desc_with_footer(msg.channel, reaction[0],
-                                                 f'{reaction[3]} | Added by {reaction[1]}', reaction[2])
+                                                 f'"{name}" | Added by {reaction[1]}', reaction[2])
 
 
 async def build_list(msg):
