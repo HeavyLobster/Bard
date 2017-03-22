@@ -5,6 +5,11 @@ from src.messages.roles import fetch_role_assignment_messages
 
 
 async def on_ready():
+    """
+    Handles the on_ready Event emitted when the Bot has finished logging in.
+    Currently, this fetches messages in #role-assignment on the Bardians Discord Server, and
+    afterwards starts a task to get the Streams in the specified Stream Announcement Channel.
+    """
     print('Logged in.')
     await fetch_role_assignment_messages()
     print('Starting Twitch Event Listener...')
