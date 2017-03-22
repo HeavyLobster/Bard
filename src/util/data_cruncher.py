@@ -304,7 +304,9 @@ class DataCruncher:
         :param member: The Member for which to get the Currency
         :return: The amount of Currency the Member has
         """
-        return self._get_currency_user(str(member.id), str(guild_id))['amount']
+        user = self._get_currency_user(str(member.id), str(guild_id))
+        user['name'] = member.display_name
+        return user['amount']
 
     def modify_currency_of_user(self, guild_id: int, member: discord.Member, amount: int):
         """

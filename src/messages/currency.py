@@ -132,6 +132,36 @@ async def add_money(msg):
 
 
 @checks.is_admin
+async def remove_money(msg):
+    """
+    Remove the given amount of Chimes from a User - if mentioned - or otherwise from the Author.
+    
+    :param msg: The Message invoking the Command
+    :return: The Response of the Bot
+    """
+    if len(msg.content.split()) + len(msg.mentions) < 2:
+        return await embeds.desc_only(msg.channel, '**Cannot take Chimes**: No Amount specified.')
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'That\'s not a valid Amount.')
+    if amount <= 0:
+        return await embeds.desc_only(msg.channel, '**Cannot take Chimes**: Do I look like a Math Bot?')
+    elif len(msg.mentions) == 1:
+        if data.get_currency_of_user(msg.guild.id, msg.mentions[0]) - amount < 0:
+            return await embeds.desc_only(msg.channel, f'Cannot take **{amount} Chimes** because {msg.mentions[0].name}'
+                                                       f' would then have a negative Amount of Chimes!')
+        data.modify_currency_of_user(msg.guild.id, msg.mentions[0], -amount)
+        return await embeds.desc_only(msg.channel, f'Took **{amount} Chimes** from **{msg.mentions[0].name}**.')
+    else:
+        if data.get_currency_of_user(msg.guild.id, msg.author) - amount < 0:
+            return await embeds.desc_only(msg.channel, 'Do you want negative Chimes? '
+                                                       'Because that\'s how you get negative Chimes.')
+        data.modify_currency_of_user(msg.guild.id, msg.author, -amount)
+        return await embeds.desc_only(msg.channel, f'Took **{amount} Chimes** from yourself!')
+
+
+@checks.is_admin
 async def toggle_cg(msg):
     """
     Toggle Currency Generation in the Channel in which this Command was invoked.

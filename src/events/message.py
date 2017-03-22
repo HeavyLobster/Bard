@@ -48,12 +48,14 @@ replies = {
     },
     data_cruncher.data.get_prefix('currency'): {
         'c': currency.get_money,
+        'chime': currency.get_money,
         'chimes': currency.get_money,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
         'grant': currency.add_money,
-        'give': currency.give_money
+        'give': currency.give_money,
+        'take': currency.remove_money
     }
 }
 
