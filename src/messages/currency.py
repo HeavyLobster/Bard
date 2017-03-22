@@ -47,8 +47,12 @@ async def generator(msg):
          'http://pm1.narvii.com/5786/089f9a52941e8ded0f54df0978378db42680f6d8_hq.jpg',
          'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
     ])
+    pickup_command = random.choice(['>pick', '>collect', '>gimme', '>mine', '>ootay', '>doot', '>slurp', '>canihas',
+                                    '>bardo', '>penguin', '>ducky', '>quack', '>darb', '>dong', '>owo', '>whatsthis'])
+
     data.currency_increment_count(msg.guild.id)
-    appearance = await embeds.desc_with_img(msg.channel, '**A Chime has appeared!** Type >pick to collect it!',
+    appearance = await embeds.desc_with_img(msg.channel, f'**A Chime has appeared!** '
+                                                         f'Type `{pickup_command}` to collect it!',
                                             chime_image,
                                             f'This is Chime #{data.get_currency_total(msg.guild.id)} for this Guild.')
 
@@ -59,7 +63,7 @@ async def generator(msg):
         :param m: The message to check 
         :return: a bool
         """
-        return m.channel == msg.channel and m.content == '>pick'
+        return m.channel == msg.channel and m.content == pickup_command
 
     try:
         resp = await bot.client.wait_for('message', check=validate_pickup, timeout=10)

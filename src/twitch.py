@@ -57,7 +57,7 @@ async def update_streams(channel):
         while not bot.client.is_closed():
             for idx, streamer_name in enumerate(data.get_twitch_subscriptions()):
                 curr_streamer = await get_stream(streamer_name)
-                if curr_streamer[1] is None or last_streamers != [] and last_streamers[idx][1] is None:
+                if curr_streamer[1] is None or (last_streamers != [] and last_streamers[idx][1]) is None:
                     continue
                 elif last_streamers != [] and curr_streamer[1] != last_streamers[idx][1]:
                     await url_with_desc(channel,
