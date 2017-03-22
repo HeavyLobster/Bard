@@ -49,18 +49,6 @@ class DataCruncher:
             print(f'Error trying to access Prefixes at key {key}')
             return None
 
-    def get_config(self, file, key=''):
-        if key == '':
-            try:
-                return self._configs[file]
-            except KeyError:
-                print(f'Error trying to access Config {file}.')
-        else:
-            try:
-                return self._configs[file][key]
-            except KeyError:
-                print(f'Error trying to access Config {file} at key \'{key}\'.')
-
     def add_custom_reaction(self, guild_id: str, name: str, contents: str, added_by: str):
         guild_id = str(guild_id)
         name = name.lower()
@@ -230,6 +218,19 @@ class DataCruncher:
 
     def get_role_servers(self):
         return self._configs['roles']
+
+    def get_currency_channels(self, guild_id: int):
+        """
+        Get a List of Channel IDs for a given Guild in which Currency Generation is enabled.
+         
+        :param guild_id: The Guild for which to get the Channel IDs 
+        :return: A List of Channel IDs in which Currency Generation is enabled for the given Guild
+        """
+        guild_id = str(guild_id)
+        if guild_id not in self._configs['currency']:
+            self._configs['currency'][guild_id] = {'channels': [], 'users': []}
+            return []
+        return self._configs['currency'][guild_id]
 
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
