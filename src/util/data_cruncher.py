@@ -77,6 +77,13 @@ class DataCruncher:
         pass
 
     def get_custom_reaction(self, guild_id: int, name: str):
+        """
+        Get a Custom Reaction on the Guild specified, with the name specified.
+        
+        :param guild_id: The Guild for which to access the Custom Reaction 
+        :param name: The Name for which to get a Custom Reaction
+        :return: None if the Guild or the Custom Reaction were not found.
+        """
         guild_id = str(guild_id)
         name = name.lower()
         try:

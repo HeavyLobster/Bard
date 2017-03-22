@@ -37,9 +37,11 @@ async def get_one(msg):
         if reaction is None:
             return None
         elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
-            return await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+            return await embeds.img_with_footer(msg.channel, reaction[0],
+                                                f'{reaction[3]} | Added by {reaction[1]}', reaction[2])
         elif reaction[0] != '':
-            return await embeds.desc_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+            return await embeds.desc_with_footer(msg.channel, reaction[0],
+                                                 f'{reaction[3]} | Added by {reaction[1]}', reaction[2])
 
 
 async def build_list(msg):

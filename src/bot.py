@@ -36,6 +36,15 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_reaction_add(reaction, user):
+    """
+    Event Handler for when a Reaction is added to a Message.
+    
+    Currently, this is used to check whether the currently stored Clickable Custom Reaction Embed was actuated,
+    and sends a signal to it to move further if this is the Case.
+    
+    :param reaction: The Added discord.Reaction 
+    :param user: The discord.User adding the Reaction 
+    """
     if user.id != client.user.id:
         try:
             if reaction.message.id == reactions.get_custom_reaction_embed().id:
