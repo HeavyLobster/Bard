@@ -21,7 +21,7 @@ async def create_custom_reaction_embed(title: str, contents: list, channel, icon
         await embed.remove()
         print('Deleted Old Custom Reaction Embed.')
     clickable_embed_storage['custom-reaction'] = ClickableCustomReactionEmbed.ClickableCustomReactionEmbed(title, contents, icon_link)
-    await get_custom_reaction_embed().send(channel)
+    return await get_custom_reaction_embed().send(channel)
 
 
 def remove_custom_reaction_embed():
