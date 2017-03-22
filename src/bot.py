@@ -18,11 +18,6 @@ volcyyBotOnline = False
 
 def becomeInactive():
 
-    #print("!! Going inactive")
-    print("Going inactive has been disabled for debugging")
-
-    # Change internal behavior
-
     global volcyyBotOnline
     volcyyBotOnline = False
 
@@ -30,10 +25,6 @@ def becomeInactive():
 # Same as above, but becoming active instead of inactive
 
 def becomeActive():
-
-    print("!! Going active")
-
-    # Change internal behavior
 
     global volcyyBotOnline
     volcyyBotOnline = False
@@ -43,11 +34,11 @@ def becomeActive():
 async def on_ready():
 
     # Detect Volcyy's bot when starting
-    volcyyBot = client.get_guild(291085969577345024).get_member(85609003089924096)
+    volcyyBot = client.get_guild(172226206375084032).get_member(226612862620008448)
 
     if volcyyBot.status != discord.Status.offline:
         becomeInactive()
-        #await client.change_presence(status=discord.Status.dnd)
+        await client.change_presence(status=discord.Status.dnd)
 
     await ready.on_ready()
 
@@ -81,7 +72,6 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_reaction_add(reaction, user):
-<<<<<<< HEAD
 
 # Check if Volcyy's bot is online
 
@@ -175,7 +165,7 @@ async def on_member_update(before, after):
 
     # Detect Volcyy's bot's id and watch it for status changes
 
-    if before.id == 85609003089924096:
+    if before.id == 226612862620008448:
 
         # If offline and coming online
         if before.status == discord.Status.offline and after.status != discord.Status.offline:

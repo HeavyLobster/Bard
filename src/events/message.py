@@ -76,7 +76,7 @@ async def handle_message(msg):
     
     :param msg: A discord.Message Object with which this Function should actuate. 
     """
-    if msg.author.id == 226612862620008448:  # message by bot itself, for safety
+    if msg.author.id == 290324118665166849:  # message by bot itself, for safety
         return
 
     valid_prefix_commands = replies.get(msg.content[:1], None)
