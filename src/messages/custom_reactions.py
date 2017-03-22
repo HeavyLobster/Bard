@@ -115,3 +115,4 @@ async def help(msg):
     """
     return await embeds.desc_only(msg.channel, "**You can view Bard's Commands here:** "
                                                "https://github.com/Volcyy/Bard/wiki")
+
