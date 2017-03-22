@@ -219,6 +219,17 @@ class DataCruncher:
     def get_role_servers(self):
         return self._configs['roles']
 
+    def _get_currency_guild(self, guild_id: str):
+        """
+        A Helper function to ease getting Data from the Currency Configuration file.
+        
+        :param guild_id: The Guild ID for which to lookup Data
+        :return: The Guild-specific Currency Configuration
+        """
+        if guild_id not in self._configs['currency']:
+            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'users': []}
+        return self._configs['currency'][guild_id]
+
     def get_currency_channels(self, guild_id: int):
         """
         Get a List of Channel IDs for a given Guild in which Currency Generation is enabled.
@@ -226,12 +237,34 @@ class DataCruncher:
         :param guild_id: The Guild for which to get the Channel IDs 
         :return: A List of Channel IDs in which Currency Generation is enabled for the given Guild
         """
-        guild_id = str(guild_id)
-        if guild_id not in self._configs['currency']:
-            self._configs['currency'][guild_id] = {'channels': [], 'users': []}
-            return []
-        return self._configs['currency'][guild_id]
+        return self._get_currency_guild(str(guild_id))['channels']
 
+    def get_currency_chance(self, guild_id: int):
+        """
+        Get the Spawn Chance (in percent) for Currency for the given Guild ID.
+        
+        :param guild_id: The Guild ID for which to get the Currency Spawn Chance
+        :return: The Spawn Chance if the Guild has an entry for it
+        """
+        return self._get_currency_guild(str(guild_id))['chance']
+
+    def add_currency_channel(self, guild_id: int, channel_id: int):
+        """
+        Adds a Channel in which Currency Generation is enabled to the given Guild.
+        
+        :param guild_id: The Guild ID for which to add a Currency-Enabled Channel
+        :param channel_id: The Channel ID which should be added
+        """
+        self._get_currency_guild(str(guild_id))['channels'].append(channel_id)
+
+    def remove_currency_channel(self, guild_id: int, channel_id: int):
+        """
+        Remove a Channel in which Currency Generation is enabled from the given Guild.
+        
+        :param guild_id: The Guild ID for which to remove the Currency-Enabled Channel 
+        :param channel_id: The Channel ID which should be removed
+        """
+        self._get_currency_guild(str(guild_id))['channels'].remove(channel_id)
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()

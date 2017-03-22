@@ -1,4 +1,4 @@
-from src.messages import administration, custom_reactions, roles
+from src.messages import administration, custom_reactions, currency, roles
 from src.util import data_cruncher
 
 print('Loading Message Event Handler... ', end='')
@@ -45,8 +45,12 @@ replies = {
         'viewall': custom_reactions.build_list,
         'showall': custom_reactions.build_list,
         'hm': custom_reactions.hugemoji
+    },
+    data_cruncher.data.get_prefix('currency'): {
+        'switch': currency.toggle_cg,
+        'toggle': currency.toggle_cg,
+        'cg': currency.toggle_cg
     }
-    # data_cruncher.data.get_prefix('currency'): currency_cmd
 }
 
 
