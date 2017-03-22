@@ -44,7 +44,6 @@ async def generator(msg):
     # After some Checks, now finally - currency spawned!
     chime_image = random.choice([
          'http://2.bp.blogspot.com/-7s3q3BhdCBw/VPUPKAOTbUI/AAAAAAAAlCs/5vyP_lAN0S4/s1600/bardchime.jpg',
-         'http://st.game.thanhnien.vn/image/9613/2015/11/24/trang-phuc-mua-dong/06.jpg',
          'http://pm1.narvii.com/5786/089f9a52941e8ded0f54df0978378db42680f6d8_hq.jpg',
          'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
     ])
@@ -84,24 +83,18 @@ async def add_money(msg):
     :param msg: The Message invoking the Command 
     :return: The Response of the Bot
     """
-    print('invoke dis')
     if len(msg.content.split()) + len(msg.mentions) < 2:
-        print('wot')
         return await embeds.desc_only(msg.channel, '**Cannot add Chimes**: No Amount specified.')
     try:
         amount = int(msg.content.split()[1])
     except ValueError:
         return await embeds.desc_only(msg.channel, 'That\'s not a valid Amount.')
-    print(f'Amount: {amount}')
     if amount <= 0:
-        print('dot')
         return await embeds.desc_only(msg.channel, '**Cannot add Chimes**: Do I look like a Math Bot?')
     elif len(msg.mentions) == 1:
-        print('mot')
         data.modify_currency_of_user(msg.guild.id, msg.mentions[0], amount)
         return await embeds.desc_only(msg.channel, f'Added **{amount} Chimes** to **{msg.mentions[0].name}**.')
     else:
-        print('wololo')
         data.modify_currency_of_user(msg.guild.id, msg.author, amount)
         return await embeds.desc_only(msg.channel, f'Added **{amount} Chimes** to yourself!')
 
