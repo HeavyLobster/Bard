@@ -47,7 +47,8 @@ replies = {
         'hm': custom_reactions.hugemoji
     },
     data_cruncher.data.get_prefix('currency'): {
-        '$$': currency.get_money,
+        'c': currency.get_money,
+        'chimes': currency.get_money,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
