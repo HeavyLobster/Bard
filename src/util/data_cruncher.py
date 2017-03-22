@@ -227,7 +227,7 @@ class DataCruncher:
         :return: The Guild-specific Currency Configuration
         """
         if guild_id not in self._configs['currency']:
-            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'users': []}
+            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': []}
         return self._configs['currency'][guild_id]
 
     def get_currency_channels(self, guild_id: int):
@@ -265,6 +265,23 @@ class DataCruncher:
         :param channel_id: The Channel ID which should be removed
         """
         self._get_currency_guild(str(guild_id))['channels'].remove(channel_id)
+
+    def currency_increment_count(self, guild_id: int):
+        """
+        Increment the Counter for Currency on the given Guild. Used for Statistics.
+        
+        :param guild_id: The Guild ID for which to increment the Counter. 
+        """
+        self._get_currency_guild(str(guild_id))['total'] += 1
+
+    def get_currency_total(self, guild_id: int):
+        """
+        Get the total amount of spawned Currency on the given Guild. Used for Statistics.
+        
+        :param guild_id: The Guild ID for which to get the Amount. 
+        """
+        return self._get_currency_guild(str(guild_id))['total']
+
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()

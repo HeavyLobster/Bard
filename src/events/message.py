@@ -67,9 +67,13 @@ async def handle_message(msg):
     
     :param msg: A discord.Message Object with which this Function should actuate. 
     """
+    if msg.author.id == 226612862620008448:  # message by bot itself, for safety
+        return
+
     try:
         reply_func = replies.get(msg.content[:1]).get(msg.content[1:].split()[0])  # Only pass the Command Part
     except (AttributeError, IndexError):  # no matching command found
+        await currency.generator(msg)
         return
 
     if reply_func is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
@@ -79,8 +83,6 @@ async def handle_message(msg):
         except TypeError:
             return
 
-    if msg.author.id == 226612862620008448:  # message by bot itself, for safety
-        return
     try:
         reply = await reply_func(msg)
     except TypeError:
