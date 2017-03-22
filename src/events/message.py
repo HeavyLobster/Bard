@@ -79,13 +79,17 @@ async def handle_message(msg):
 
     valid_prefix_commands = replies.get(msg.content[:1], None)
     if valid_prefix_commands is not None:  # No message of interest
-        valid_response = valid_prefix_commands.get(msg.content[1:].split()[0])
-        if valid_response is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
-            if await custom_reactions.get_one(msg):
-                await msg.delete()
-        elif valid_response is not None:
-            reply = await valid_response(msg)
-            # Delete reply after a set time
+        try:
+            valid_response = valid_prefix_commands.get(msg.content[1:].split()[0])
+        except IndexError:  # somebody sent a single character for some reason
+            pass
+        else:
+            if valid_response is None and msg.content[:1] == data_cruncher.data.get_prefix('custom_reactions'):
+                if await custom_reactions.get_one(msg):
+                    await msg.delete()
+            elif valid_response is not None:
+                reply = await valid_response(msg)
+                # Delete reply after a set time
 
 
 print('done.')
