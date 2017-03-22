@@ -7,6 +7,15 @@ from src import bot
 
 @permission_checks.check_if_mod
 async def kick(msg):
+    """
+    Kick a mentioned User from the Guild.
+    
+    The User must be mentioned via @name#1337 so the Bot can obtain the Member object.
+    It's also possible to specify an optional Kick Message that will be sent by the Bot via DM to the kicked User.
+     
+    :param msg: The Message invoking the Command
+    :return: A discord.Message Object containing the resulting Feedback from the Bot.
+    """
     if not len(msg.mentions):
         return await embeds.desc_only(msg.channel, 'No User specified. Kick not possible.')
     else:
@@ -22,6 +31,15 @@ async def kick(msg):
 
 @permission_checks.check_if_mod
 async def ban(msg):
+    """
+    Ban a mentioned User from the Guild.
+
+    The User must be mentioned via @name#1337 so the Bot can obtain the Member object.
+    It's also possible to specify an optional Ban Message that will be sent by the Bot via DM to the banned User.
+
+    :param msg: The Message invoking the Command
+    :return: A discord.Message Object containing the resulting Feedback from the Bot.
+    """
     if not len(msg.mentions):
         return await embeds.desc_only(msg.channel, 'No User specified. Ban not possible.')
     else:
@@ -37,6 +55,15 @@ async def ban(msg):
 
 @permission_checks.check_if_mod
 async def purge(msg):
+    """
+    Purge a specified amount of Messages.
+    
+    It's possible to either purge a given amount of Messages, or by also mentioning a User searching for Messages
+    of the User in the specified amount of Messages.
+    
+    :param msg: The Message invoking the Command
+    :return: A discord.Message Object containing the response from the Bot. Most likely the amount of purged Messages.
+    """
     try:
         amount = int(msg.content.split()[1])
     except (ValueError, IndexError):
@@ -62,6 +89,12 @@ async def purge(msg):
 
 @permission_checks.check_if_admin
 async def change_activity(msg):
+    """
+    Change the Activity, or also named "playing state", of the Bot.
+
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the response of the Bot.
+    """
     # TODO: add new config file for global settings like the last activity etc
     try:
         new_activity = msg.content.split()[1:]
@@ -76,7 +109,15 @@ async def change_activity(msg):
 
 @permission_checks.check_if_admin
 async def set_log_channel(msg):
-    if data.set_log_channel(msg.guild.id, msg.channel.id):
+    """
+    Set a Log Channel which is used to inform about various Events. 
+    
+    :param msg: The Message invoking the Command
+    :return: A discord.Message Object containing the Response from the Bot indicating Success or Failure.
+    """
+    if data.get_log_channel(msg.guild.id) == msg.channel:
+        return await embeds.desc_only(msg.channel, 'This already is the Log Channel for this Guild.')
+    elif data.set_log_channel(msg.guild.id, msg.channel.id):
         return await embeds.desc_only(msg.channel, 'Log Channel set to **this channel**.')
     else:
         return await embeds.desc_only(msg.channel, 'Failed to set Log channel.')
@@ -84,6 +125,15 @@ async def set_log_channel(msg):
 
 @permission_checks.check_if_admin
 async def add_mod(msg):
+    """
+    Add a Moderator for the Guild in which the Message was sent.
+    
+    Since Bard uses his own Permission Management System, this is necessary to authorize Users to use various Commands.
+    Check the usage of the @permission_checks Decorator for knowing which Group can invoke which Command.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot indicating Success or Failure.
+    """
     # issue: if multiple roles in the owner - admin - mod hierarchy are assigned, the topmost must be removed first
     if not len(msg.mentions):  # No User Mentioned
         return await embeds.desc_only(msg.channel, f'No User specified, cannot add Moderator.')
@@ -97,6 +147,12 @@ async def add_mod(msg):
 
 @permission_checks.check_if_admin
 async def remove_mod(msg):
+    """
+    Remove a Moderator for the Guild in which the Message was sent.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot indicating Success or Failure.
+    """
     if not len(msg.mentions):
         return await embeds.desc_only(msg.channel, 'No User specified, cannot remove Moderator.')
     elif msg.mentions[0].id not in data.get_moderators_and_above(msg.guild.id):
@@ -109,12 +165,27 @@ async def remove_mod(msg):
 
 @permission_checks.check_if_admin
 async def shutdown(msg):
+    """
+    Shutdown the Bot.
+    
+    :param msg: The Message invoking the Command. 
+    :return: A discord.Message Object informing about the Bot shutting itself down.
+    """
     await embeds.desc_only(msg.channel, '*emulates windows xp shutdown sound*')
     await bot.client.close()
 
 
 @permission_checks.check_if_owner
 async def add_admin(msg):
+    """
+    Add an Administrator for the Guild in which the Message was sent.
+
+    Since Bard uses his own Permission Management System, this is necessary to authorize Users to use various Commands.
+    Check the usage of the @permission_checks Decorator for knowing which Group can invoke which Command.
+
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot indicating Success or Failure.
+    """
     if not len(msg.mentions):
         return await embeds.desc_only(msg.channel, 'No User specified, cannot add Administrator.')
     elif msg.mentions[0].id in data.get_admins_and_above(msg.guild.id):
@@ -127,6 +198,12 @@ async def add_admin(msg):
 
 @permission_checks.check_if_owner
 async def remove_admin(msg):
+    """
+    Remove an Administrator for the Guild in which the Message was sent.
+
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot indicating Success or Failure.
+    """
     if not len(msg.mentions):
         return await embeds.desc_only(msg.channel, 'No User specified, cannot remove Administrator.')
     elif msg.mentions[0].id not in data.get_admins_and_above(msg.guild.id):
