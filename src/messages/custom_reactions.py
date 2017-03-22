@@ -9,53 +9,92 @@ from src.util.data_cruncher import data
 
 
 async def add(msg):
+    """
+    Add a Custom Reaction for the Guild in which the Message was sent.
+    
+    :param msg: The message invoking the Command.
+    :return: A discord.Message informing about the Success or Failure of adding it.
+    """
     if len(msg.content.split()[2:]) < 1:
         return await embeds.desc_only(msg.channel, 'Too little content for a Custom Reaction!')
-    elif msg.content.split()[1] == 'add':  # !add add
+    elif msg.content.split()[1] == 'add':  # !add add, u memers
         return await embeds.desc_only(msg.channel, 'That\'s not a valid Custom Reaction name.')
     data.add_custom_reaction(msg.guild.id, msg.content.split()[1], ' '.join(msg.content.split()[2:]), msg.author.name)
     return await embeds.desc_only(msg.channel, f'Added new Custom Reaction called {msg.content.split()[1]}.')
 
 
 async def meow(msg):
+    """
+    Sends a random Cat Image or GIF. Note that the request is blocking.
+    
+    :param msg: The Message invoking the Command
+    :return: A discord.Message Object containing a Cat Image or GIF
+    """
     link = json.load(urllib.request.urlopen('http://random.cat/meow'))['file']
     return await embeds.img_only(msg.channel, link)
 
 
 async def woof(msg):
+    """
+    Sends a random Dog GIF. Note that the request is blocking.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing a Cat Image or GIF
+    """
     url = requests.get('https://api.giphy.com/v1/gifs/random?'
                        'api_key=dc6zaTOxFJmzC&tag=dog').json()['data']['image_original_url']
     return await msg.channel.send(url)
 
 
 async def get_one(msg):
+    """
+    Sends a Custom Reaction with the specified name.
+    
+    :param msg: The Message invoking the Command 
+    :return: None if no Custom Reaction was found, otherwise a discord.Message Object containing the Custom Reaction.
+    """
     try:
-        reaction = data.get_custom_reaction(msg.guild.id, msg.content[1:].split()[0])
+        name = msg.content[1:].split()[0]
+        reaction = data.get_custom_reaction(msg.guild.id, name)
     except IndexError:
-        pass
+        return None
     else:
         if reaction is None:
             return None
         elif reaction[0].startswith('http'):  # Properly Embed Links to GIF, Images etc.
-            return await embeds.img_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+            return await embeds.img_with_footer(msg.channel, reaction[0],
+                                                f'"{name}" | Added by {reaction[1]}', reaction[2])
         elif reaction[0] != '':
-            return await embeds.desc_with_footer(msg.channel, reaction[0], f'Added by {reaction[1]}', reaction[2])
+            return await embeds.desc_with_footer(msg.channel, reaction[0],
+                                                 f'"{name}" | Added by {reaction[1]}', reaction[2])
 
 
 async def build_list(msg):
+    """
+    Send a List of Custom Reactions found on the Guild in which the Command was invoked.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object with the Bot's Response.
+    """
     custom_reactions = data.get_all_custom_reactions_on_guild(msg.guild.id)
     if custom_reactions is None:
         return await embeds.desc_only(msg.channel, 'Sorry, no Quotes were found for this Server.')
     else:
-        await create_custom_reaction_embed(f'- All Custom Reactions on {msg.guild.name} - ',
-                                           custom_reactions, msg.channel,
-                                           'https://lh3.googleusercontent.com/'
-                                           'BvIDv_HYH8HnHubWn_lle2eC5lm5lY3kAGI'
-                                           'kFniSk8x_SDpbUr0dlNTe6P6j_C8f4cSmH-d'
-                                           '0rtuSlUU=w1441-h740')
+        return await create_custom_reaction_embed(f'- All Custom Reactions on {msg.guild.name} - ',
+                                                  custom_reactions, msg.channel,
+                                                  'https://lh3.googleusercontent.com/'
+                                                  'BvIDv_HYH8HnHubWn_lle2eC5lm5lY3kAGI'
+                                                  'kFniSk8x_SDpbUr0dlNTe6P6j_C8f4cSmH-d'
+                                                  '0rtuSlUU=w1441-h740')
 
 
 async def hugemoji(msg):
+    """
+    Sends a "hugified" version of the Emoji given in the Message. Only works for Custom Emojis.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object with a huge version of the Emoji.
+    """
     emoji_id = re.search('[0-9]+', msg.content)
     # Make sure it also works when there's a number in the ID!
     try:
@@ -65,3 +104,14 @@ async def hugemoji(msg):
         return await embeds.desc_only(msg.channel, 'Sorry, something went wrong.')
     else:
         return await embeds.img_only(msg.channel, f'https://cdn.discordapp.com/emojis/{emoji_id.group(0)}.png')
+
+
+async def help(msg):
+    """
+    Send a Message with a Link to Bard's Wiki.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object with the hopefully helpful Message.
+    """
+    return await embeds.desc_only(msg.channel, "**You can view Bard's Commands here:** "
+                                               "https://github.com/Volcyy/Bard/wiki")

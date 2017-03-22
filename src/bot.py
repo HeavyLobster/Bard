@@ -60,9 +60,13 @@ async def on_resumed():
 @client.event
 async def on_message(msg):
 
-    # Check if Volcyy's bot is online:
+    try:
+        # Check if Volcyy's bot is online:
         if not volcyyBotOnline:
             await message.handle_message(msg)
+    except TypeError:
+        # Message wasn't sent in a Guild
+        pass
 
 
 @client.event
@@ -77,11 +81,22 @@ async def on_message_edit(before, after):
 
 @client.event
 async def on_reaction_add(reaction, user):
+<<<<<<< HEAD
 
 # Check if Volcyy's bot is online
 
     global volcyyBotOnline
     if not volcyyBotOnline:
+
+    """
+    Event Handler for when a Reaction is added to a Message.
+    
+    Currently, this is used to check whether the currently stored Clickable Custom Reaction Embed was actuated,
+    and sends a signal to it to move further if this is the Case.
+    
+    :param reaction: The Added discord.Reaction 
+    :param user: The discord.User adding the Reaction 
+    """
 
         # Actual function
         if user.id != client.user.id:

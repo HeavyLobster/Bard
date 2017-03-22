@@ -1,4 +1,5 @@
 import datetime
+import discord
 import json
 import os
 import random
@@ -49,18 +50,6 @@ class DataCruncher:
             print(f'Error trying to access Prefixes at key {key}')
             return None
 
-    def get_config(self, file, key=''):
-        if key == '':
-            try:
-                return self._configs[file]
-            except KeyError:
-                print(f'Error trying to access Config {file}.')
-        else:
-            try:
-                return self._configs[file][key]
-            except KeyError:
-                print(f'Error trying to access Config {file} at key \'{key}\'.')
-
     def add_custom_reaction(self, guild_id: str, name: str, contents: str, added_by: str):
         guild_id = str(guild_id)
         name = name.lower()
@@ -77,6 +66,13 @@ class DataCruncher:
         pass
 
     def get_custom_reaction(self, guild_id: int, name: str):
+        """
+        Get a Custom Reaction on the Guild specified, with the name specified.
+        
+        :param guild_id: The Guild for which to access the Custom Reaction 
+        :param name: The Name for which to get a Custom Reaction
+        :return: None if the Guild or the Custom Reaction were not found.
+        """
         guild_id = str(guild_id)
         name = name.lower()
         try:
@@ -92,12 +88,20 @@ class DataCruncher:
                 return reaction[random.randrange(0, len(reaction))]
 
     def get_all_custom_reactions_on_guild(self, guild_id: int):
+        """
+        Returns a List of all Custom Reactions on a Guild, in the following format:
+        [ [contents, author, creation date, name], ... ]
+        
+        :param guild_id: The Guild for which to get all Custom Reactions. 
+        :return: A List of all Custom Reactions, or None if none were found for the specified Guild.
+        """
         guild_id = str(guild_id)
         all_custom_reactions = list()
         try:
             for namespace in self._configs['custom_reactions'][guild_id]:
                 for custom_reaction in self._configs['custom_reactions'][guild_id][namespace]:
-                    all_custom_reactions.append([custom_reaction[0], custom_reaction[1], custom_reaction[2]])
+                    all_custom_reactions.append([custom_reaction[0], custom_reaction[1],
+                                                 custom_reaction[2], namespace])
         except KeyError:
             return None
         else:
@@ -119,7 +123,6 @@ class DataCruncher:
                    + self._configs['users'][guild_id]['administrators'] \
                    + self._configs['users']['owner']
         except KeyError:
-            print(f'Failed to fetch Moderators for Server with ID {guild_id}.')
             return self._configs['users']['owner']
 
     def get_admins_and_above(self, guild_id: int):
@@ -128,7 +131,6 @@ class DataCruncher:
             return self._configs['users'][guild_id]['administrators'] \
                    + self._configs['users']['owner']
         except KeyError:
-            print(f'Failed to fetch Admins for Server with ID {guild_id}.')
             return self._configs['users']['owner']
 
     def get_owner(self):
@@ -216,6 +218,109 @@ class DataCruncher:
     def get_role_servers(self):
         return self._configs['roles']
 
+    def _get_currency_guild(self, guild_id: str):
+        """
+        A Helper function to ease getting Data from the Currency Configuration file.
+        
+        :param guild_id: The Guild ID for which to lookup Data
+        :return: The Guild-specific Currency Configuration
+        """
+        if guild_id not in self._configs['currency']:
+            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': {}}
+        return self._configs['currency'][guild_id]
+
+    def _get_currency_user(self, user_id: str, guild_id: str):
+        """
+        A Helper function to ease getting Currency Data from a User.
+        
+        :param user_id: The User ID for which to get Data  
+        :return: Data about the User
+        """
+        guild = self._get_currency_guild(guild_id)
+        if user_id not in guild['users']:
+            guild['users'][user_id] = {
+                'name': '',
+                'amount': 0
+            }
+        return guild['users'][user_id]
+
+    def get_currency_channels(self, guild_id: int):
+        """
+        Get a List of Channel IDs for a given Guild in which Currency Generation is enabled.
+         
+        :param guild_id: The Guild for which to get the Channel IDs 
+        :return: A List of Channel IDs in which Currency Generation is enabled for the given Guild
+        """
+        return self._get_currency_guild(str(guild_id))['channels']
+
+    def get_currency_chance(self, guild_id: int):
+        """
+        Get the Spawn Chance (in percent) for Currency for the given Guild ID.
+        
+        :param guild_id: The Guild ID for which to get the Currency Spawn Chance
+        :return: The Spawn Chance if the Guild has an entry for it
+        """
+        return self._get_currency_guild(str(guild_id))['chance']
+
+    def add_currency_channel(self, guild_id: int, channel_id: int):
+        """
+        Adds a Channel in which Currency Generation is enabled to the given Guild.
+        
+        :param guild_id: The Guild ID for which to add a Currency-Enabled Channel
+        :param channel_id: The Channel ID which should be added
+        """
+        self._get_currency_guild(str(guild_id))['channels'].append(channel_id)
+
+    def remove_currency_channel(self, guild_id: int, channel_id: int):
+        """
+        Remove a Channel in which Currency Generation is enabled from the given Guild.
+        
+        :param guild_id: The Guild ID for which to remove the Currency-Enabled Channel 
+        :param channel_id: The Channel ID which should be removed
+        """
+        self._get_currency_guild(str(guild_id))['channels'].remove(channel_id)
+
+    def currency_increment_count(self, guild_id: int):
+        """
+        Increment the Counter for Currency on the given Guild. Used for Statistics.
+        
+        :param guild_id: The Guild ID for which to increment the Counter. 
+        """
+        self._get_currency_guild(str(guild_id))['total'] += 1
+
+    def get_currency_total(self, guild_id: int):
+        """
+        Get the total amount of spawned Currency on the given Guild. Used for Statistics.
+        
+        :param guild_id: The Guild ID for which to get the Amount. 
+        """
+        return self._get_currency_guild(str(guild_id))['total']
+
+    def get_currency_of_user(self, guild_id: int, member: discord.Member):
+        """
+        Get the Amount of Currency a User has.
+        
+        :param guild_id: The Guild in which to check for his Currency 
+        :param member: The Member for which to get the Currency
+        :return: The amount of Currency the Member has
+        """
+        user = self._get_currency_user(str(member.id), str(guild_id))
+        user['name'] = member.display_name
+        return user['amount']
+
+    def modify_currency_of_user(self, guild_id: int, member: discord.Member, amount: int):
+        """
+        Modify the Currency of the specified User.
+        
+        :param guild_id: The Guild on which to modify his Currency. 
+        :param member: The User whose Currency should be modified.
+        :param amount: The amount by which to modify the Currency
+        :return The new amount of Currency from the User.
+        """
+        user = self._get_currency_user(str(member.id), str(guild_id))
+        user['name'] = member.display_name
+        user['amount'] += amount
+        return user['amount']
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
