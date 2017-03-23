@@ -7,9 +7,29 @@ from src.util import embeds, checks
 from src import bot
 
 
+async def set_chance(msg):
+    """
+    Set the Currency Spawn Chance for the Guild in which the Message was sent.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot 
+    """
+    if len(msg.content.split()) < 2:
+        return await embeds.desc_only(msg.channel, 'You need to specify an Amount to which the Chance should be set!')
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'That is not a valid amount.')
+
+    if not 0 <= amount <= 20:
+        return await embeds.desc_only(msg.channel, 'Chance must be within 0 and 20%.')
+    data.set_currency_chance(msg.guild.id, amount)
+    return await embeds.desc_only(msg.channel, 'Set **Chime Spawn Chance** to **{amount} %**!')
+
+
 async def get_chance(msg):
     """
-    Get the Currency Spawn Chance for the Channel in which the Message was sent.
+    Get the Currency Spawn Chance for the Guild in which the Message was sent.
     
     :param msg: The Message invoking the Command 
     :return: The Response of the Bot

@@ -226,7 +226,7 @@ class DataCruncher:
         :return: The Guild-specific Currency Configuration
         """
         if guild_id not in self._configs['currency']:
-            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': {}}
+            self._configs['currency'][guild_id] = {'chance': 4, 'channels': [], 'total': 0, 'users': {}}
         return self._configs['currency'][guild_id]
 
     def _get_currency_user(self, user_id: str, guild_id: str):
@@ -261,6 +261,15 @@ class DataCruncher:
         :return: The Spawn Chance if the Guild has an entry for it
         """
         return self._get_currency_guild(str(guild_id))['chance']
+
+    def set_currency_chance(self, guild_id: int, chance: int):
+        """
+        Set the Currency Spawn Chance (in percent) for the given Guild ID.
+
+        :param guild_id: The Guild ID for which to set the Chance 
+        :param chance: The Chance to set
+        """
+        self._get_currency_guild(str(guild_id))['chance'] = chance
 
     def add_currency_channel(self, guild_id: int, channel_id: int):
         """
@@ -321,6 +330,8 @@ class DataCruncher:
         user['name'] = member.display_name
         user['amount'] += amount
         return user['amount']
+
+
 
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations

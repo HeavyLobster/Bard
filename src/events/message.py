@@ -56,6 +56,7 @@ replies = {
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
+        'setchance': currency.set_chance,
         'grant': currency.add_money,
         'take': currency.remove_money
     }
