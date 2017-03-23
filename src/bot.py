@@ -19,7 +19,7 @@ volcyyBotOnline = False
 def becomeInactive():
 
     global volcyyBotOnline
-    volcyyBotOnline = False
+    volcyyBotOnline = True
 
 
 # Same as above, but becoming active instead of inactive
