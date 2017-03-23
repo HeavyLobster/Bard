@@ -160,9 +160,18 @@ async def coin_flip(msg):
                                           'http://favim.com/orig/201105/25/cat-evil-kitty-eyes-laser-laser'
                                           '-eyes-lasers-Favim.com-55022.jpg'])
         return await embeds.desc_with_img(msg.channel,
-                                          f'A cat ate your **{f"{amount} Chimes" if amount < 0 else "Chime"}**!',
+                                          f'A cat ate your **{f"{amount} Chimes" if amount > 1 else "Chime"}**!',
                                           cat_eating_chime)
 
+
+async def leaderboard(msg):
+    """
+    Show a Leaderboard showing who has the most Chimes on the Guild.
+    
+    :param msg: The Message which invoked the Command 
+    :return: The Bot's Response
+    """
+    for person in
 
 @checks.is_admin
 async def add_money(msg):

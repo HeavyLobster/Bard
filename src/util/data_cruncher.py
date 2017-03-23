@@ -331,6 +331,13 @@ class DataCruncher:
         user['amount'] += amount
         return user['amount']
 
+    def get_currency_guild_users(self, guild_id: int):
+        """
+        Get the List of Users with their name, ID and Money on the given Guild.
+        
+        :param guild_id: 
+        :return: 
+        """
 
 
 
