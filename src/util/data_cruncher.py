@@ -365,11 +365,24 @@ class DataCruncher:
         Add a User to the League of Legends Players List of the given Guild.
         
         :param guild_id: The Guild on which to add the User 
-        :param player_id: The Player which should be added
+        :param player_id: The Summoner ID which should be added
         :return: The refreshed List of League Users on the given Guild
         """
-        return self.get_league_guild_users(guild_id).append(player_id)
+        self.get_league_guild_users(guild_id).append(player_id)
+        return self.get_league_guild_users(guild_id)
 
+    def remove_league_guild_user(self, guild_id: int, player_id: str):
+        """
+        Remove a User from the League of Legends Player List for the given Guild.
+        
+        :param guild_id: The Guild from which to remove the User 
+        :param player_id: The Summoner ID that should be removed from the List
+        :return: The refreshed List of League Users on the given Guild.
+        """
+        try:
+            self.get_league_guild_users(guild_id).remove(player_id)
+        except ValueError:
+            pass
 
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
