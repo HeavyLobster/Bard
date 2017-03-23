@@ -143,7 +143,7 @@ async def coin_flip(msg):
     if random.uniform(0, 1) < 0.5:
         data.modify_currency_of_user(msg.guild.id, msg.author, amount)
         return await embeds.desc_with_img(msg.channel,
-                                          f'You won **{amount} Chime{"s" if amount > 1 else ""}!',
+                                          f'You won **{amount} Chime{"s" if amount > 1 else ""}**!',
                                           'https://cdn.discordapp.com/attachments/17225136311002726'
                                           '4/294523714198831105/chime.png')
     else:
