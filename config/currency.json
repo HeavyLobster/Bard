@@ -1,25 +1,25 @@
 {
     "172226206375084032": {
-        "chance": 3,
+        "chance": 5,
         "channels": [
             172251363110027264
         ],
-        "total": 0,
+        "total": 10,
         "users": {
             "196989358165852160": {
                 "name": "Volcyy",
                 "amount": 0
             },
             "143833693520134144": {
-                "name": "",
-                "amount": 0
+                "name": "Chime Addict",
+                "amount": 4
             },
             "290324118665166849": {
                 "name": "Darb",
                 "amount": 1
             },
             "137059214903214080": {
-                "name": "",
+                "name": "\u239dF\u239dU\u29f9L\u29f8L\u23a0Y\u239dM\u23a0\u239dA\u23a0Y\u23a0S\u23a0",
                 "amount": 0
             },
             "226612862620008448": {
@@ -29,7 +29,44 @@
             "140329679159689216": {
                 "name": "Cata (NA flamer mod)",
                 "amount": 0
+            },
+            "135079599154528256": {
+                "name": "Bardie",
+                "amount": 0
+            },
+            "215056515357343746": {
+                "name": "look at my sausage",
+                "amount": 0
+            },
+            "179743703441604608": {
+                "name": "Xiga",
+                "amount": 0
+            },
+            "174126034428493825": {
+                "name": "TheSeaPunCake",
+                "amount": 1
+            },
+            "147723973340168192": {
+                "name": "Onno | Bradi",
+                "amount": 0
             }
         }
+    },
+    "293833573016928257": {
+        "chance": 4,
+        "channels": [],
+        "total": 0,
+        "users": {
+            "197177484792299522": {
+                "name": "yoo",
+                "amount": 0
+            }
+        }
+    },
+    "226288553053782016": {
+        "chance": 4,
+        "channels": [],
+        "total": 0,
+        "users": {}
     }
 }

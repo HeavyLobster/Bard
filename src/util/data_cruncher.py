@@ -226,7 +226,7 @@ class DataCruncher:
         :return: The Guild-specific Currency Configuration
         """
         if guild_id not in self._configs['currency']:
-            self._configs['currency'][guild_id] = {'chance': 3, 'channels': [], 'total': 0, 'users': {}}
+            self._configs['currency'][guild_id] = {'chance': 4, 'channels': [], 'total': 0, 'users': {}}
         return self._configs['currency'][guild_id]
 
     def _get_currency_user(self, user_id: str, guild_id: str):
@@ -261,6 +261,15 @@ class DataCruncher:
         :return: The Spawn Chance if the Guild has an entry for it
         """
         return self._get_currency_guild(str(guild_id))['chance']
+
+    def set_currency_chance(self, guild_id: int, chance: int):
+        """
+        Set the Currency Spawn Chance (in percent) for the given Guild ID.
+
+        :param guild_id: The Guild ID for which to set the Chance 
+        :param chance: The Chance to set
+        """
+        self._get_currency_guild(str(guild_id))['chance'] = chance
 
     def add_currency_channel(self, guild_id: int, channel_id: int):
         """
@@ -321,6 +330,61 @@ class DataCruncher:
         user['name'] = member.display_name
         user['amount'] += amount
         return user['amount']
+
+    def get_currency_guild_users(self, guild_id: int):
+        """
+        Get the dictionary of Users with their name, ID and Money on the given Guild.
+        
+        :param guild_id: The Guild for which to lookup the Users
+        :return: A List of Users in the Format { "id": { "name": "xyz", "amount": 3 }, ... }  
+        """
+        return self._get_currency_guild(str(guild_id))['users']
+
+    def _get_league_guild(self, guild_id: str):
+        """
+        Helper Function to get the League Configuration for the given guild ID.
+        
+        :param guild_id: The Guild's ID for which to perform the lookup
+        :return: The Configuration for the Guild
+        """
+        if guild_id not in self._configs['league']:
+            self._configs['league'][guild_id] = {'users': []}
+        return self._configs['league'][guild_id]
+
+    def get_league_guild_users(self, guild_id: int):
+        """
+        Get the people who are in the User Array for the given Guild.
+        
+        :param guild_id: The Guild ID for which to perform the lookups 
+        :return: Summoner IDs for the Guild, if found.
+        """
+        return self._get_league_guild(str(guild_id))['users']
+
+    def add_league_guild_user(self, guild_id: int, player_id: str, server: str):
+        """
+        Add a User to the League of Legends Players List of the given Guild.
+        
+        :param guild_id: The Guild on which to add the User 
+        :param player_id: The Summoner ID which should be added
+        :param server: The League of Legends Server where the ID lives
+        :return: The refreshed List of League Users on the given Guild
+        """
+        self.get_league_guild_users(guild_id).append([player_id, server])
+        return self.get_league_guild_users(guild_id)
+
+    def remove_league_guild_user(self, guild_id: int, player_id: int):
+        """
+        Remove a User from the League of Legends Player List for the given Guild.
+        
+        :param guild_id: The Guild from which to remove the User 
+        :param player_id: The Summoner ID that should be removed from the List
+        :return: The refreshed List of League Users on the given Guild.
+        """
+        players = self.get_league_guild_users(guild_id)
+        for item in players:
+            if item[0] == player_id:
+                players.remove(item)
+        return self.get_league_guild_users(guild_id)
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()

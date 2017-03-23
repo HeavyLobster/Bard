@@ -40,6 +40,14 @@ replies = {
     },
     data_cruncher.data.get_prefix('custom_reactions'): {
         'add': custom_reactions.add,
+        'addleague': custom_reactions.add_league_id,
+        'addlol': custom_reactions.add_league_id,
+        'removeleague': custom_reactions.remove_league_id,
+        'rmleague': custom_reactions.remove_league_id,
+        'rmlol': custom_reactions.remove_league_id,
+        'lb': custom_reactions.invoke_leaderboard_build,
+        'leaderboard': custom_reactions.invoke_leaderboard_build,
+        'leagueboard': custom_reactions.invoke_leaderboard_build,
         'meow': custom_reactions.meow,
         'woof': custom_reactions.woof,
         'viewall': custom_reactions.build_list,
@@ -52,10 +60,20 @@ replies = {
         'c': currency.get_money,
         'chime': currency.get_money,
         'chimes': currency.get_money,
+        'chance': currency.get_chance,
+        'cf': currency.coin_flip,
+        'flip': currency.coin_flip,
+        'coinflip': currency.coin_flip,
         'give': currency.give_money,
+        'lb': currency.leaderboard,
+        'leaderboard': currency.leaderboard,
+        'topchimes': currency.leaderboard,
+        'top': currency.leaderboard,
+        'tc': currency.leaderboard,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,
+        'setchance': currency.set_chance,
         'grant': currency.add_money,
         'take': currency.remove_money
     }
@@ -92,6 +110,8 @@ async def handle_message(msg):
             elif valid_response is not None:
                 reply = await valid_response(msg)
                 # Delete reply after a set time
+    else:
+        await currency.generator(msg)
 
 
 print('done.')
