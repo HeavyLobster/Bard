@@ -6,6 +6,7 @@ import urllib
 from src.events.reactions import create_custom_reaction_embed
 from src.util import embeds
 from src.util.data_cruncher import data
+from src import bot
 
 
 async def invoke_leaderboard_build(msg):
@@ -13,9 +14,19 @@ async def invoke_leaderboard_build(msg):
     Invoke the asynchronously running process of building a Leaderboard of the top Mastery Points per Player that habe
     previously added themselves to a List.
     
-    :param msg: The Message invoking the command 
+    :param msg: The Message invoking the command
+    :return The built Leaderboard. Takes some time.
     """
-    return
+    return await bot.client.loop.create_task()
+
+
+async def _build_league_leaderboard(msg):
+    """
+    Build a Leaderboard containing the top scores for the people who entered themselves into the List previously.
+    
+    :param msg: 
+    :return: 
+    """
 
 
 async def add(msg):

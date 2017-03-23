@@ -51,24 +51,26 @@ def get_summoner_by_id(player_id, region):
     return riotapi.get_summoner_by_id(player_id)
 
 
-def get_mastery_points(name, region):
+def get_mastery_points(name, region, champ_id: int=432):
     """
     Get someone's Champ Mastery Points on Bard
     
     :param name: The Name of the Player to lookup 
     :param region: The Region of the Player
+    :param champ_id: The Champion ID for which to get the Points. Defaults to Bard.
     :return: The Points of the given Person on Bard
     """
-    return dto.championmasteryapi.get_champion_mastery(get_id_by_name(name, region), 432).championPoints
+    return dto.championmasteryapi.get_champion_mastery(get_id_by_name(name, region), champ_id).championPoints
 
 
-def get_mastery_points_by_id(player_id, region):
+def get_mastery_points_by_id(player_id, region, champ_id: int=432):
     """
     Get someone's Champ Mastery Points on Bard by their ID and Server
     
     :param player_id: The ID of the Summoner for which to lookup the Points 
-    :param region: The Region of the Summoner 
+    :param region: The Region of the Summoner
+    :param champ_id: The Champion ID for which to get the Points. Defaults to Bard.
     :return: The Mastery Points of the Player on Bard
     """
     set_region(region)
-    return dto.champmasteryapi.get_champion_mastery(player_id, 432).championPoints
+    return dto.champmasteryapi.get_champion_mastery(player_id, champ_id).championPoints
