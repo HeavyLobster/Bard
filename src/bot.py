@@ -38,7 +38,7 @@ async def on_ready():
 
     if volcyyBot.status != discord.Status.offline:
         becomeInactive()
-        await client.change_presence(status=discord.Status.dnd)
+        await client.change_presence(game=discord.Game(name="hide and seek with Bard"), status=discord.Status.dnd, afk=False)
 
     await ready.on_ready()
 
@@ -161,7 +161,7 @@ async def on_member_update(before, after):
         # If offline and coming online
         if before.status == discord.Status.offline and after.status != discord.Status.offline:
             becomeInactive()
-            await client.change_presence(status=discord.Status.dnd)
+            await client.change_presence(game=discord.Game(name="hide and seek with Bard"), status=discord.Status.dnd, afk=False)
 
         # If online and going offline
         if before.status != discord.Status.offline and after.status == discord.Status.offline:
