@@ -36,11 +36,12 @@ async def _build_league_leaderboard(msg):
     for user in data.get_league_guild_users(msg.guild.id):
         users.append([lolapi.get_mastery_points_by_id(user[0], user[1]),
                       lolapi.get_summoner_by_id(user[0], user[1]).name])
-    users = sorted(users, key=lambda x: x[1], reverse=True)
+    users = sorted(users, key=lambda x: x[0], reverse=True)
     leader_board = discord.Embed()
+    leader_board.title = '- Bard Mastery Score Leaderboard -'
     for idx, pair in enumerate(users):
         score = '{:,}'.format(pair[0])
-        leader_board.add_field(name=f'#{idx} + 1: {pair[1]}', value=f'**{score}** points')
+        leader_board.add_field(name=f'#{idx + 1}: {pair[1]}', value=f' with **{score} points**')
     await info.delete()
     return await msg.channel.send(embed=leader_board)
 
