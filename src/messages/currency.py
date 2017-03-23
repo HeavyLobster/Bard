@@ -142,7 +142,8 @@ async def coin_flip(msg):
 
     if random.uniform(0, 1) < 0.5:
         data.modify_currency_of_user(msg.guild.id, msg.author, amount)
-        return await embeds.desc_with_img(f'You won **{amount} Chime{"s" if amount > 1 else ""}!',
+        return await embeds.desc_with_img(msg.channel,
+                                          f'You won **{amount} Chime{"s" if amount > 1 else ""}!',
                                           'https://cdn.discordapp.com/attachments/17225136311002726'
                                           '4/294523714198831105/chime.png')
     else:
@@ -158,7 +159,8 @@ async def coin_flip(msg):
                                           '9403358ea4097c7b73c4a1321.jpg',
                                           'http://favim.com/orig/201105/25/cat-evil-kitty-eyes-laser-laser'
                                           '-eyes-lasers-Favim.com-55022.jpg'])
-        return await embeds.desc_with_img(f'A cat ate your **{f"{amount} Chimes" if amount < 0 else "Chime"}**!',
+        return await embeds.desc_with_img(msg.channel,
+                                          f'A cat ate your **{f"{amount} Chimes" if amount < 0 else "Chime"}**!',
                                           cat_eating_chime)
 
 
