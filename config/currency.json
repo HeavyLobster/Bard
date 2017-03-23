@@ -56,7 +56,12 @@
         "chance": 4,
         "channels": [],
         "total": 0,
-        "users": {}
+        "users": {
+            "197177484792299522": {
+                "name": "yoo",
+                "amount": 0
+            }
+        }
     },
     "226288553053782016": {
         "chance": 4,

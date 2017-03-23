@@ -73,4 +73,4 @@ def get_mastery_points_by_id(player_id, region, champ_id: int=432):
     :return: The Mastery Points of the Player on Bard
     """
     set_region(region)
-    return dto.champmasteryapi.get_champion_mastery(player_id, champ_id).championPoints
+    return dto.championmasteryapi.get_champion_mastery(player_id, champ_id).championPoints

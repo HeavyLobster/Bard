@@ -372,7 +372,7 @@ class DataCruncher:
         self.get_league_guild_users(guild_id).append([player_id, server])
         return self.get_league_guild_users(guild_id)
 
-    def remove_league_guild_user(self, guild_id: int, player_id: str):
+    def remove_league_guild_user(self, guild_id: int, player_id: int):
         """
         Remove a User from the League of Legends Player List for the given Guild.
         
@@ -380,9 +380,10 @@ class DataCruncher:
         :param player_id: The Summoner ID that should be removed from the List
         :return: The refreshed List of League Users on the given Guild.
         """
-        for pair in self.get_league_guild_users(guild_id):
-            if pair[0] == player_id:
-                del pair
+        players = self.get_league_guild_users(guild_id)
+        for item in players:
+            if item[0] == player_id:
+                players.remove(item)
         return self.get_league_guild_users(guild_id)
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations

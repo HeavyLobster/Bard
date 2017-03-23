@@ -1,4 +1,5 @@
 import cassiopeia
+import discord
 import json
 import re
 import requests
@@ -28,9 +29,21 @@ async def _build_league_leaderboard(msg):
     :param msg: The Message invoking the Command 
     :return: The built Leaderboard. Takes some time.
     """
+    user_list = data.get_league_guild_users(msg.guild.id)
+    info = await embeds.desc_only(msg.channel, f'Building League of Legends Leaderboard for '
+                                               f'**{len(user_list)} Users**...')
     users = []
-    for user_id in data.get_league_guild_users(msg.guild.id):
-        users.append([lolapi.get_mastery_points_by_id(user_id,)])
+    for user in data.get_league_guild_users(msg.guild.id):
+        users.append([lolapi.get_mastery_points_by_id(user[0], user[1]),
+                      lolapi.get_summoner_by_id(user[0], user[1]).name])
+    users = sorted(users, key=lambda x: x[1], reverse=True)
+    leader_board = discord.Embed()
+    for idx, pair in enumerate(users):
+        score = '{:,}'.format(pair[0])
+        leader_board.add_field(name=f'#{idx} + 1: {pair[1]}', value=f'**{score}** points')
+    await info.delete()
+    return await msg.channel.send(embed=leader_board)
+
 
 async def add_league_id(msg):
     """
@@ -48,7 +61,7 @@ async def add_league_id(msg):
     except (cassiopeia.type.api.exception.APIError, ValueError):
         return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
                                                    'moner Account. This usually means that your Account was not found.')
-    if user_id in data.get_league_guild_users(msg.guild.id):
+    if user_id in sum(data.get_league_guild_users(msg.guild.id), []):
         return await embeds.desc_only(msg.channel, f'**{summoner_name}** is already on the List of Users for '
                                                    f'this Guild.')
     data.add_league_guild_user(msg.guild.id, user_id, region.upper())
@@ -72,7 +85,7 @@ async def remove_league_id(msg):
     except (cassiopeia.type.api.exception.APIError, ValueError):
         return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
                                                    'moner Account. This usually means that your Account was not found.')
-    if user_id not in data.get_league_guild_users(msg.guild.id):
+    if user_id not in sum(data.get_league_guild_users(msg.guild.id), []):  # flatten Array
         return await embeds.desc_only(msg.channel, f'**{summoner_name}** is not on the List of Users for this Guild.')
     data.remove_league_guild_user(msg.guild.id, user_id)
     return await embeds.desc_only(msg.channel, f'Removed **{summoner_name}** from the List of Users for League of '

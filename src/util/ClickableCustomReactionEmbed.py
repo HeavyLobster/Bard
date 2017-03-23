@@ -55,13 +55,11 @@ class ClickableCustomReactionEmbed:
         """
         await self.embedded_message.remove_reaction('\N{BLACK RIGHT-POINTING TRIANGLE}' if right
                                                     else '\N{BLACK LEFT-POINTING TRIANGLE}', member)
-        try:
-            self.index = self.index + 1 if right else self.index - 1
-            next_contents = self.embeds[self.index]
-        except IndexError:
-            self.index = 0
-        finally:
-            await self.embedded_message.edit(embed=next_contents)
+        self.index = self.index + 1 if right else self.index - 1
+        if 0 < self.index > len(self.embeds):
+            self.index = len(self.embeds)
+        next_contents = self.embeds[self.index]
+        await self.embedded_message.edit(embed=next_contents)
 
     async def remove(self):
         """
