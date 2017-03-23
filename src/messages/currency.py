@@ -255,4 +255,4 @@ async def set_chance(msg):
     if not 0 <= amount <= 20:
         return await embeds.desc_only(msg.channel, 'Chance must be within 0 and 20%.')
     data.set_currency_chance(msg.guild.id, amount)
-    return await embeds.desc_only(msg.channel, 'Set **Chime Spawn Chance** to **{amount} %**!')
+    return await embeds.desc_only(msg.channel, f'Set **Chime Spawn Chance** to **{amount} %**!')
