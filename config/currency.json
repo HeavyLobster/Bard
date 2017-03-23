@@ -4,7 +4,7 @@
         "channels": [
             172251363110027264
         ],
-        "total": 3,
+        "total": 10,
         "users": {
             "196989358165852160": {
                 "name": "Volcyy",
@@ -12,14 +12,14 @@
             },
             "143833693520134144": {
                 "name": "Chime Addict",
-                "amount": 1
+                "amount": 4
             },
             "290324118665166849": {
                 "name": "Darb",
                 "amount": 1
             },
             "137059214903214080": {
-                "name": "FillyMays",
+                "name": "\u239dF\u239dU\u29f9L\u29f8L\u23a0Y\u239dM\u23a0\u239dA\u23a0Y\u23a0S\u23a0",
                 "amount": 0
             },
             "226612862620008448": {
@@ -37,7 +37,27 @@
             "215056515357343746": {
                 "name": "look at my sausage",
                 "amount": 0
+            },
+            "179743703441604608": {
+                "name": "Xiga",
+                "amount": 0
+            },
+            "174126034428493825": {
+                "name": "TheSeaPunCake",
+                "amount": 1
             }
         }
+    },
+    "293833573016928257": {
+        "chance": 4,
+        "channels": [],
+        "total": 0,
+        "users": {}
+    },
+    "226288553053782016": {
+        "chance": 4,
+        "channels": [],
+        "total": 0,
+        "users": {}
     }
 }

@@ -1,5 +1,6 @@
 import asyncio
 from concurrent.futures import TimeoutError
+import datetime
 import discord
 import random
 from src.util.data_cruncher import data
@@ -171,7 +172,18 @@ async def leaderboard(msg):
     :param msg: The Message which invoked the Command 
     :return: The Bot's Response
     """
-    for person in
+    start_time = datetime.datetime.now()
+    loading_message = await embeds.desc_only(msg.channel, '*Building Leaderboard...*')
+    leader_board = discord.Embed()
+    leader_board.title = f'- Chime Leaderboard for {msg.guild.name}-'
+    users = sorted(data.get_currency_guild_users(msg.guild.id).items(), key=lambda x: x[1]['amount'], reverse=True)
+    for idx, group in enumerate(users):
+        if group[1]['amount'] != 0:
+            leader_board.add_field(name=f'#{idx + 1}: {group[1]["name"]}',
+                                   value=f'*with {group[1]["amount"]} Chime{"s" if group[1]["amount"] > 1 else ""}*')
+    leader_board.set_footer(text=f'Took {str(datetime.datetime.now() - start_time)[6:]}s.')
+    return await loading_message.edit(embed=leader_board)
+
 
 @checks.is_admin
 async def add_money(msg):

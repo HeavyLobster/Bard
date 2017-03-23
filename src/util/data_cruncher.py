@@ -333,11 +333,12 @@ class DataCruncher:
 
     def get_currency_guild_users(self, guild_id: int):
         """
-        Get the List of Users with their name, ID and Money on the given Guild.
+        Get the dictionary of Users with their name, ID and Money on the given Guild.
         
-        :param guild_id: 
-        :return: 
+        :param guild_id: The Guild for which to lookup the Users
+        :return: A List of Users in the Format { "id": { "name": "xyz", "amount": 3 }, ... }  
         """
+        return self._get_currency_guild(str(guild_id))['users']
 
 
 
