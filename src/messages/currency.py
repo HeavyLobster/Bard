@@ -157,7 +157,7 @@ async def coin_flip(msg):
                                           'http://media-cache-ec0.pinimg.com/736x/63/71/7a/63717a8'
                                           '9403358ea4097c7b73c4a1321.jpg',
                                           'http://favim.com/orig/201105/25/cat-evil-kitty-eyes-laser-laser'
-                                          '-eyes-lasers-Favim.com-55022.jpg']
+                                          '-eyes-lasers-Favim.com-55022.jpg'])
         return await embeds.desc_with_img(f'A cat ate your **{f"{amount} Chimes" if amount < 0 else "Chime"}**!',
                                           cat_eating_chime)
 
