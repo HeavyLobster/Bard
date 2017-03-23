@@ -7,26 +7,6 @@ from src.util import embeds, checks
 from src import bot
 
 
-async def set_chance(msg):
-    """
-    Set the Currency Spawn Chance for the Guild in which the Message was sent.
-    
-    :param msg: The Message invoking the Command 
-    :return: The Response of the Bot 
-    """
-    if len(msg.content.split()) < 2:
-        return await embeds.desc_only(msg.channel, 'You need to specify an Amount to which the Chance should be set!')
-    try:
-        amount = int(msg.content.split()[1])
-    except ValueError:
-        return await embeds.desc_only(msg.channel, 'That is not a valid amount.')
-
-    if not 0 <= amount <= 20:
-        return await embeds.desc_only(msg.channel, 'Chance must be within 0 and 20%.')
-    data.set_currency_chance(msg.guild.id, amount)
-    return await embeds.desc_only(msg.channel, 'Set **Chime Spawn Chance** to **{amount} %**!')
-
-
 async def get_chance(msg):
     """
     Get the Currency Spawn Chance for the Guild in which the Message was sent.
@@ -141,6 +121,47 @@ async def generator(msg):
         await confirmation.delete()
 
 
+async def coin_flip(msg):
+    """
+    Gain a Chime. Or get nightmares. Hehehehe...
+     
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot
+    """
+    if len(msg.content.split()) < 2:
+        return await embeds.desc_only(msg.channel, 'You need to specify an Amount of Chimes to bet for this Command.')
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'That is not a valid Amount of Chimes to bet.')
+    if amount <= 0:
+        return await embeds.desc_only(msg.channel, 'You need to bet at least 1 Chime.')
+    diff = data.get_currency_of_user(msg.guild.id, msg.author) - amount
+    if diff < 0:
+        return await embeds.desc_only(msg.channel, f'You are missing **{diff * (-1)} Chimes** for that!')
+
+    if random.uniform(0, 1) < 0.5:
+        data.modify_currency_of_user(msg.guild.id, msg.author, amount)
+        return await embeds.desc_with_img(f'You won **{amount} Chime{"s" if amount > 1 else ""}!',
+                                          'https://cdn.discordapp.com/attachments/17225136311002726'
+                                          '4/294523714198831105/chime.png')
+    else:
+        data.modify_currency_of_user(msg.guild.id, msg.author, -amount)
+        cat_eating_chime = random.choice(['http://grza.net/gis/Animals/Cats%20Kittens/Cat%20Evil.jpg',
+                                          'http://www.hahastop.com/pictures/Evil_Cat.jpg',
+                                          'https://c2.staticflickr.com/2/1357/1208954954_62136d4109.jpg',
+                                          'http://img04.deviantart.net/3da2/i/2004/313/1/4/'
+                                          'evil_cat__p_by_animals_pictures.jpg',
+                                          'http://orig07.deviantart.net/02de/f/2012/294/e/a/'
+                                          'evil_cat_by_lena14081990-d5ii594.jpg',
+                                          'http://media-cache-ec0.pinimg.com/736x/63/71/7a/63717a8'
+                                          '9403358ea4097c7b73c4a1321.jpg',
+                                          'http://favim.com/orig/201105/25/cat-evil-kitty-eyes-laser-laser'
+                                          '-eyes-lasers-Favim.com-55022.jpg']
+        return await embeds.desc_with_img(f'A cat ate your **{f"{amount} Chimes" if amount < 0 else "Chime"}**!',
+                                          cat_eating_chime)
+
+
 @checks.is_admin
 async def add_money(msg):
     """
@@ -212,3 +233,24 @@ async def toggle_cg(msg):
 
     data.add_currency_channel(msg.guild.id, msg.channel.id)
     return await embeds.desc_only(msg.channel, 'Currency Generation is now **enabled** in this Channel.')
+
+
+@checks.is_admin
+async def set_chance(msg):
+    """
+    Set the Currency Spawn Chance for the Guild in which the Message was sent.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot 
+    """
+    if len(msg.content.split()) < 2:
+        return await embeds.desc_only(msg.channel, 'You need to specify an Amount to which the Chance should be set!')
+    try:
+        amount = int(msg.content.split()[1])
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'That is not a valid amount.')
+
+    if not 0 <= amount <= 20:
+        return await embeds.desc_only(msg.channel, 'Chance must be within 0 and 20%.')
+    data.set_currency_chance(msg.guild.id, amount)
+    return await embeds.desc_only(msg.channel, 'Set **Chime Spawn Chance** to **{amount} %**!')
