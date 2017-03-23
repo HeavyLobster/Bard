@@ -40,6 +40,11 @@ replies = {
     },
     data_cruncher.data.get_prefix('custom_reactions'): {
         'add': custom_reactions.add,
+        'addleague': custom_reactions.add_league_id,
+        'addlol': custom_reactions.add_league_id,
+        'removeleague': custom_reactions.remove_league_id,
+        'rmleague': custom_reactions.remove_league_id,
+        'rmlol': custom_reactions.remove_league_id,
         'meow': custom_reactions.meow,
         'woof': custom_reactions.woof,
         'viewall': custom_reactions.build_list,

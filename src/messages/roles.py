@@ -148,8 +148,8 @@ async def get_league_role(msg):
 
     try:
         champion_points = lolapi.get_mastery_points(name, server)
-    # except ValueError:
-    #    return await embeds.desc_only(msg.channel, 'Some error occured, keep in mind: it\'s .getmyrole <server> <name>')
+    except ValueError:
+        return await embeds.desc_only(msg.channel, 'Some error occured, keep in mind: it\'s .getmyrole <server> <name>')
     except cassiopeia.type.api.exception.APIError:
         return await embeds.desc_only(msg.channel, 'Riot Games API returned an API Error trying to fetch your score.')
     except IndexError:

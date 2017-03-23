@@ -24,6 +24,7 @@ def get_id_by_name(player_name, region):
     :param region: The Region the Player is on
     :return: The ID of the Summoner
     """
+    print(player_name, region)
     return get_summoner_by_name(player_name, region).id
 
 

@@ -1,10 +1,11 @@
+import cassiopeia
 import json
 import re
 import requests
 import urllib
 
 from src.events.reactions import create_custom_reaction_embed
-from src.util import embeds
+from src.util import embeds, lolapi
 from src.util.data_cruncher import data
 from src import bot
 
@@ -28,6 +29,52 @@ async def _build_league_leaderboard(msg):
     :return: The built Leaderboard. Takes some time.
     """
 
+
+async def add_league_id(msg):
+    """
+    Add a Summoner ID to the League of Legends Users for the given Guild.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response from the Bot
+    """
+    if len(msg.content.split()) < 3:
+        return await embeds.desc_only(msg.channel, 'That\'s not the valid way to use this command.')
+    region = msg.content.split()[1]
+    summoner_name = ' '.join(msg.content.split()[2:])
+    try:
+        user_id = lolapi.get_id_by_name(summoner_name, region)
+    except cassiopeia.type.api.exception.APIError:
+        return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
+                                                   'moner Account. This usually means that your Account was not found.')
+    if user_id in data.get_league_guild_users(msg.guild.id):
+        return await embeds.desc_only(msg.channel, f'**{summoner_name}** is already on the List of Users for '
+                                                   f'this Guild.')
+    data.add_league_guild_user(msg.guild.id, user_id)
+    return await embeds.desc_only(msg.channel, f'Added **{summoner_name}** to the List of Users for League of Legends'
+                                               f' for this Guild!')
+
+
+async def remove_league_id(msg):
+    """
+    Remove a Summoner ID from the League of Legends Users for the given Guild.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response from the Bot
+    """
+    if len(msg.content.split()) < 3:
+        return await embeds.desc_only(msg.channel, 'That\'s not the valid way to use this command.')
+    region = msg.content.split()[1]
+    summoner_name = ' '.join(msg.content.split()[2:])
+    try:
+        user_id = lolapi.get_id_by_name(summoner_name, region)
+    except cassiopeia.type.api.exception.APIError:
+        return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
+                                                   'moner Account. This usually means that your Account was not found.')
+    if user_id not in data.get_league_guild_users(msg.guild.id):
+        return await embeds.desc_only(msg.channel, f'**{summoner_name}** is not on the List of Users for this Guild.')
+    data.remove_league_guild_user(msg.guild.id, user_id)
+    return await embeds.desc_only(msg.channel, f'Removed **{summoner_name}** from the List of Users for League of Legends'
+                                               f' for this Guild.')
 
 
 async def add(msg):
