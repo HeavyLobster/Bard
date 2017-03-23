@@ -340,6 +340,36 @@ class DataCruncher:
         """
         return self._get_currency_guild(str(guild_id))['users']
 
+    def _get_league_guild(self, guild_id: str):
+        """
+        Helper Function to get the League Configuration for the given guild ID.
+        
+        :param guild_id: The Guild's ID for which to perform the lookup
+        :return: The Configuration for the Guild
+        """
+        if guild_id not in self._configs['league']:
+            self._configs['league'][guild_id] = {'users': []}
+        return self._configs['league'][guild_id]
+
+    def get_league_guild_users(self, guild_id: int):
+        """
+        Get the people who are in the User Array for the given Guild.
+        
+        :param guild_id: The Guild ID for which to perform the lookups 
+        :return: Summoner IDs for the Guild, if found.
+        """
+        return self._get_league_guild(str(guild_id))['users']
+
+    def add_league_guild_user(self, guild_id: int, player_id: str):
+        """
+        Add a User to the League of Legends Players List of the given Guild.
+        
+        :param guild_id: The Guild on which to add the User 
+        :param player_id: The Player which should be added
+        :return: The refreshed List of League Users on the given Guild
+        """
+        return self.get_league_guild_users(guild_id).append(player_id)
+
 
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
