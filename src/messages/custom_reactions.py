@@ -8,6 +8,16 @@ from src.util import embeds
 from src.util.data_cruncher import data
 
 
+async def invoke_leaderboard_build(msg):
+    """
+    Invoke the asynchronously running process of building a Leaderboard of the top Mastery Points per Player that habe
+    previously added themselves to a List.
+    
+    :param msg: The Message invoking the command 
+    """
+    return
+
+
 async def add(msg):
     """
     Add a Custom Reaction for the Guild in which the Message was sent.
