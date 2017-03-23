@@ -51,6 +51,7 @@ replies = {
         'c': currency.get_money,
         'chime': currency.get_money,
         'chimes': currency.get_money,
+        'chance': currency.get_chance,
         'give': currency.give_money,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
@@ -91,6 +92,8 @@ async def handle_message(msg):
             elif valid_response is not None:
                 reply = await valid_response(msg)
                 # Delete reply after a set time
+    else:
+        await currency.generator(msg)
 
 
 print('done.')

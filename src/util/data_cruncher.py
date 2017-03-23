@@ -322,6 +322,7 @@ class DataCruncher:
         user['amount'] += amount
         return user['amount']
 
+
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
 

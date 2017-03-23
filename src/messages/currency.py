@@ -7,6 +7,20 @@ from src.util import embeds, checks
 from src import bot
 
 
+async def get_chance(msg):
+    """
+    Get the Currency Spawn Chance for the Channel in which the Message was sent.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot
+    """
+    if msg.channel.id not in data.get_currency_channels(msg.guild.id):
+        return await embeds.desc_only(msg.channel, 'Currency Generation is **disabled** in this Channel. '
+                                                   'Ask an Administrator to enable it.')
+    return await embeds.desc_only(msg.channel, f'Currency Generation for this Server is set to '
+                                               f'**{data.get_currency_chance(msg.guild.id)} %**.')
+
+
 async def get_money(msg):
     """
     Get the amount of money / currency / chimes a User possesses.
