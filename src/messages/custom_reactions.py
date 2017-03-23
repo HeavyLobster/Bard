@@ -28,7 +28,9 @@ async def _build_league_leaderboard(msg):
     :param msg: The Message invoking the Command 
     :return: The built Leaderboard. Takes some time.
     """
-
+    users = []
+    for user_id in data.get_league_guild_users(msg.guild.id):
+        users.append([lolapi.get_mastery_points_by_id(user_id,)])
 
 async def add_league_id(msg):
     """
@@ -43,13 +45,13 @@ async def add_league_id(msg):
     summoner_name = ' '.join(msg.content.split()[2:])
     try:
         user_id = lolapi.get_id_by_name(summoner_name, region)
-    except cassiopeia.type.api.exception.APIError:
+    except (cassiopeia.type.api.exception.APIError, ValueError):
         return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
                                                    'moner Account. This usually means that your Account was not found.')
     if user_id in data.get_league_guild_users(msg.guild.id):
         return await embeds.desc_only(msg.channel, f'**{summoner_name}** is already on the List of Users for '
                                                    f'this Guild.')
-    data.add_league_guild_user(msg.guild.id, user_id)
+    data.add_league_guild_user(msg.guild.id, user_id, region.upper())
     return await embeds.desc_only(msg.channel, f'Added **{summoner_name}** to the List of Users for League of Legends'
                                                f' for this Guild!')
 
@@ -67,14 +69,14 @@ async def remove_league_id(msg):
     summoner_name = ' '.join(msg.content.split()[2:])
     try:
         user_id = lolapi.get_id_by_name(summoner_name, region)
-    except cassiopeia.type.api.exception.APIError:
+    except (cassiopeia.type.api.exception.APIError, ValueError):
         return await embeds.desc_only(msg.channel, 'The League of Legends API returned an Error trying to get your Sum'
                                                    'moner Account. This usually means that your Account was not found.')
     if user_id not in data.get_league_guild_users(msg.guild.id):
         return await embeds.desc_only(msg.channel, f'**{summoner_name}** is not on the List of Users for this Guild.')
     data.remove_league_guild_user(msg.guild.id, user_id)
-    return await embeds.desc_only(msg.channel, f'Removed **{summoner_name}** from the List of Users for League of Legends'
-                                               f' for this Guild.')
+    return await embeds.desc_only(msg.channel, f'Removed **{summoner_name}** from the List of Users for League of '
+                                               f'Legends for this Guild.')
 
 
 async def add(msg):

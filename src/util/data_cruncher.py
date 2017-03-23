@@ -360,15 +360,16 @@ class DataCruncher:
         """
         return self._get_league_guild(str(guild_id))['users']
 
-    def add_league_guild_user(self, guild_id: int, player_id: str):
+    def add_league_guild_user(self, guild_id: int, player_id: str, server: str):
         """
         Add a User to the League of Legends Players List of the given Guild.
         
         :param guild_id: The Guild on which to add the User 
         :param player_id: The Summoner ID which should be added
+        :param server: The League of Legends Server where the ID lives
         :return: The refreshed List of League Users on the given Guild
         """
-        self.get_league_guild_users(guild_id).append(player_id)
+        self.get_league_guild_users(guild_id).append([player_id, server])
         return self.get_league_guild_users(guild_id)
 
     def remove_league_guild_user(self, guild_id: int, player_id: str):
@@ -379,11 +380,10 @@ class DataCruncher:
         :param player_id: The Summoner ID that should be removed from the List
         :return: The refreshed List of League Users on the given Guild.
         """
-        try:
-            self.get_league_guild_users(guild_id).remove(player_id)
-        except ValueError:
-            pass
-
+        for pair in self.get_league_guild_users(guild_id):
+            if pair[0] == player_id:
+                del pair
+        return self.get_league_guild_users(guild_id)
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
