@@ -13,8 +13,6 @@ async def raffle(msg):
 
     winnerIndex = random.randrange(len(onlineMembers))
 
-    formattedString = onlineMembers[winnerIndex].name
-    formattedString += "#"
-    formattedString += onlineMembers[winnerIndex].discriminator
+    formattedString = str(onlineMembers[winnerIndex])
 
     return await embeds.desc_only(msg.channel, formattedString)
