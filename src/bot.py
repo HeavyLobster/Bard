@@ -1,5 +1,6 @@
 import discord
 import os
+import signal
 
 from src.events import message, members, reactions, ready
 
@@ -156,7 +157,12 @@ async def on_member_unban(server, user):
 
 
 def start():
+    client.loop.add_signal_handler(signal.SIGTERM, lambda: client.loop.create_task(client.close()))
     client.run(os.environ['DISCORD_TOKEN'])
+    message.data_cruncher.data.save_all()
+
+
+def close(_signo, _stack_frame):
     message.data_cruncher.data.save_all()
 
 
