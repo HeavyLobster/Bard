@@ -19,7 +19,7 @@ async def invoke_leaderboard_build(msg):
     :param msg: The Message invoking the command
     :return The built Leaderboard. Takes some time.
     """
-    return await bot.client.loop.create_task(_build_league_leaderboard(msg))
+    return await bot.client.loop.run_in_executor(await _build_league_leaderboard(msg))
 
 
 async def _build_league_leaderboard(msg):
