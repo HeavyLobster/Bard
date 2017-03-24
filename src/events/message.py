@@ -1,4 +1,4 @@
-from src.messages import administration, custom_reactions, currency, roles, unit
+from src.messages import administration, custom_reactions, currency, roles, unit, raffle
 from src.util import checks, data_cruncher
 
 print('Loading Message Event Handler... ', end='')
@@ -54,7 +54,8 @@ replies = {
         'showall': custom_reactions.build_list,
         'hm': custom_reactions.hugemoji,
         'help': custom_reactions.help,
-        'unit': unit.convert
+        'unit': unit.convert,
+        'raffle': raffle.raffle
     },
     data_cruncher.data.get_prefix('currency'): {
         'c': currency.get_money,
