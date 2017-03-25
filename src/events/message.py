@@ -69,6 +69,7 @@ replies = {
         'topchimes': currency.leaderboard,
         'top': currency.leaderboard,
         'tc': currency.leaderboard,
+        'trivia': currency.trivia,
         'switch': currency.toggle_cg,
         'toggle': currency.toggle_cg,
         'cg': currency.toggle_cg,

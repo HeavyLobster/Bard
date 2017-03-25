@@ -1,63 +1,63 @@
 {
-  "league": {
-    "mode": "guess",
-    "questions": [
-      {
-        "q": "What is the name of **Bard's Passive**?",
-        "h": "Ding-a-Ring",
-        "a": "travellers call"
-      },
-      {
-        "q": "What is the Name of **Bard's Q**?",
-        "h": "Something with Cosmos and a Connection between two things",
-        "a": "cosmic binding"
-      },
-      {
-        "q": "*\"There, inside a perfect cage of ice floated a dancing column of flame. There was no way such a thing should be burning, especially not in this place. However, its movement was as hypnotic as a siren's song, captivating and seductive.\"* Whose lore is this?"
-        "h": "A burning ... man?",
-        "a": "brand"
-      },
-      {
-        "q": "Which Champion has a **Crescent Axe** as their **Weapon**?",
-        "h": "Something something Lacoste",
-        "a": "renekton"
-      }
-    ]
-  },
-  "random": {
-    "mode": "numbers",
-    "questions": [
-      {
-        "q": "What came first, the Egg or the Hen?",
-        "1": "The Egg",
-        "2": "The Hen",
-        "3": "Neither",
-        "a": "1"
-      },
-      {
-        "q": "What animals **digest stones** intentionally to **ease food consumption**?",
-        "1": "Dolphins",
-        "2": "Weasels",
-        "3": "Chickens",
-        "4": "Cranes",
-        "a": "3"
-      },
-      {
-        "q": "What was the name of **Salvador Dali's wife** and lifelong muse?",
-        "1": "Nala",
-        "2": "Sarah",
-        "3": "Ulala",
-        "4": "Gala",
-        "a": "4"
-      },
-      {
-        "q": "To aid with **navigation and sensation**, cats have dozens of **movable ...** over their body, especially their faces. These provide **information on the width of gaps and on the location of objects in the dark**, both by **touching objects directly** and by **sensing air currents**; they also **trigger protective blink reflexes** to protect the eyes from damage. Which word is replaced by **ellipsis**?",
-        "1": "Hairs",
-        "2": "Whiskers",
-        "3": "Skin Elements",
-        "4": "Spots",
-        "a": 2
-      }
-    ]
-  }
+    "league": {
+        "mode": "guess",
+        "questions": [
+            {
+                "q": "What is the name of **Bard's Passive**?",
+                "h": "Ding-a-Ring",
+                "a": "travellers call"
+            },
+            {
+                "q": "What is the Name of **Bard's Q**?",
+                "h": "Something with Cosmos and a Connection between two things",
+                "a": "cosmic binding"
+            },
+            {
+                "q": "*\"There, inside a perfect cage of ice floated a dancing column of flame. There was no way such a thing should be burning, especially not in this place. However, its movement was as hypnotic as a siren's song, captivating and seductive.\"* Whose lore is this?",
+                "h": "A burning ... man?",
+                "a": "brand"
+            },
+            {
+                "q": "Which Champion has a **Crescent Axe** as their **Weapon**?",
+                "h": "Something something Lacoste",
+                "a": "renekton"
+            }
+        ]
+    },
+    "random": {
+        "mode": "numbers",
+        "questions": [
+            {
+                "q": "What came first, the Egg or the Hen?",
+                "1": "The Egg",
+                "2": "The Hen",
+                "3": "Neither",
+                "a": "1"
+            },
+            {
+                "q": "What animals **digest stones** intentionally to **ease food consumption**?",
+                "1": "Dolphins",
+                "2": "Weasels",
+                "3": "Chickens",
+                "4": "Cranes",
+                "a": "3"
+            },
+            {
+                "q": "What was the name of **Salvador Dali's wife** and lifelong muse?",
+                "1": "Nala",
+                "2": "Sarah",
+                "3": "Ulala",
+                "4": "Gala",
+                "a": "4"
+            },
+            {
+                "q": "To aid with **navigation and sensation**, cats have dozens of **movable ...** over their body, especially their faces. These provide **information on the width of gaps and on the location of objects in the dark**, both by **touching objects directly** and by **sensing air currents**; they also **trigger protective blink reflexes** to protect the eyes from damage. Which word is replaced by **ellipsis**?",
+                "1": "Hairs",
+                "2": "Whiskers",
+                "3": "Skin Elements",
+                "4": "Spots",
+                "a": 2
+            }
+        ]
+    }
 }

@@ -193,14 +193,16 @@ async def trivia(msg):
     :return: The Response of the Bot 
     """
     if len(msg.content.split()) < 2:
-        return await embeds.desc_only(msg.channel, 'You need to specify which Trivia Topic you want to play!')
-    topic = msg.content.split()[0]
+        return await embeds.desc_only(msg.channel, 'You did not specify any topic - here are all available ones:\n'
+                                                   f'**{", ".join(data.get_all_trivia_topics())}**.')
+    topic = msg.content.split()[1]
     trivia_obj = data.get_trivia(topic)
     if trivia_obj is None:
-        return await embeds.desc_only(msg.channel, 'I could not find tht Trivia Topic. '
-                                                   'Run `!triviatopics` to get a List of all available Topics.')
+        return await embeds.desc_only(msg.channel, f'I could not find the Trivia Topic "`{topic}`". '
+                                                   'Run `>trivia` to get a List of all available Topics.')
 
-    await embeds.desc_only(msg.channel, f'**{msg.author.nick}** wants to start a Trivia Game! Type `!join to join!')
+    await embeds.desc_only(msg.channel, f'**{msg.author.display_name}** wants to start a Trivia Game! '
+                                        f'Type `>join` to join!', discord.Color.gold())
 
     def did_join_trivia(m):
         """
@@ -209,7 +211,7 @@ async def trivia(msg):
         :param m: The message to check 
         :return: a bool
         """
-        return m.channel == msg.channel and m.content == '!join'
+        return m.channel == msg.channel and m.content == '>join'
 
     participating_users = [msg.author]
 
@@ -219,16 +221,21 @@ async def trivia(msg):
         except TimeoutError:
             break
         else:
-            embeds.desc_only(msg.channel, f'✅ You (**{msg.author.nick}**) joined the Trivia Game about **{topic}**!',
-                             discord.Color.green())
-            participating_users.append(accept_msg.author)
+            if accept_msg.author in participating_users:
+                await embeds.desc_only(msg.channel, f'You (**{accept_msg.author.display_name}**) '
+                                                    f'are already participating!', discord.Color.red())
+            else:
+                participating_users.append(accept_msg.author)
+                await embeds.desc_only(msg.channel, f'✅ You (**{accept_msg.author.display_name}**) joined the '
+                                                    f'**{topic}** Trivia Game! Total: **{len(participating_users)}**',
+                                       discord.Color.green())
 
-    if len(participating_users) < 2:
-        return await embeds.desc_only(msg.channel, 'Not enough Users joined - you need at least 2 Users to start a '
-                                                   'Trivia Game!', discord.Color.red())
-    await embeds.desc_only(msg.channel, f'Starting Trivia Game with **{len(participating_users)} Users**...')
-
-    trivia_obj['questions'] = random.shuffle(trivia_obj['questions'])
+    if len(participating_users) < 1:
+        return await embeds.desc_only(msg.channel, '**Not enough Users joined** - you need **at least 2 Users** to '
+                                                   'start a Trivia Game!', discord.Color.red())
+    await embeds.desc_only(msg.channel, f'Starting Trivia Game with **{len(participating_users)} User'
+                                        f'{"s" if len(participating_users) > 1 else ""}**...')
+    questions = random.shuffle(trivia_obj['questions'])
     correct_guessing_people = {}
     if trivia_obj['mode'] == 'guess':
         for idx, question in enumerate(trivia_obj['questions']):
@@ -240,8 +247,7 @@ async def trivia(msg):
                 :return: A boolean indicating whether it was the right answer
                 """
                 return m.channel == msg.channel and m.content.lower() == question['a']
-
-            await embeds.title_and_desc(msg.channel, f'Trivia Question #{idx}',
+            await embeds.title_and_desc(msg.channel, f'- Trivia Question #{idx + 1} -',
                                         question['q'], discord.Color.gold())
             try:
                 accept_msg = await bot.client.wait_for('message', check=check_answer, timeout=10)
@@ -257,9 +263,14 @@ async def trivia(msg):
                     correct_guessing_people[msg.author.name] = 1
             await asyncio.sleep(5)
         correct_guessing_people = sorted(correct_guessing_people, key=lambda x: (v for k, v in x.items())[0], reverse=True)
-        await embeds.title_and_desc(msg.channel, '- Trivia Game Results -',
-                                    f'**{correct_guessing_people[0]["name"]}** won with '
-                                    f'**{correct_guessing_people[0]["points"]} Points**!')
+        return await embeds.title_and_desc(msg.channel,
+                                           '- Trivia Game Results -',
+                                           f'**{correct_guessing_people[0]["name"]}** won with '
+                                           f'**{correct_guessing_people[0]["points"]} Points**!')
+    elif trivia_obj['mode'] == 'numbers':
+        return await embeds.desc_only(msg.channel, 'Unsupported Trivia Mode.', discord.Color.red())
+    else:
+        return await embeds.desc_only(msg.channel, 'Unsupported Trivia Mode.', discord.Color.red())
 
 
 @checks.is_admin

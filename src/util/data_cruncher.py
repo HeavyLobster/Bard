@@ -17,6 +17,13 @@ class DataCruncher:
             # Remove .json Extension for simpler access
             self._configs[file_name[:-5]] = self.load_config(file_name)
             print('done.')
+
+        # Do not save the following files
+        self._do_not_save = 'trivia'
+
+        # Trivia User List for Timeout
+        self._trivia_users = []
+
         print('Done loading Data Holder.')
 
     @staticmethod
@@ -35,6 +42,8 @@ class DataCruncher:
     def save_all(self):
         print('Saving all Configs...')
         for file_name in self._configs:
+            if file_name in self._do_not_save:
+                continue
             file_name += '.json'
             path = os.path.join(config_dir, file_name)
             print(f'Saving Config {file_name}... ', end='')
@@ -394,6 +403,43 @@ class DataCruncher:
         :return: A dictionary containing the Mode and various questions for the Trivia game, or None if not found
         """
         return self._configs['trivia'].get(name, None)
+
+    def get_all_trivia_topics(self):
+        """
+        Get all Available Trivia Topics
+        
+        :return: A list of available trivia topics 
+        """
+        return [x for x in self._configs['trivia']]
+
+    def get_trivia_timeout_list(self):
+        """
+        Get the List of Users on the Trivia Timeout List
+        
+        :return: A list of Users on the Trivia Timeout List in the Format [ [user_id, datetime], ... ] 
+        """
+        return self._trivia_users
+
+    def timeout_trivia_user(self, user_id: int):
+        """
+        Set the trivia User timeout. If the datetime associated with the User is less than 5 minutes ago,
+        this will return False. Otherwise, it will return True to indicate the new datetime has been set and no
+        previous were set.
+        
+        :param user_id: The User ID for which to get / set the Timeout 
+        :return: True or False, see above
+        """
+        found = False
+        for some_user_pair in self._trivia_users:
+            if some_user_pair[0] == user_id:
+                found = True
+                if datetime.datetime.now() - some_user_pair[1] > datetime.timedelta(minutes=10):
+                    return False
+                some_user_pair[1] = datetime.datetime.now()
+        if not found:
+            self._trivia_users.append([user_id, datetime.datetime.now()])
+        return True
+
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
