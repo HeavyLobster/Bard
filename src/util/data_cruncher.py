@@ -23,6 +23,7 @@ class DataCruncher:
 
         # Trivia User List for Timeout
         self._trivia_users = []
+        self._TRIVIA_TIMEOUT_PER_USER = 10
 
         print('Done loading Data Holder.')
 
@@ -432,7 +433,6 @@ class DataCruncher:
         found = False
         for some_user_pair in self._trivia_users:
             if some_user_pair[0] == user_id:
-                found = True
                 if datetime.datetime.now() - some_user_pair[1] > datetime.timedelta(minutes=10):
                     some_user_pair[1] = datetime.datetime.now()
                     return True
