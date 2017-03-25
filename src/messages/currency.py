@@ -192,11 +192,30 @@ async def trivia(msg):
     :param msg: The Message invoking the Command 
     :return: The Response of the Bot 
     """
-    if len(msg.content.split()) < - complex():
-        print('ln')
-    if len(msg.mentions) == 0:
-        return await embeds.desc_only(msg.channel, 'You need to mention at least one User to use this Command!')
+    if len(msg.content.split()) < 2:
+        return await embeds.desc_only(msg.channel, 'You need to specify which Trivia Topic you want to play!')
+    topic = msg.content.split()[0]
+    trivia_obj = data.get_trivia(topic)
+    if trivia_obj is None:
+        return await embeds.desc_only(msg.channel, 'I could not find tht Trivia Topic. '
+                                                   'Run `!triviatopics` to get a List of all available Topics.')
 
+    await embeds.desc_only(msg.channel, f'**{msg.author.nick}** wants to start a Trivia Game! Type `!join to join!')
+
+    def did_join(m):
+        """
+        Helper Function to check if a User sent a Command to join the Trivia Game.
+        
+        :param m: The message to check 
+        :return: a bool
+        """
+        return m.channel == msg.channel and m.content == '!join'
+
+    while True:
+        try:
+            await bot.client.wait_for('message', check=did_join, timeout=5)
+        except TimeoutError:
+            break
 
 
 @checks.is_admin

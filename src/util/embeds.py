@@ -18,6 +18,16 @@ async def desc_only(channel, desc: str):
     except discord.errors.HTTPException:
         pass
 
+
+async def red_desc(channel, desc: str):
+    embed = discord.Embed()
+    embed.description = desc
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        pass
+
+
 async def img_only(channel, link: str):
     embed = discord.Embed()
     embed.set_image(url=link)
