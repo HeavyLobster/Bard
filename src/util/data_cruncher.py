@@ -434,8 +434,9 @@ class DataCruncher:
             if some_user_pair[0] == user_id:
                 found = True
                 if datetime.datetime.now() - some_user_pair[1] > datetime.timedelta(minutes=10):
-                    return False
-                some_user_pair[1] = datetime.datetime.now()
+                    some_user_pair[1] = datetime.datetime.now()
+                    return True
+                return False
         if not found:
             self._trivia_users.append([user_id, datetime.datetime.now()])
         return True
