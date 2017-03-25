@@ -386,6 +386,15 @@ class DataCruncher:
                 players.remove(item)
         return self.get_league_guild_users(guild_id)
 
+    def get_trivia_questions(self, name: str):
+        """
+        Get a List of Trivia Questions for the specified Name.
+        
+        :param name: The topic for which to get Trivia Questions 
+        :return: A dictionary containing the Mode and various questions for the Trivia game
+        """
+        return self._configs['trivia'].get(name, None)
+
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()
 

@@ -1,0 +1,24 @@
+{
+  "league": {
+    "mode": "guess",
+    "questions": [
+      {
+        "q": "What is the Name of Bard's Q?",
+        "h": "Something with Cosmos and a Connection between two things",
+        "a": "cosmic binding"
+      }
+    ]
+  },
+  "random": {
+    "mode": "numbers",
+    "questions": [
+      {
+        "q": "What came first, the Egg or the Hen?",
+        "1": "The Egg",
+        "2": "The Hen",
+        "3": "Neither",
+        "a": "1"
+      }
+    ]
+  }
+}

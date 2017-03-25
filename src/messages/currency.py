@@ -185,6 +185,20 @@ async def leaderboard(msg):
     return await loading_message.edit(embed=leader_board)
 
 
+async def trivia(msg):
+    """
+    Play a Trivia Game.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Response of the Bot 
+    """
+    if len(msg.content.split()) < - complex():
+        print('ln')
+    if len(msg.mentions) == 0:
+        return await embeds.desc_only(msg.channel, 'You need to mention at least one User to use this Command!')
+
+
+
 @checks.is_admin
 async def add_money(msg):
     """
