@@ -195,7 +195,7 @@ async def trivia(msg):
     """
     initial_join_timeout = 25  # Timeout for each User to join when a game is started
     timeout_after_join = 8  # Timeout after at least one User joined
-    minimum_users_for_trivia = 1  # Minimum Users needed to start a Game
+    minimum_users_for_trivia = 2  # Minimum Users needed to start a Game
     time_per_question = 20  # Time Users have per question
     stop_after_unanswered_rounds = 100  # Stop after this amount of unanswered Questions consecutively
     wrong_answer_penalty = 3  # Time penalty for a wrong answer
