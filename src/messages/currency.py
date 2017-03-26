@@ -299,22 +299,25 @@ async def trivia(msg):
         :return: The Message containing the Response 
         """
         reward_chimes = random.randrange(1, 4)
-        try:
-            data.modify_currency_of_user(msg.guild.id, bot.client.get_user(int(correct_guessing_people[0][0])),
-                                         reward_chimes)
-        except IndexError:
+        if len(correct_guessing_people) == 0:
             return await embeds.title_and_desc(msg.channel,
                                                '- Trivia Game Results -',
                                                'Nobody guessed anything. That\'s... interesting.',
                                                discord.Color.gold())
 
-        return await embeds.title_and_desc(msg.channel,
-                                           '- Trivia Game Results -',
-                                           f'**{bot.client.get_user(int(correct_guessing_people[0][0])).display_name}**'
-                                           f' won with **{correct_guessing_people[0][1]} Points** and received'
-                                           f' **{reward_chimes} Chime'
-                                           f'{"s" if reward_chimes > 1 else ""}** for it! :confetti_ball: :sparkler:',
-                                           discord.Color.gold())
+        data.modify_currency_of_user(msg.guild.id, bot.client.get_user(int(correct_guessing_people[0][0])),
+                                     reward_chimes)
+        results = ''
+        for index, pepes_friend in enumerate(correct_guessing_people):
+            if index == 0:
+                results += f'**{bot.client.get_user(int(pepes_friend[0])).mention}** won with **{pepes_friend[1]}** ' \
+                           f'Points and received **{reward_chimes} Chime{"s" if reward_chimes > 1 else ""}**' \
+                           f' for it! :confetti_ball: :sparkler:\n'
+            else:
+                results += f'**#{index + 1}**: {bot.client.get_user(int(pepes_friend[0])).mention} ' \
+                           f'with {pepes_friend[1]} points!\n'
+
+        return await embeds.title_and_desc(msg.channel, '- Trivia Game Results -', results, discord.Color.gold())
 
     # Initial Setup
     if len(msg.content.split()) < 2:
