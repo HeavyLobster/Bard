@@ -1,11 +1,12 @@
 import asyncio
-from concurrent.futures import TimeoutError
 import datetime
 import discord
 import random
-from src.util.data_cruncher import data
-from src.util import embeds, checks
+from concurrent.futures import TimeoutError
+
 from src import bot
+from src.util import embeds, checks
+from src.util.data_cruncher import data
 
 
 async def get_chance(msg):
@@ -32,10 +33,10 @@ async def get_money(msg):
 
     if len(msg.mentions) == 1:
         return await embeds.desc_only(msg.channel, f'**{msg.mentions[0].name}** has a '
-                                      f'total of **{data.get_currency_of_user(msg.guild.id, msg.mentions[0])} '
-                                      f'Chimes**!')
+                                                   f'total of **{data.get_currency_of_user(msg.guild.id, msg.mentions[0])} '
+                                                   f'Chimes**!')
     return await embeds.desc_only(msg.channel, f'You (**{msg.author.name}**) have a total of '
-                                  f'**{data.get_currency_of_user(msg.guild.id, msg.author)} Chimes**!')
+                                               f'**{data.get_currency_of_user(msg.guild.id, msg.author)} Chimes**!')
 
 
 async def give_money(msg):
@@ -86,9 +87,9 @@ async def generator(msg):
 
     # After some Checks, now finally - currency spawned!
     chime_image = random.choice([
-         'http://2.bp.blogspot.com/-7s3q3BhdCBw/VPUPKAOTbUI/AAAAAAAAlCs/5vyP_lAN0S4/s1600/bardchime.jpg',
-         'http://pm1.narvii.com/5786/089f9a52941e8ded0f54df0978378db42680f6d8_hq.jpg',
-         'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
+        'http://2.bp.blogspot.com/-7s3q3BhdCBw/VPUPKAOTbUI/AAAAAAAAlCs/5vyP_lAN0S4/s1600/bardchime.jpg',
+        'http://pm1.narvii.com/5786/089f9a52941e8ded0f54df0978378db42680f6d8_hq.jpg',
+        'https://cdn.discordapp.com/attachments/172251363110027264/283612882846089216/unknown.png'
     ])
     pickup_command = random.choice(['>pick', '>collect', '>gimme', '>mine', '>ootay', '>doot', '>slurp', '>canihas',
                                     '>bardo', '>penguin', '>ducky', '>quack', '>darb', '>dong', '>owo', '>whatsthis'])
@@ -192,9 +193,13 @@ async def trivia(msg):
     :param msg: The Message invoking the Command 
     :return: The Response of the Bot 
     """
-    minimum_users_for_trivia = 2
-    time_per_question = 10
-    stop_after_unanswered_rounds = 2
+    initial_join_timeout = 25  # Timeout for each User to join when a game is started
+    timeout_after_join = 8  # Timeout after at least one User joined
+    minimum_users_for_trivia = 1  # Minimum Users needed to start a Game
+    time_per_question = 20  # Time Users have per question
+    stop_after_unanswered_rounds = 100  # Stop after this amount of unanswered Questions consecutively
+    wrong_answer_penalty = 3  # Time penalty for a wrong answer
+    participating_users = [msg.author]  # Who participates in the Trivia Game
 
     def did_join_trivia(m):
         """
@@ -205,16 +210,34 @@ async def trivia(msg):
         """
         return m.channel == msg.channel and (m.content == '>join' or m.content == '>leave')
 
-    def check_answer(m):
+    async def handle_join_and_leave(m):
         """
-        Check whether the Answer of a User is the correct one.
+        Handler Users Joining and Leaving the Trivia Game, aswell as Quit
+        
+        :param m: The Message to check for Commands
+        :return: False if somebody wants to quit
+        """
+        if m.content.startswith('>leave') and m.author in participating_users:
+            participating_users.remove(m.author)
+            await embeds.desc_only(msg.channel, f'✅ You (**{m.author.display_name}**) are no longer '
+                                                f'participating in the Trivia Game!', discord.Color.green())
+        elif m.content.startswith('>leave'):
+            await embeds.desc_only(msg.channel, f'You (**{m.author.display_name}**) are not participating'
+                                                f' in the Trivia Game!', discord.Color.red())
 
-        :param m: The Message to Check
-        :param current_question: The Current Question being asked
-        :return: A boolean indicating whether it was the right answer
-        """
-        return m.channel == msg.channel and m.content.lower() == current_question['a'] \
-            and m.author.id in (x.id for x in participating_users)
+        elif m.content == '>join' and m.author in participating_users:
+            await embeds.desc_only(msg.channel, f'You (**{m.author.display_name}**) are already '
+                                                f'participating!', discord.Color.red())
+        elif m.content == '>join':
+            participating_users.append(m.author)
+            await embeds.desc_only(msg.channel, f'✅ You (**{m.author.display_name}**) joined the **'
+                                                f'{topic}** Trivia Game! Total: **{len(participating_users)}**',
+                                   discord.Color.green())
+        elif m.content in ('>stoptrivia', '>stop', '>stahp', '>quit'):
+            await embeds.desc_only(msg.channel, f'**Trivia stopped** upon Request by **{m.author.mention}**.',
+                                   discord.Color.red())
+            return False
+        return True
 
     async def question_loop(index: int, question: dict, consecutive_rounds: int):
         """
@@ -223,10 +246,10 @@ async def trivia(msg):
         :param index: The Index of the Question 
         :param question: A dictionary representing the Question and its answers
         :param consecutive_rounds: How many Rounds have been without response consecutively
+        :return The consecutive Rounds without an Answer, None if it's time to stop, or False if somebody wants to quit
         """
         if consecutive_rounds >= stop_after_unanswered_rounds:
-            await embeds.desc_only(msg.channel, f'I did not receive any Trivia Responses within the past **'
-                                                f'{stop_after_unanswered_rounds} rounds** - time to stop!')
+            return None
 
         description = question['q']
         for key in question:
@@ -236,23 +259,37 @@ async def trivia(msg):
         await embeds.title_and_desc(msg.channel, f'- Trivia Question #{index + 1} -',
                                     description, discord.Color.gold())
 
-        # this is bad, don't do it (but it works which is nice)
-        global current_question
-        current_question = question
         try:
-            correct_reply = await bot.client.wait_for('message', check=check_answer, timeout=time_per_question)
+            countdown = time_per_question
+            while True:
+                some_message = await bot.client.wait_for('message', check=lambda m: m.channel == msg.channel,
+                                                         timeout=countdown)
+                if some_message.content.lower() == question['a'] \
+                        and some_message.author.id in (x.id for x in participating_users):
+                    break  # PEP8 is a meme
+                else:
+                    # somebody wanted to quit
+                    if not await handle_join_and_leave(some_message):
+                        print('time to quit!!!!!')
+                        consecutive_rounds = -1
+                        return consecutive_rounds
+                    else:
+                        countdown -= wrong_answer_penalty
+
         except TimeoutError:
-            await embeds.desc_only(msg.channel, 'Nobody guessed it in time. Next one coming soon...',
+            await embeds.desc_only(msg.channel, f'Nobody responded it in time. The answer was: **{question["a"]}**',
                                    discord.Color.dark_gold())
             consecutive_rounds += 1
         else:
-            await embeds.desc_only(msg.channel, f'**{correct_reply.author.mention}**, you guessed it!',
+            await embeds.desc_only(msg.channel, f'**{some_message.author.mention}**, you guessed it!',
                                    discord.Color.green())
+            consecutive_rounds = 0
 
-            if str(msg.author.id) in correct_guessing_people:
-                correct_guessing_people[str(correct_reply.author.id)] += 1
+            if str(some_message.author.id) in correct_guessing_people:
+                correct_guessing_people[str(some_message.author.id)] += 1
             else:
-                correct_guessing_people[str(correct_reply.author.id)] = 1
+                correct_guessing_people[str(some_message.author.id)] = 1
+        return consecutive_rounds
 
     async def reward():
         """
@@ -267,7 +304,9 @@ async def trivia(msg):
         except IndexError:
             return await embeds.title_and_desc(msg.channel,
                                                '- Trivia Game Results -',
-                                               'Nobody guessed anything. That\'s... interesting.')
+                                               'Nobody guessed anything. That\'s... interesting.',
+                                               discord.Color.gold())
+
         return await embeds.title_and_desc(msg.channel,
                                            '- Trivia Game Results -',
                                            f'**{bot.client.get_user(int(correct_guessing_people[0][0])).display_name}**'
@@ -286,38 +325,23 @@ async def trivia(msg):
         return await embeds.desc_only(msg.channel, f'I could not find the Trivia Topic "`{topic}`". '
                                                    'Run `>trivia` to get a List of all available Topics.')
 
-    elif not data.timeout_trivia_user(msg.author.id):
-        return await embeds.desc_only(msg.channel, 'You need to wait **at least 10 Minutes** before '
-                                                   'using this Command.')
-
+    # descriptive variable names
+    is_not_being_time_outed = data.timeout_user_is_not_being_time_outed(msg.author.id)
+    if not is_not_being_time_outed:
+        await embeds.desc_only(msg.channel, 'You need to wait **at least 10 Minutes** before using this Command.',
+                               discord.Color.red())
     await embeds.desc_only(msg.channel, f'**{msg.author.display_name}** wants to start a Trivia Game! '
                                         f'Type `>join` to join!', discord.Color.gold())
-
-    participating_users = [msg.author]
 
     # Get Participants
     while True:
         try:
-            accept_msg = await bot.client.wait_for('message', check=did_join_trivia, timeout=8)
+            accept_msg = await bot.client.wait_for('message', check=did_join_trivia, timeout=initial_join_timeout
+            if len(participating_users) < 2 else timeout_after_join)
         except TimeoutError:
             break
         else:
-            if accept_msg.content.startswith('>leave') and accept_msg.author in participating_users:
-                participating_users.remove(accept_msg.author)
-                await embeds.desc_only(msg.channel, f'✅ You (**{accept_msg.author.display_name}**) are no longer '
-                                                    f'participating in the Trivia Game!', discord.Color.green())
-            elif accept_msg.content.startswith('>leave'):
-                await embeds.desc_only(msg.channel, f'You (**{accept_msg.author.display_name}**) are not participating'
-                                                    f' in the Trivia Game!', discord.Color.red())
-
-            elif accept_msg.content == '>join' and accept_msg.author in participating_users:
-                await embeds.desc_only(msg.channel, f'You (**{accept_msg.author.display_name}**) are already '
-                                                    f'participating!', discord.Color.red())
-            elif accept_msg.content == '>join':
-                participating_users.append(accept_msg.author)
-                await embeds.desc_only(msg.channel, f'✅ You (**{accept_msg.author.display_name}**) joined the **'
-                                                    f'{topic}** Trivia Game! Total: **{len(participating_users)}**',
-                                                    discord.Color.green())
+            await handle_join_and_leave(accept_msg)
 
     # Check for Amount of participants
     if len(participating_users) < minimum_users_for_trivia:
@@ -325,16 +349,24 @@ async def trivia(msg):
                                                    f'{minimum_users_for_trivia} Users** to '
                                                    f'start a Trivia Game, but only {len(participating_users)} joined!',
                                       discord.Color.red())
+
     await embeds.desc_only(msg.channel, f'Starting Trivia Game with **{len(participating_users)} User'
                                         f'{"s" if len(participating_users) > 1 else ""}**...')
+    data.timeout_trivia_user(msg.author.id)
     correct_guessing_people = {}
     consecutive_rounds_without_answer = 0
     random.shuffle(trivia_obj['questions'])
     if trivia_obj['mode'] in ('guess', 'numbers'):
         for idx, single_question in enumerate(trivia_obj['questions']):
-            await question_loop(idx, single_question, consecutive_rounds_without_answer)
-            await asyncio.sleep(5)
+            consecutive_rounds_without_answer = await question_loop(idx, single_question,
+                                                                    consecutive_rounds_without_answer)
+            if consecutive_rounds_without_answer is None:
+                return await embeds.desc_only(msg.channel, f'I did not receive any Trivia Responses within the past **'
+                                                           f'{stop_after_unanswered_rounds} rounds** - time to stop!')
 
+            # Somebody requested Quit - need to check for False and not 0 for because magic
+            elif consecutive_rounds_without_answer == -1:
+                break
         correct_guessing_people = list(sorted(correct_guessing_people.items(), key=lambda x: x[1], reverse=True))
         return await reward()
 

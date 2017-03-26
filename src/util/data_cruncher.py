@@ -421,11 +421,11 @@ class DataCruncher:
         """
         return self._trivia_users
 
-    def timeout_trivia_user(self, user_id: int):
+    def timeout_trivia_user(self, user_id: int) -> bool:
         """
         Set the trivia User timeout. If the datetime associated with the User is less than 5 minutes ago,
-        this will return False. Otherwise, it will return True to indicate the new datetime has been set and no
-        previous were set.
+        this will return False. Otherwise, it will return True to indicate the new datetime has been set 
+        and / or no previous were set.
         
         :param user_id: The User ID for which to get / set the Timeout 
         :return: True or False, see above
@@ -441,6 +441,20 @@ class DataCruncher:
             self._trivia_users.append([user_id, datetime.datetime.now()])
         return True
 
+    def timeout_user_is_not_being_time_outed(self, user_id: int) -> bool:
+        """
+        Returns True or False to indicate if the User will have to be time outed or not.
+        Basically the Method above without assignment
+        
+        :param user_id: The User ID for which to check if it'S being timeouted 
+        :return: True or False, see above.
+        """
+        for some_user_pair in self._trivia_users:
+            if some_user_pair[0] == user_id:
+                if datetime.datetime.now() - some_user_pair[1] > datetime.timedelta(minutes=10):
+                    return True
+                return False
+        return True
 
 # One central data Object to prevent Errors with multiple accesses to the Configurations
 data = DataCruncher()

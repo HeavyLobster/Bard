@@ -1,14 +1,14 @@
 {
     "172226206375084032": {
-        "chance": 5,
+      "chance": 1,
         "channels": [
             172251363110027264
         ],
-        "total": 11,
+      "total": 35,
         "users": {
             "196989358165852160": {
                 "name": "Volcyy",
-                "amount": 8
+              "amount": 16
             },
             "143833693520134144": {
                 "name": "Chime Addict",
@@ -27,12 +27,12 @@
                 "amount": 0
             },
             "140329679159689216": {
-                "name": "Cata (NA flamer mod)",
-                "amount": 0
+              "name": "riceBOYE (Cata)",
+              "amount": 9
             },
             "135079599154528256": {
                 "name": "Bardie",
-                "amount": 1
+              "amount": 3
             },
             "215056515357343746": {
                 "name": "look at my sausage",
@@ -57,6 +57,10 @@
             "295283525819826178": {
                 "name": "",
                 "amount": 0
+            },
+          "85609003089924096": {
+            "name": "Heavy Lobster",
+            "amount": 6
             }
         }
     },
@@ -95,5 +99,11 @@
         "channels": [],
         "total": 0,
         "users": {}
+    },
+  "197391197935763457": {
+    "chance": 4,
+    "channels": [],
+    "total": 0,
+    "users": {}
     }
 }
