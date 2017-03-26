@@ -1,8 +1,9 @@
 import asyncio
 import datetime
+from concurrent.futures import TimeoutError
+
 import discord
 import random
-from concurrent.futures import TimeoutError
 
 from src import bot
 from src.util import embeds, checks
@@ -199,6 +200,7 @@ async def trivia(msg):
     time_per_question = 20  # Time Users have per question
     stop_after_unanswered_rounds = 100  # Stop after this amount of unanswered Questions consecutively
     wrong_answer_penalty = 3  # Time penalty for a wrong answer
+    get_this_amount_of_points = 10  # The Amount of Points one User has to get to win
     participating_users = [msg.author]  # Who participates in the Trivia Game
 
     def did_join_trivia(m):
@@ -270,7 +272,6 @@ async def trivia(msg):
                 else:
                     # somebody wanted to quit
                     if not await handle_join_and_leave(some_message):
-                        print('time to quit!!!!!')
                         consecutive_rounds = -1
                         return consecutive_rounds
                     else:
@@ -367,6 +368,9 @@ async def trivia(msg):
             # Somebody requested Quit - need to check for False and not 0 for because magic
             elif consecutive_rounds_without_answer == -1:
                 break
+
+            elif get_this_amount_of_points in correct_guessing_people.values():
+                return await reward()
         correct_guessing_people = list(sorted(correct_guessing_people.items(), key=lambda x: x[1], reverse=True))
         return await reward()
 
