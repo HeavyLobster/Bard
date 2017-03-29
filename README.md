@@ -3,10 +3,10 @@ Source Code for the Discord Bot of the Bardians Discord Server. If you're here t
 
 ### Planned Features
 - [X] Role-Assignment for Users
-- [ ] Currency Generation & Gambling 
-- [ ] Minigames
-- [ ] Administration Commands
-- [ ] Twitch Stream Online / Offline Notifications
+- [X] Currency Generation & Gambling 
+- [X] Minigames
+- [X] Administration Commands
+- [X] Twitch Stream Online / Offline Notifications
 - [ ] Reddit Feed
 - [ ] League Commands
 
