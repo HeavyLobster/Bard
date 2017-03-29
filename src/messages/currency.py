@@ -299,20 +299,20 @@ async def trivia(msg):
         :return: The Message containing the Response 
         """
         reward_chimes = random.randrange(1, 4)
-        if len(correct_guessing_people) == 0:
+        results = ''
+        sorted_correct = sorted(correct_guessing_people.items(), key=lambda x: x[1], reverse=True)
+        if len(sorted_correct) < 1:
             return await embeds.title_and_desc(msg.channel,
                                                '- Trivia Game Results -',
                                                'Nobody guessed anything. That\'s... interesting.',
                                                discord.Color.gold())
-
-        data.modify_currency_of_user(msg.guild.id, bot.client.get_user(int(correct_guessing_people[0][0])),
-                                     reward_chimes)
-        results = ''
-        for index, pepes_friend in enumerate(correct_guessing_people):
+        for index, pepes_friend in enumerate(sorted_correct):
+            print(index)
             if index == 0:
                 results += f'**{bot.client.get_user(int(pepes_friend[0])).mention}** won with **{pepes_friend[1]}** ' \
                            f'Points and received **{reward_chimes} Chime{"s" if reward_chimes > 1 else ""}**' \
                            f' for it! :confetti_ball: :sparkler:\n'
+                data.modify_currency_of_user(msg.guild.id, bot.client.get_user(int(pepes_friend[0])), reward_chimes)
             else:
                 results += f'**#{index + 1}**: {bot.client.get_user(int(pepes_friend[0])).mention} ' \
                            f'with {pepes_friend[1]} points!\n'
@@ -332,8 +332,9 @@ async def trivia(msg):
     # descriptive variable names
     is_not_being_time_outed = data.timeout_user_is_not_being_time_outed(msg.author.id)
     if not is_not_being_time_outed:
-        await embeds.desc_only(msg.channel, 'You need to wait **at least 10 Minutes** before using this Command.',
-                               discord.Color.red())
+        return await embeds.desc_only(msg.channel,
+                                      'You need to wait **at least 10 Minutes** before using this Command.',
+                                      discord.Color.red())
     await embeds.desc_only(msg.channel, f'**{msg.author.display_name}** wants to start a Trivia Game! '
                                         f'Type `>join` to join!', discord.Color.gold())
 

@@ -1,8 +1,30 @@
 import discord
+
+from src import bot
 from src.util import embeds, checks
 from src.util.data_cruncher import data
 
-from src import bot
+
+@checks.is_mod
+async def shame(msg):
+    """
+    Shame a mentioned User, or multiple ones, if you're that hardcore.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the resulting Feedback from the Bot
+    """
+    if not len(msg.mentions):
+        return await embeds.desc_only(msg.channel, 'No User specified. Shaming not possible.')
+    shame_role = discord.utils.find(lambda r: r.name == 'Shame', msg.guild.roles)
+    result = ''
+    for member in msg.mentions:
+        try:
+            await member.add_roles(shame_role)
+        except discord.Forbidden as err:
+            result += f'Failed to add Shame to **{str(member)}: {err}.\n'
+        else:
+            result += f'Shamed **{member.name}**.\n'
+    return await embeds.desc_only(msg.channel, result)
 
 
 @checks.is_mod
@@ -20,12 +42,12 @@ async def kick(msg):
         return await embeds.desc_only(msg.channel, 'No User specified. Kick not possible.')
     else:
         try:
-            await msg.guild.kick(msg.mentions[0])
             if len(msg.content.split()) >= 3:  # if a kick message is specified
                 await msg.mentions[0].send(f'**You have been kicked from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
             else:
                 await msg.mentions[0].send(f'You have been kicked from {msg.guild.name}!')
+            await msg.guild.kick(msg.mentions[0])
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\'t kick**: {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')
@@ -46,12 +68,12 @@ async def ban(msg):
         return await embeds.desc_only(msg.channel, 'No User specified. Ban not possible.')
     else:
         try:
-            await msg.guild.ban(msg.mentions[0])
             if len(msg.content.split()) >= 3:  # if a ban message is specified
                 await msg.mentions[0].send(f'**You have been banned from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
             else:
                 await msg.mentions[0].send(f'You have been banned from {msg.guild.name}!')
+            await msg.guild.ban(msg.mentions[0])
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\’t ban:** {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')

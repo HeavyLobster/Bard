@@ -4,7 +4,7 @@
         "channels": [
             172251363110027264
         ],
-      "total": 35,
+      "total": 36,
         "users": {
             "196989358165852160": {
                 "name": "Volcyy",
@@ -16,7 +16,7 @@
             },
             "290324118665166849": {
                 "name": "Darb",
-                "amount": 1
+              "amount": 4
             },
             "137059214903214080": {
                 "name": "\u239dF\u239dU\u29f9L\u29f8L\u23a0Y\u239dM\u23a0\u239dA\u23a0Y\u23a0S\u23a0",
@@ -28,7 +28,7 @@
             },
             "140329679159689216": {
               "name": "riceBOYE (Cata)",
-              "amount": 9
+              "amount": 0
             },
             "135079599154528256": {
                 "name": "Bardie",
@@ -44,7 +44,7 @@
             },
             "174126034428493825": {
                 "name": "TheSeaPunCake",
-                "amount": 1
+              "amount": 0
             },
             "147723973340168192": {
                 "name": "Onno | Bradi",
@@ -60,7 +60,15 @@
             },
           "85609003089924096": {
             "name": "Heavy Lobster",
-            "amount": 6
+            "amount": 0
+          },
+          "170929033981329408": {
+            "name": "Cas",
+            "amount": 0
+          },
+          "197782592651526144": {
+            "name": "Lissy",
+            "amount": 0
             }
         }
     },
@@ -82,15 +90,19 @@
             226307470539227136,
             272692718839398401
         ],
-        "total": 2,
+      "total": 18,
         "users": {
             "118271490364801027": {
                 "name": "Narwhalicorn",
-                "amount": 1
+              "amount": 7
             },
             "196989358165852160": {
                 "name": "Volcyy",
-                "amount": 1
+              "amount": 9
+            },
+          "252953970547359744": {
+            "name": "Achory",
+            "amount": 4
             }
         }
     },

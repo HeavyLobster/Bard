@@ -17,6 +17,7 @@ replies = {
         'shutdown': administration.shutdown,
         'kill': administration.shutdown,
         'kick': administration.kick,
+        'shame': administration.shame,
         'purge': administration.purge,
         'prune': administration.purge,
         'clear': administration.purge,
