@@ -11,7 +11,7 @@ def format_string(string):
 
     # If the first two digits after the decimal point are zeroes, just return
     # the integer portion
-    if splitString[1][:2] == "00":
+    if splitString[1][:2] == "00" or splitString[1][:2] == "0":
         return splitString[0]
 
     # If there are already only two or fewer decimal places of precision, return the string
