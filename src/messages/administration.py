@@ -1,4 +1,4 @@
-import datetime
+import time
 
 import discord
 
@@ -214,7 +214,8 @@ async def replace(msg):
     :param msg: The Message invoking the Command 
     :return: A discord.Message Object informing about the result.
     """
-    start = datetime.datetime.now()
+    start = time.time()
+    history_limit = 100
     try:
         find = msg.content.split()[1]
         replace_with = msg.content.split()[2]
@@ -225,7 +226,7 @@ async def replace(msg):
     result = f'**Starting replacement process:**\n Searching `{find}` and replacing it with `{replace_with}`...\n'
     if msg.guild.me.top_role.permissions.manage_guild:
         result += '**Bot has permissions to manage this Guild.**\n'
-        result += f'Checking Guild Name: {msg.guild.name}'
+        result += f'Checking Guild Name: `{msg.guild.name}`\n'
         if find in msg.guild.name:
             await msg.guild.edit(name=msg.guild.name.replace(find, replace_with))
             result += 'Replaced occurrences in Guild Name.\n'
@@ -268,20 +269,29 @@ async def replace(msg):
     else:
         result += '**Bot has no permissions to manage the Nicknames.**\n'
 
-    result += '**Checking for Bot Messages containing Keyword...**\n'
+    result += '**Checking for Bot Messages:**\n'
+    result += f'Checking up to {history_limit * len(msg.guild.text_channels)} Messages...\n'
     edited_messages = 0
     for channel in msg.guild.text_channels:
-        async for message in channel.history(limit=2500):
+        async for message in channel.history(limit=history_limit):
             if msg.author.id == bot.client.user.id and find in msg.content:
                 await message.edit(content=message.content.replace(find, replace_with))
                 edited_messages += 1
-    result += f'Replaced a total of {edited_messages} occurrences in Bot Messages.'
+    result += f'Replaced a total of {edited_messages} occurrences in Bot Messages.\n'
 
     result += f'**Replacement done.**\n'
+    result += f'*Took {str(time.time() - start)[:-13]} seconds.*'
     return await embeds.title_and_desc(msg.channel, '- Replacement Command Results -', result)
 
 
-
+@checks.is_owner
+async def change_avatar(msg):
+    """
+    Change the Avatar to a file that the bot finds in the root directory called "av.png".
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot
+    """
 
 
 @checks.is_owner
