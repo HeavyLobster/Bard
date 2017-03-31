@@ -258,6 +258,25 @@ async def replace(msg):
     else:
         result += '**Bot has no permissions to manage the Roles.**\n'
 
+    if msg.guild.me.top_role.permissions.manage_nicknames:
+        result += '**Bot has permissions to manage the Nicknames.**\n'
+        for member in msg.guild.members:
+            if member.nick is not None and find in member.name:
+                old_nick = member.nick
+                await member.edit(nick=member.nick.replace(find, replace_with))
+                result += f'Replaced Member {member}\'s nickname "{old_nick}" with "{member.nick}".\n'
+    else:
+        result += '**Bot has no permissions to manage the Nicknames.**\n'
+
+    result += '**Checking for Bot Messages containing Keyword...**\n'
+    edited_messages = 0
+    for channel in msg.guild.text_channels:
+        async for message in channel.history(limit=2500):
+            if msg.author.id == bot.client.user.id and find in msg.content:
+                await message.edit(content=message.content.replace(find, replace_with))
+                edited_messages += 1
+    result += f'Replaced a total of {edited_messages} occurrences in Bot Messages.'
+
     result += f'**Replacement done.**\n'
     return await embeds.title_and_desc(msg.channel, '- Replacement Command Results -', result)
 
