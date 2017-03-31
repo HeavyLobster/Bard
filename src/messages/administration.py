@@ -216,14 +216,16 @@ async def replace(msg):
     """
     start = datetime.datetime.now()
     try:
-        find = msg.content.split()[0]
-        replace_with = msg.content.split()[1]
+        find = msg.content.split()[1]
+        replace_with = msg.content.split()[2]
     except IndexError:
         return await embeds.desc_only(msg.channel, 'You need to specify what to find '
                                                    'and with what you wish to replace it.')
-    result = ''
+
+    result = f'**Starting replacement process:**\n searching {find} and replacing it with {replace_with}...\n'
     if msg.guild.me.top_role.permissions.manage_guild:
         result += '**Bot has permissions to manage this Guild.**\n'
+        result += f'Checking Guild Name: {msg.guild.name}'
         if find in msg.guild.name:
             await msg.guild.edit(name=msg.guild.name.replace(find, replace_with))
             result += 'Replaced occurrences in Guild Name.\n'
@@ -235,14 +237,16 @@ async def replace(msg):
     if msg.guild.me.top_role.permissions.manage_channels:
         result += '**Bot has permissions to manage the Channels.**\n'
         for channel in msg.guild.text_channels:
-            if find in channel.name:
-                old_name = channel.name
-                await channel.edit(name=channel.name.replace(find, replace_with))
-                result += f'Replaced #{old_name} with #{channel.name}.\n'
             if channel.topic is not None and find in channel.topic:
                 old_topic = channel.topic
                 await channel.edit(topic=channel.topic.replace(find, replace_with))
                 result += f'Replaced "{old_topic}" with "{channel.topic}" in #{channel.name}.\n'
+            if find in channel.name:
+                old_name = channel.name
+                await channel.edit(name=channel.name.replace(find, replace_with))
+                result += f'Replaced #{old_name} with #{channel.name}.\n'
+            else:
+                result += f'No name changes for channel {channel.name}.\n'
     else:
         result += '**Bot has no permissions to manage the Channels.**\n'
 
