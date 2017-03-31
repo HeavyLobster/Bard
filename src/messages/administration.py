@@ -1,3 +1,5 @@
+import datetime
+
 import discord
 
 from src import bot
@@ -199,6 +201,77 @@ async def shutdown(msg):
     """
     await embeds.desc_only(msg.channel, '*emulates windows xp shutdown sound*')
     await bot.client.close()
+
+
+@checks.is_admin
+async def replace(msg):
+    """
+    Replace everything the Bot can find and can replace in the Guild containing the first argument with the second.
+    
+    Do not use this unless you know exactly what you are doing.
+    This was designed for April fools.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object informing about the result.
+    """
+    start = datetime.datetime.now()
+    try:
+        find = msg.content.split()[0]
+        replace_with = msg.content.split()[1]
+    except IndexError:
+        return await embeds.desc_only(msg.channel, 'You need to specify what to find '
+                                                   'and with what you wish to replace_with it.')
+    result = ''
+    if msg.guild.me.top_role.permissions.manage_guild:
+        result += '**Bot has permissions to manage this Guild.**\n'
+        if find in msg.guild.name:
+            await msg.guild.edit(name=msg.guild.name.replace(find, replace_with))
+            result += 'Replaced occurrences in Guild Name.\n'
+        else:
+            result += 'No change in Guild Name.\n'
+    else:
+        result += '**Bot has no permissions to manage this Guild.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_channels:
+        result += '**Bot has permissions to manage the Channels.**\n'
+        result += 'Checking Text Channels...\n'
+        for channel in msg.guild.text_channels:
+            if find in channel.name:
+                old_name = channel.name
+                await channel.edit(name=channel.name.replace(find, replace_with))
+                result += f'Replaced #{old_name} with #{channel.name}.\n'
+            if channel.topic is not None and find in channel.topic:
+                old_topic = channel.topic
+                await channel.edit(topic=channel.topic.replace(find, replace_with))
+                result += f'Replaced "{old_topic}" with "{channel.topic}" in #{channel.name}.\n'
+    else:
+        result += '**Bot has no permissions to manage the Channels.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_roles:
+        result += '**Bot has permissions to manage the Roles.**\n'
+        for role in msg.guild.roles:
+            if find in role.name:
+                old_name = role.name
+                await role.edit(name=role.name.replace(find, replace_with))
+                result += f'Replaced Role "{old_name}" with "{role.name}".\n'
+    else:
+        result += '**Bot has no permissions to manage the Roles.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_emojis:
+        result += '**Bot has permissions to manage the Emojis.**\n'
+        for emoji in msg.guild.emojis:
+            if find in emoji.name:
+                old_name = emoji.name
+                await emoji.edit(name=emoji.name.replace(find, replace_with))
+                result += f'Replaced Emoji "{old_name}" with "{emoji.name}".\n'
+    else:
+        result += '**Bot has no permissions to manage the Emojis.**\n'
+
+    result += f'**Replacement done.** Took {datetime.datetime.now() - start}.\n'
+    return await embeds.title_and_desc(msg.channel, '- Replacement Command Results -', result)
+
+
+
 
 
 @checks.is_owner
