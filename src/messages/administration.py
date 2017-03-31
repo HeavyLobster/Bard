@@ -293,7 +293,7 @@ async def change_avatar(msg):
     :return: A discord.Message Object containing the Response from the Bot
     """
     try:
-        new_avatar = open('../../av.png', 'rb').read()
+        new_avatar = open('/../../av.png', 'rb').read()
     except FileNotFoundError:
         return await embeds.desc_only(msg.channel, 'Could not find a file called `av.png` in the Root directory of Bard'
                                                    '. If you wish to set a new Avatar, please make sure it exists befor'
