@@ -1,8 +1,32 @@
+import time
+
 import discord
+
+from src import bot
 from src.util import embeds, checks
 from src.util.data_cruncher import data
 
-from src import bot
+
+@checks.is_mod
+async def shame(msg):
+    """
+    Shame a mentioned User, or multiple ones, if you're that hardcore.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the resulting Feedback from the Bot
+    """
+    if not len(msg.mentions):
+        return await embeds.desc_only(msg.channel, 'No User specified. Shaming not possible.')
+    shame_role = discord.utils.find(lambda r: r.name == 'Shame', msg.guild.roles)
+    result = ''
+    for member in msg.mentions:
+        try:
+            await member.add_roles(shame_role)
+        except discord.Forbidden as err:
+            result += f'Failed to add Shame to **{str(member)}: {err}.\n'
+        else:
+            result += f'Shamed **{member.name}**.\n'
+    return await embeds.desc_only(msg.channel, result)
 
 
 @checks.is_mod
@@ -20,12 +44,12 @@ async def kick(msg):
         return await embeds.desc_only(msg.channel, 'No User specified. Kick not possible.')
     else:
         try:
-            await msg.guild.kick(msg.mentions[0])
             if len(msg.content.split()) >= 3:  # if a kick message is specified
                 await msg.mentions[0].send(f'**You have been kicked from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
             else:
                 await msg.mentions[0].send(f'You have been kicked from {msg.guild.name}!')
+            await msg.guild.kick(msg.mentions[0])
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\'t kick**: {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')
@@ -46,12 +70,12 @@ async def ban(msg):
         return await embeds.desc_only(msg.channel, 'No User specified. Ban not possible.')
     else:
         try:
-            await msg.guild.ban(msg.mentions[0])
             if len(msg.content.split()) >= 3:  # if a ban message is specified
                 await msg.mentions[0].send(f'**You have been banned from {msg.guild.name}, reason:** \n'
                                            f'{" ".join(msg.content.split()[2:])}')
             else:
                 await msg.mentions[0].send(f'You have been banned from {msg.guild.name}!')
+            await msg.guild.ban(msg.mentions[0])
         except (discord.errors.Forbidden, discord.errors.HTTPException) as err:
             return await embeds.desc_only(msg.channel, f'**Can\’t ban:** {err}.')
         return await embeds.desc_only(msg.channel, 'Gone!')
@@ -177,6 +201,105 @@ async def shutdown(msg):
     """
     await embeds.desc_only(msg.channel, '*emulates windows xp shutdown sound*')
     await bot.client.close()
+
+
+@checks.is_admin
+async def replace(msg):
+    """
+    Replace everything the Bot can find and can replace in the Guild containing the first argument with the second.
+    
+    Do not use this unless you know exactly what you are doing.
+    This was designed for April fools.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object informing about the result.
+    """
+    start = time.time()
+    history_limit = 100
+    try:
+        find = msg.content.split()[1]
+        replace_with = msg.content.split()[2]
+    except IndexError:
+        return await embeds.desc_only(msg.channel, 'You need to specify what to find '
+                                                   'and with what you wish to replace it.')
+
+    result = f'**Starting replacement process:**\n Searching `{find}` and replacing it with `{replace_with}`...\n'
+    if msg.guild.me.top_role.permissions.manage_guild:
+        result += '**Bot has permissions to manage this Guild.**\n'
+        result += f'Checking Guild Name: `{msg.guild.name}`\n'
+        if find in msg.guild.name:
+            await msg.guild.edit(name=msg.guild.name.replace(find, replace_with))
+            result += 'Replaced occurrences in Guild Name.\n'
+        else:
+            result += 'No change in Guild Name.\n'
+    else:
+        result += '**Bot has no permissions to manage this Guild.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_channels:
+        result += '**Bot has permissions to manage the Channels.**\n'
+        for channel in msg.guild.text_channels:
+            if find in channel.name:
+                old_name = channel.name
+                await channel.edit(name=channel.name.replace(find, replace_with))
+                result += f'Replaced #{old_name} with #{channel.name}.\n'
+            if channel.topic is not None and find in channel.topic:
+                old_topic = channel.topic
+                await channel.edit(topic=channel.topic.replace(find, replace_with))
+                result += f'Replaced "{old_topic}" with "{channel.topic}" in #{channel.name}.\n'
+    else:
+        result += '**Bot has no permissions to manage the Channels.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_roles:
+        result += '**Bot has permissions to manage the Roles.**\n'
+        for role in msg.guild.roles:
+            if find in role.name:
+                old_name = role.name
+                await role.edit(name=role.name.replace(find, replace_with))
+                result += f'Replaced Role "{old_name}" with "{role.name}".\n'
+    else:
+        result += '**Bot has no permissions to manage the Roles.**\n'
+
+    if msg.guild.me.top_role.permissions.manage_nicknames:
+        result += '**Bot has permissions to manage the Nicknames.**\n'
+        for member in msg.guild.members:
+            if member.nick is not None and find in member.name:
+                old_nick = member.nick
+                await member.edit(nick=member.nick.replace(find, replace_with))
+                result += f'Replaced Member {member}\'s nickname "{old_nick}" with "{member.nick}".\n'
+    else:
+        result += '**Bot has no permissions to manage the Nicknames.**\n'
+
+    result += '**Checking for Bot Messages:**\n'
+    result += f'Checking up to {history_limit * len(msg.guild.text_channels)} Messages...\n'
+    edited_messages = 0
+    for channel in msg.guild.text_channels:
+        async for message in channel.history(limit=history_limit):
+            if msg.author.id == bot.client.user.id and find in msg.content:
+                await message.edit(content=message.content.replace(find, replace_with))
+                edited_messages += 1
+    result += f'Replaced a total of {edited_messages} occurrences in Bot Messages.\n'
+
+    result += f'**Replacement done.**\n'
+    result += f'*Took {str(time.time() - start)[:-13]} seconds.*'
+    return await embeds.title_and_desc(msg.channel, '- Replacement Command Results -', result)
+
+
+@checks.is_owner
+async def change_avatar(msg):
+    """
+    Change the Avatar to a file that the bot finds in the root directory called "av.png".
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message Object containing the Response from the Bot
+    """
+    try:
+        new_avatar = open('av.png', 'rb').read()
+    except FileNotFoundError:
+        return await embeds.desc_only(msg.channel, 'Could not find a file called `av.png` in the Root directory of Bard'
+                                                   '. If you wish to set a new Avatar, please make sure it exists befor'
+                                                   'e using this Command.', discord.Color.red())
+    await bot.client.user.edit(avatar=new_avatar)
+    return await embeds.desc_only(msg.channel, 'Set new Avatar.', discord.Color.green())
 
 
 @checks.is_owner

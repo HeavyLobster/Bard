@@ -17,10 +17,13 @@ replies = {
         'shutdown': administration.shutdown,
         'kill': administration.shutdown,
         'kick': administration.kick,
+        'shame': administration.shame,
         'purge': administration.purge,
         'prune': administration.purge,
         'clear': administration.purge,
-        'ban': administration.ban
+        'ban': administration.ban,
+        'replace': administration.replace,
+        'changeavatar': administration.change_avatar
     },
     data_cruncher.data.get_prefix('roles'): {
         'assign': roles.assign,
