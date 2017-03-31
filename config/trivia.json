@@ -1,0 +1,2739 @@
+{
+  "league": {
+    "mode": "guess",
+    "questions": [
+      {
+        "q": "What is the name of **Bard's Passive**?",
+        "a": "travellers call"
+      },
+      {
+        "q": "What is the Name of **Bard's Q**?",
+        "a": "cosmic binding"
+      },
+      {
+        "q": "*\"There, inside a perfect cage of ice floated a dancing column of flame. There was no way such a thing should be burning, especially not in this place. However, its movement was as hypnotic as a siren's song, captivating and seductive.\"* Whose lore is this?",
+        "a": "brand"
+      },
+      {
+        "q": "Which Champion has a **Crescent Axe** as their **Weapon**?",
+        "a": "renekton"
+      },
+      {
+        "q": "Which Champion has the title **Grandmaster at Arms**?",
+        "a": "jax"
+      },
+      {
+        "q": "Which Champion has the title **Maven of the Strings**?",
+        "a": "sona"
+      },
+      {
+        "q": "Which Champion has the title **the Yordle Gunner**?",
+        "a": "tristana"
+      },
+      {
+        "q": "Which Champion has the title **the Arrow of Retribution**?",
+        "a": "varus"
+      },
+      {
+        "q": "Which Champion has the title **the Grand Duelist**?",
+        "a": "fiora"
+      },
+      {
+        "q": "Which Champion has the title **the Mad Chemist**?",
+        "a": "singed"
+      },
+      {
+        "q": "Which Champion has the title **the River King**?",
+        "a": "tahm kench"
+      },
+      {
+        "q": "Which Champion has the title **the Deceiver**?",
+        "a": "leblanc"
+      },
+      {
+        "q": "Which Champion has the title **the Chain Warden**?",
+        "a": "thresh"
+      },
+      {
+        "q": "Which Champion has the title **the Enlightened One**?",
+        "a": "karma"
+      },
+      {
+        "q": "Which Champion has the title **the Virtuoso**?",
+        "a": "jhin"
+      },
+      {
+        "q": "Which Champion has the title **the Mechanized Menace**?",
+        "a": "rumble"
+      },
+      {
+        "q": "Which Champion has the title **the Spirit Walker**?",
+        "a": "udyr"
+      },
+      {
+        "q": "Which Champion has the title **the Blind Monk**?",
+        "a": "lee sin"
+      },
+      {
+        "q": "Which Champion has the title **Shepherd of Souls**?",
+        "a": "yorick"
+      },
+      {
+        "q": "Which Champion has the title **the Void Walker**?",
+        "a": "kassadin"
+      },
+      {
+        "q": "Which Champion has the title **the Battle Mistress**?",
+        "a": "sivir"
+      },
+      {
+        "q": "Which Champion has the title **the Bounty Hunter**?",
+        "a": "miss fortune"
+      },
+      {
+        "q": "Which Champion has the title **the Glorious Executioner**?",
+        "a": "draven"
+      },
+      {
+        "q": "Which Champion has the title **the Unforgiven**?",
+        "a": "yasuo"
+      },
+      {
+        "q": "Which Champion has the title **The Judicator**?",
+        "a": "kayle"
+      },
+      {
+        "q": "Which Champion has the title **the Demon Jester**?",
+        "a": "shaco"
+      },
+      {
+        "q": "Which Champion has the title **the Butcher of the Sands**?",
+        "a": "renekton"
+      },
+      {
+        "q": "Which Champion has the title **the Shadow of War**?",
+        "a": "hecarim"
+      },
+      {
+        "q": "Which Champion has the title **the Tidal Trickster**?",
+        "a": "fizz"
+      },
+      {
+        "q": "Which Champion has the title **the Mouth of the Abyss**?",
+        "a": "kog'maw"
+      },
+      {
+        "q": "Which Champion has the title **the Twisted Treant**?",
+        "a": "maokai"
+      },
+      {
+        "q": "Which Champion has the title **the Ice Witch**?",
+        "a": "lissandra"
+      },
+      {
+        "q": "Which Champion has the title **the Loose Cannon**?",
+        "a": "jinx"
+      },
+      {
+        "q": "Which Champion has the title **the Headsman's Pride**?",
+        "a": "urgot"
+      },
+      {
+        "q": "Which Champion has the title **the Harbinger of Doom**?",
+        "a": "fiddlesticks"
+      },
+      {
+        "q": "Which Champion has the title **the Colossus**?",
+        "a": "galio"
+      },
+      {
+        "q": "Which Champion has the title **the Artisan of War**?",
+        "a": "pantheon"
+      },
+      {
+        "q": "Which Champion has the title **the Blade's Shadow**?",
+        "a": "talon"
+      },
+      {
+        "q": "Which Champion has the title **the Saltwater Scourge**?",
+        "a": "gangplank"
+      },
+      {
+        "q": "Which Champion has the title **the Prodigal Explorer**?",
+        "a": "ezreal"
+      },
+      {
+        "q": "Which Champion has the title **the Missing Link**?",
+        "a": "gnar"
+      },
+      {
+        "q": "Which Champion has the title **the Swift Scout**?",
+        "a": "teemo"
+      },
+      {
+        "q": "Which Champion has the title **the Dark Child**?",
+        "a": "annie"
+      },
+      {
+        "q": "Which Champion has the title **the Iron Revenant**?",
+        "a": "mordekaiser"
+      },
+      {
+        "q": "Which Champion has the title **the Emperor of the Sands**?",
+        "a": "azir"
+      },
+      {
+        "q": "Which Champion has the title **the Heart of the Tempest**?",
+        "a": "kennen"
+      },
+      {
+        "q": "Which Champion has the title **the Exile**?",
+        "a": "riven"
+      },
+      {
+        "q": "Which Champion has the title **the Terror of the Void**?",
+        "a": "cho'gath"
+      },
+      {
+        "q": "Which Champion has the title **the Darkin Blade**?",
+        "a": "aatrox"
+      },
+      {
+        "q": "Which Champion has the title **Keeper of the Hammer**?",
+        "a": "poppy"
+      },
+      {
+        "q": "Which Champion has the title **the Stoneweaver**?",
+        "a": "taliyah"
+      },
+      {
+        "q": "Which Champion has the title **the Kraken Priestess**?",
+        "a": "illaoi"
+      },
+      {
+        "q": "Which Champion has the title **the Revered Inventor**?",
+        "a": "heimerdinger"
+      },
+      {
+        "q": "Which Champion has the title **the Minotaur**?",
+        "a": "alistar"
+      },
+      {
+        "q": "Which Champion has the title **the Seneschal of Demacia**?",
+        "a": "xin zhao"
+      },
+      {
+        "q": "Which Champion has the title **the Purifier**?",
+        "a": "lucian"
+      },
+      {
+        "q": "Which Champion has the title **the Thunder's Roar**?",
+        "a": "volibear"
+      },
+      {
+        "q": "Which Champion has the title **the Winter's Wrath**?",
+        "a": "sejuani"
+      },
+      {
+        "q": "Which Champion has the title **the Bestial Huntress**?",
+        "a": "nidalee"
+      },
+      {
+        "q": "Which Champion has the title **The Might of Demacia**?",
+        "a": "garen"
+      },
+      {
+        "q": "Which Champion has the title **the Radiant Dawn**?",
+        "a": "leona"
+      },
+      {
+        "q": "Which Champion has the title **the Master of Shadows**?",
+        "a": "zed"
+      },
+      {
+        "q": "Which Champion has the title **the Great Steam Golem**?",
+        "a": "blitzcrank"
+      },
+      {
+        "q": "Which Champion has the title **the Armordillo**?",
+        "a": "rammus"
+      },
+      {
+        "q": "Which Champion has the title **the Eye of the Void**?",
+        "a": "vel'koz"
+      },
+      {
+        "q": "Which Champion has the title **the Sheriff of Piltover**?",
+        "a": "caitlyn"
+      },
+      {
+        "q": "Which Champion has the title **the Troll King**?",
+        "a": "trundle"
+      },
+      {
+        "q": "Which Champion has the title **The Eternal Hunters**?",
+        "a": "kindred"
+      },
+      {
+        "q": "Which Champion has the title **Demacia's Wings**?",
+        "a": "quinn"
+      },
+      {
+        "q": "Which Champion has the title **the Boy Who Shattered Time**?",
+        "a": "ekko"
+      },
+      {
+        "q": "Which Champion has the title **the Tidecaller**?",
+        "a": "nami"
+      },
+      {
+        "q": "Which Champion has the title **the Master Tactician**?",
+        "a": "swain"
+      },
+      {
+        "q": "Which Champion has the title **the Shield of Valoran**?",
+        "a": "taric"
+      },
+      {
+        "q": "Which Champion has the title **the Dark Sovereign**?",
+        "a": "syndra"
+      },
+      {
+        "q": "Which Champion has the title **the Crystal Vanguard**?",
+        "a": "skarner"
+      },
+      {
+        "q": "Which Champion has the title **the Heart of the Freljord**?",
+        "a": "braum"
+      },
+      {
+        "q": "Which Champion has the title **the Tiny Master of Evil**?",
+        "a": "veigar"
+      },
+      {
+        "q": "Which Champion has the title **the Magus Ascendant**?",
+        "a": "xerath"
+      },
+      {
+        "q": "Which Champion has the title **the Daring Bombardier**?",
+        "a": "corki"
+      },
+      {
+        "q": "Which Champion has the title **the Titan of the Depths**?",
+        "a": "nautilus"
+      },
+      {
+        "q": "Which Champion has the title **the Nine-Tailed Fox**?",
+        "a": "ahri"
+      },
+      {
+        "q": "Which Champion has the title **the Defender of Tomorrow**?",
+        "a": "jayce"
+      },
+      {
+        "q": "Which Champion has the title **the Hand of Noxus**?",
+        "a": "darius"
+      },
+      {
+        "q": "Which Champion has the title **the Barbarian King**?",
+        "a": "tryndamere"
+      },
+      {
+        "q": "Which Champion has the title **the Storm's Fury**?",
+        "a": "janna"
+      },
+      {
+        "q": "Which Champion has the title **the Spider Queen**?",
+        "a": "elise"
+      },
+      {
+        "q": "Which Champion has the title **the Night Hunter**?",
+        "a": "vayne"
+      },
+      {
+        "q": "Which Champion has the title **the Burning Vengeance**?",
+        "a": "brand"
+      },
+      {
+        "q": "Which Champion has the title **the Outlaw**?",
+        "a": "graves"
+      },
+      {
+        "q": "Which Champion has the title **the Starchild**?",
+        "a": "soraka"
+      },
+      {
+        "q": "Which Champion has the title **the Deathsinger**?",
+        "a": "karthus"
+      },
+      {
+        "q": "Which Champion has the title **the Crimson Reaper**?",
+        "a": "vladimir"
+      },
+      {
+        "q": "Which Champion has the title **the Chronokeeper**?",
+        "a": "zilean"
+      },
+      {
+        "q": "Which Champion has the title **the Sinister Blade**?",
+        "a": "katarina"
+      },
+      {
+        "q": "Which Champion has the title **the Half-Dragon**?",
+        "a": "shyvana"
+      },
+      {
+        "q": "Which Champion has the title **the Uncaged Wrath of Zaun**?",
+        "a": "warwick"
+      },
+      {
+        "q": "Which Champion has the title **the Hexplosives Expert**?",
+        "a": "ziggs"
+      },
+      {
+        "q": "Which Champion has the title **the Cantankerous Cavalier**?",
+        "a": "kled"
+      },
+      {
+        "q": "Which Champion has the title **the Voidreaver**?",
+        "a": "kha'zix"
+      },
+      {
+        "q": "Which Champion has the title **the Berserker**?",
+        "a": "olaf"
+      },
+      {
+        "q": "Which Champion has the title **the Card Master**?",
+        "a": "twisted fate"
+      },
+      {
+        "q": "Which Champion has the title **the Yeti Rider**?",
+        "a": "nunu"
+      },
+      {
+        "q": "Which Champion has the title **the Pridestalker**?",
+        "a": "rengar"
+      },
+      {
+        "q": "Which Champion has the title **the Wandering Caretaker**?",
+        "a": "bard"
+      },
+      {
+        "q": "Which Champion has the title **the Will of the Blades**?",
+        "a": "irelia"
+      },
+      {
+        "q": "Which Champion has the title **the Green Father**?",
+        "a": "ivern"
+      },
+      {
+        "q": "Which Champion has the title **the Monkey King**?",
+        "a": "wukong"
+      },
+      {
+        "q": "Which Champion has the title **the Frost Archer**?",
+        "a": "ashe"
+      },
+      {
+        "q": "Which Champion has the title **the Spear of Vengeance**?",
+        "a": "kalista"
+      },
+      {
+        "q": "Which Champion has the title **the Fist of Shadow**?",
+        "a": "akali"
+      },
+      {
+        "q": "Which Champion has the title **the Piltover Enforcer**?",
+        "a": "vi"
+      },
+      {
+        "q": "Which Champion has the title **the Sad Mummy**?",
+        "a": "amumu"
+      },
+      {
+        "q": "Which Champion has the title **the Fae Sorceress**?",
+        "a": "lulu"
+      },
+      {
+        "q": "Which Champion has the title **Fallen Angel**?",
+        "a": "morgana"
+      },
+      {
+        "q": "Which Champion has the title **the Eternal Nightmare**?",
+        "a": "nocturne"
+      },
+      {
+        "q": "Which Champion has the title **Scorn of the Moon**?",
+        "a": "diana"
+      },
+      {
+        "q": "Which Champion has the title **The Star Forger**?",
+        "a": "aurelion sol"
+      },
+      {
+        "q": "Which Champion has the title **Rise of the Thorns**?",
+        "a": "zyra"
+      },
+      {
+        "q": "Which Champion has the title **the Machine Herald**?",
+        "a": "viktor"
+      },
+      {
+        "q": "Which Champion has the title **the Serpent's Embrace**?",
+        "a": "cassiopeia"
+      },
+      {
+        "q": "Which Champion has the title **the Curator of the Sands**?",
+        "a": "nasus"
+      },
+      {
+        "q": "Which Champion has the title **the Plague Rat**?",
+        "a": "twitch"
+      },
+      {
+        "q": "Which Champion has the title **the Madman of Zaun**?",
+        "a": "dr. mundo"
+      },
+      {
+        "q": "Which Champion has the title **the Lady of Clockwork**?",
+        "a": "orianna"
+      },
+      {
+        "q": "Which Champion has the title **the Widowmaker**?",
+        "a": "evelynn"
+      },
+      {
+        "q": "Which Champion has the title **the Void Burrower**?",
+        "a": "rek'sai"
+      },
+      {
+        "q": "Which Champion has the title **the Lady of Luminosity**?",
+        "a": "lux"
+      },
+      {
+        "q": "Which Champion has the title **The Undead Juggernaut**?",
+        "a": "sion"
+      },
+      {
+        "q": "Which Champion has the title **the Steel Shadow**?",
+        "a": "camille"
+      },
+      {
+        "q": "Which Champion has the title **the Wuju Bladesman**?",
+        "a": "master yi"
+      },
+      {
+        "q": "Which Champion has the title **the Rune Mage**?",
+        "a": "ryze"
+      },
+      {
+        "q": "Which Champion has the title **Shard of the Monolith**?",
+        "a": "malphite"
+      },
+      {
+        "q": "Which Champion has the title **the Cryophoenix**?",
+        "a": "anivia"
+      },
+      {
+        "q": "Which Champion has the title **the Eye of Twilight**?",
+        "a": "shen"
+      },
+      {
+        "q": "Which Champion has the title **the Exemplar of Demacia**?",
+        "a": "jarvan iv"
+      },
+      {
+        "q": "Which Champion has the title **the Prophet of the Void**?",
+        "a": "malzahar"
+      },
+      {
+        "q": "Which Champion has the title **the Secret Weapon**?",
+        "a": "zac"
+      },
+      {
+        "q": "Which Champion has the title **the Rabble Rouser**?",
+        "a": "gragas"
+      },
+      {
+        "q": "What is the name of **Jax's Q**?",
+        "a": "leap strike"
+      },
+      {
+        "q": "What is the name of **Jax's W**?",
+        "a": "empower"
+      },
+      {
+        "q": "What is the name of **Jax's E**?",
+        "a": "counter strike"
+      },
+      {
+        "q": "What is the name of **Jax's R**?",
+        "a": "grandmaster's might"
+      },
+      {
+        "q": "What is the name of **Sona's Q**?",
+        "a": "hymn of valor"
+      },
+      {
+        "q": "What is the name of **Sona's W**?",
+        "a": "aria of perseverance"
+      },
+      {
+        "q": "What is the name of **Sona's E**?",
+        "a": "song of celerity"
+      },
+      {
+        "q": "What is the name of **Sona's R**?",
+        "a": "crescendo"
+      },
+      {
+        "q": "What is the name of **Tristana's Q**?",
+        "a": "rapid fire"
+      },
+      {
+        "q": "What is the name of **Tristana's W**?",
+        "a": "rocket jump"
+      },
+      {
+        "q": "What is the name of **Tristana's E**?",
+        "a": "explosive charge"
+      },
+      {
+        "q": "What is the name of **Tristana's R**?",
+        "a": "buster shot"
+      },
+      {
+        "q": "What is the name of **Varus's Q**?",
+        "a": "piercing arrow"
+      },
+      {
+        "q": "What is the name of **Varus's W**?",
+        "a": "blighted quiver"
+      },
+      {
+        "q": "What is the name of **Varus's E**?",
+        "a": "hail of arrows"
+      },
+      {
+        "q": "What is the name of **Varus's R**?",
+        "a": "chain of corruption"
+      },
+      {
+        "q": "What is the name of **Fiora's Q**?",
+        "a": "lunge"
+      },
+      {
+        "q": "What is the name of **Fiora's W**?",
+        "a": "riposte"
+      },
+      {
+        "q": "What is the name of **Fiora's E**?",
+        "a": "bladework"
+      },
+      {
+        "q": "What is the name of **Fiora's R**?",
+        "a": "grand challenge"
+      },
+      {
+        "q": "What is the name of **Singed's Q**?",
+        "a": "poison trail"
+      },
+      {
+        "q": "What is the name of **Singed's W**?",
+        "a": "mega adhesive"
+      },
+      {
+        "q": "What is the name of **Singed's E**?",
+        "a": "fling"
+      },
+      {
+        "q": "What is the name of **Singed's R**?",
+        "a": "insanity potion"
+      },
+      {
+        "q": "What is the name of **Tahm Kench's Q**?",
+        "a": "tongue lash"
+      },
+      {
+        "q": "What is the name of **Tahm Kench's W**?",
+        "a": "devour"
+      },
+      {
+        "q": "What is the name of **Tahm Kench's E**?",
+        "a": "thick skin"
+      },
+      {
+        "q": "What is the name of **Tahm Kench's R**?",
+        "a": "abyssal voyage"
+      },
+      {
+        "q": "What is the name of **LeBlanc's Q**?",
+        "a": "shatter orb"
+      },
+      {
+        "q": "What is the name of **LeBlanc's W**?",
+        "a": "distortion"
+      },
+      {
+        "q": "What is the name of **LeBlanc's E**?",
+        "a": "ethereal chains"
+      },
+      {
+        "q": "What is the name of **LeBlanc's R**?",
+        "a": "mimic"
+      },
+      {
+        "q": "What is the name of **Thresh's Q**?",
+        "a": "death sentence"
+      },
+      {
+        "q": "What is the name of **Thresh's W**?",
+        "a": "dark passage"
+      },
+      {
+        "q": "What is the name of **Thresh's E**?",
+        "a": "flay"
+      },
+      {
+        "q": "What is the name of **Thresh's R**?",
+        "a": "the box"
+      },
+      {
+        "q": "What is the name of **Karma's Q**?",
+        "a": "inner flame"
+      },
+      {
+        "q": "What is the name of **Karma's W**?",
+        "a": "focused resolve"
+      },
+      {
+        "q": "What is the name of **Karma's E**?",
+        "a": "inspire"
+      },
+      {
+        "q": "What is the name of **Karma's R**?",
+        "a": "mantra"
+      },
+      {
+        "q": "What is the name of **Jhin's Q**?",
+        "a": "dancing grenade"
+      },
+      {
+        "q": "What is the name of **Jhin's W**?",
+        "a": "deadly flourish"
+      },
+      {
+        "q": "What is the name of **Jhin's E**?",
+        "a": "captive audience"
+      },
+      {
+        "q": "What is the name of **Jhin's R**?",
+        "a": "curtain call"
+      },
+      {
+        "q": "What is the name of **Rumble's Q**?",
+        "a": "flamespitter"
+      },
+      {
+        "q": "What is the name of **Rumble's W**?",
+        "a": "scrap shield"
+      },
+      {
+        "q": "What is the name of **Rumble's E**?",
+        "a": "electro harpoon"
+      },
+      {
+        "q": "What is the name of **Rumble's R**?",
+        "a": "the equalizer"
+      },
+      {
+        "q": "What is the name of **Udyr's Q**?",
+        "a": "tiger stance"
+      },
+      {
+        "q": "What is the name of **Udyr's W**?",
+        "a": "turtle stance"
+      },
+      {
+        "q": "What is the name of **Udyr's E**?",
+        "a": "bear stance"
+      },
+      {
+        "q": "What is the name of **Udyr's R**?",
+        "a": "phoenix stance"
+      },
+      {
+        "q": "What is the name of **Lee Sin's Q**?",
+        "a": "sonic wave / resonating strike"
+      },
+      {
+        "q": "What is the name of **Lee Sin's W**?",
+        "a": "safeguard / iron will"
+      },
+      {
+        "q": "What is the name of **Lee Sin's E**?",
+        "a": "tempest / cripple"
+      },
+      {
+        "q": "What is the name of **Lee Sin's R**?",
+        "a": "dragon's rage"
+      },
+      {
+        "q": "What is the name of **Yorick's Q**?",
+        "a": "last rites"
+      },
+      {
+        "q": "What is the name of **Yorick's W**?",
+        "a": "dark procession"
+      },
+      {
+        "q": "What is the name of **Yorick's E**?",
+        "a": "mourning mist"
+      },
+      {
+        "q": "What is the name of **Yorick's R**?",
+        "a": "eulogy of the isles"
+      },
+      {
+        "q": "What is the name of **Kassadin's Q**?",
+        "a": "null sphere"
+      },
+      {
+        "q": "What is the name of **Kassadin's W**?",
+        "a": "nether blade"
+      },
+      {
+        "q": "What is the name of **Kassadin's E**?",
+        "a": "force pulse"
+      },
+      {
+        "q": "What is the name of **Kassadin's R**?",
+        "a": "riftwalk"
+      },
+      {
+        "q": "What is the name of **Sivir's Q**?",
+        "a": "boomerang blade"
+      },
+      {
+        "q": "What is the name of **Sivir's W**?",
+        "a": "ricochet"
+      },
+      {
+        "q": "What is the name of **Sivir's E**?",
+        "a": "spell shield"
+      },
+      {
+        "q": "What is the name of **Sivir's R**?",
+        "a": "on the hunt"
+      },
+      {
+        "q": "What is the name of **Miss Fortune's Q**?",
+        "a": "double up"
+      },
+      {
+        "q": "What is the name of **Miss Fortune's W**?",
+        "a": "strut"
+      },
+      {
+        "q": "What is the name of **Miss Fortune's E**?",
+        "a": "make it rain"
+      },
+      {
+        "q": "What is the name of **Miss Fortune's R**?",
+        "a": "bullet time"
+      },
+      {
+        "q": "What is the name of **Draven's Q**?",
+        "a": "spinning axe"
+      },
+      {
+        "q": "What is the name of **Draven's W**?",
+        "a": "blood rush"
+      },
+      {
+        "q": "What is the name of **Draven's E**?",
+        "a": "stand aside"
+      },
+      {
+        "q": "What is the name of **Draven's R**?",
+        "a": "whirling death"
+      },
+      {
+        "q": "What is the name of **Yasuo's Q**?",
+        "a": "steel tempest"
+      },
+      {
+        "q": "What is the name of **Yasuo's W**?",
+        "a": "wind wall"
+      },
+      {
+        "q": "What is the name of **Yasuo's E**?",
+        "a": "sweeping blade"
+      },
+      {
+        "q": "What is the name of **Yasuo's R**?",
+        "a": "last breath"
+      },
+      {
+        "q": "What is the name of **Kayle's Q**?",
+        "a": "reckoning"
+      },
+      {
+        "q": "What is the name of **Kayle's W**?",
+        "a": "divine blessing"
+      },
+      {
+        "q": "What is the name of **Kayle's E**?",
+        "a": "righteous fury"
+      },
+      {
+        "q": "What is the name of **Kayle's R**?",
+        "a": "intervention"
+      },
+      {
+        "q": "What is the name of **Shaco's Q**?",
+        "a": "deceive"
+      },
+      {
+        "q": "What is the name of **Shaco's W**?",
+        "a": "jack in the box"
+      },
+      {
+        "q": "What is the name of **Shaco's E**?",
+        "a": "two-shiv poison"
+      },
+      {
+        "q": "What is the name of **Shaco's R**?",
+        "a": "hallucinate"
+      },
+      {
+        "q": "What is the name of **Renekton's Q**?",
+        "a": "cull the meek"
+      },
+      {
+        "q": "What is the name of **Renekton's W**?",
+        "a": "ruthless predator"
+      },
+      {
+        "q": "What is the name of **Renekton's E**?",
+        "a": "slice and dice"
+      },
+      {
+        "q": "What is the name of **Renekton's R**?",
+        "a": "dominus"
+      },
+      {
+        "q": "What is the name of **Hecarim's Q**?",
+        "a": "rampage"
+      },
+      {
+        "q": "What is the name of **Hecarim's W**?",
+        "a": "spirit of dread"
+      },
+      {
+        "q": "What is the name of **Hecarim's E**?",
+        "a": "devastating charge"
+      },
+      {
+        "q": "What is the name of **Hecarim's R**?",
+        "a": "onslaught of shadows"
+      },
+      {
+        "q": "What is the name of **Fizz's Q**?",
+        "a": "urchin strike"
+      },
+      {
+        "q": "What is the name of **Fizz's W**?",
+        "a": "seastone trident"
+      },
+      {
+        "q": "What is the name of **Fizz's E**?",
+        "a": "playful / trickster"
+      },
+      {
+        "q": "What is the name of **Fizz's R**?",
+        "a": "chum the waters"
+      },
+      {
+        "q": "What is the name of **Kog'Maw's Q**?",
+        "a": "caustic spittle"
+      },
+      {
+        "q": "What is the name of **Kog'Maw's W**?",
+        "a": "bio-arcane barrage"
+      },
+      {
+        "q": "What is the name of **Kog'Maw's E**?",
+        "a": "void ooze"
+      },
+      {
+        "q": "What is the name of **Kog'Maw's R**?",
+        "a": "living artillery"
+      },
+      {
+        "q": "What is the name of **Maokai's Q**?",
+        "a": "arcane smash"
+      },
+      {
+        "q": "What is the name of **Maokai's W**?",
+        "a": "twisted advance"
+      },
+      {
+        "q": "What is the name of **Maokai's E**?",
+        "a": "sapling toss"
+      },
+      {
+        "q": "What is the name of **Maokai's R**?",
+        "a": "vengeful maelstrom"
+      },
+      {
+        "q": "What is the name of **Lissandra's Q**?",
+        "a": "ice shard"
+      },
+      {
+        "q": "What is the name of **Lissandra's W**?",
+        "a": "ring of frost"
+      },
+      {
+        "q": "What is the name of **Lissandra's E**?",
+        "a": "glacial path"
+      },
+      {
+        "q": "What is the name of **Lissandra's R**?",
+        "a": "frozen tomb"
+      },
+      {
+        "q": "What is the name of **Jinx's Q**?",
+        "a": "switcheroo!"
+      },
+      {
+        "q": "What is the name of **Jinx's W**?",
+        "a": "zap!"
+      },
+      {
+        "q": "What is the name of **Jinx's E**?",
+        "a": "flame chompers!"
+      },
+      {
+        "q": "What is the name of **Jinx's R**?",
+        "a": "super mega death rocket!"
+      },
+      {
+        "q": "What is the name of **Urgot's Q**?",
+        "a": "acid hunter"
+      },
+      {
+        "q": "What is the name of **Urgot's W**?",
+        "a": "terror capacitor"
+      },
+      {
+        "q": "What is the name of **Urgot's E**?",
+        "a": "noxian corrosive charge"
+      },
+      {
+        "q": "What is the name of **Urgot's R**?",
+        "a": "hyper-kinetic position reverser"
+      },
+      {
+        "q": "What is the name of **Fiddlesticks's Q**?",
+        "a": "terrify"
+      },
+      {
+        "q": "What is the name of **Fiddlesticks's W**?",
+        "a": "drain"
+      },
+      {
+        "q": "What is the name of **Fiddlesticks's E**?",
+        "a": "dark wind"
+      },
+      {
+        "q": "What is the name of **Fiddlesticks's R**?",
+        "a": "crowstorm"
+      },
+      {
+        "q": "What is the name of **Galio's Q**?",
+        "a": "winds of war"
+      },
+      {
+        "q": "What is the name of **Galio's W**?",
+        "a": "shield of durand"
+      },
+      {
+        "q": "What is the name of **Galio's E**?",
+        "a": "justice punch"
+      },
+      {
+        "q": "What is the name of **Galio's R**?",
+        "a": "hero's entrance"
+      },
+      {
+        "q": "What is the name of **Pantheon's Q**?",
+        "a": "spear shot"
+      },
+      {
+        "q": "What is the name of **Pantheon's W**?",
+        "a": "aegis of zeonia"
+      },
+      {
+        "q": "What is the name of **Pantheon's E**?",
+        "a": "heartseeker strike"
+      },
+      {
+        "q": "What is the name of **Pantheon's R**?",
+        "a": "grand skyfall"
+      },
+      {
+        "q": "What is the name of **Talon's Q**?",
+        "a": "noxian diplomacy"
+      },
+      {
+        "q": "What is the name of **Talon's W**?",
+        "a": "rake"
+      },
+      {
+        "q": "What is the name of **Talon's E**?",
+        "a": "assassin's path"
+      },
+      {
+        "q": "What is the name of **Talon's R**?",
+        "a": "shadow assault"
+      },
+      {
+        "q": "What is the name of **Gangplank's Q**?",
+        "a": "parrrley"
+      },
+      {
+        "q": "What is the name of **Gangplank's W**?",
+        "a": "remove scurvy"
+      },
+      {
+        "q": "What is the name of **Gangplank's E**?",
+        "a": "powder keg"
+      },
+      {
+        "q": "What is the name of **Gangplank's R**?",
+        "a": "cannon barrage"
+      },
+      {
+        "q": "What is the name of **Ezreal's Q**?",
+        "a": "mystic shot"
+      },
+      {
+        "q": "What is the name of **Ezreal's W**?",
+        "a": "essence flux"
+      },
+      {
+        "q": "What is the name of **Ezreal's E**?",
+        "a": "arcane shift"
+      },
+      {
+        "q": "What is the name of **Ezreal's R**?",
+        "a": "trueshot barrage"
+      },
+      {
+        "q": "What is the name of **Gnar's Q**?",
+        "a": "boomerang throw / boulder toss"
+      },
+      {
+        "q": "What is the name of **Gnar's W**?",
+        "a": "hyper / wallop"
+      },
+      {
+        "q": "What is the name of **Gnar's E**?",
+        "a": "hop / crunch"
+      },
+      {
+        "q": "What is the name of **Gnar's R**?",
+        "a": "gnar!"
+      },
+      {
+        "q": "What is the name of **Teemo's Q**?",
+        "a": "blinding dart"
+      },
+      {
+        "q": "What is the name of **Teemo's W**?",
+        "a": "move quick"
+      },
+      {
+        "q": "What is the name of **Teemo's E**?",
+        "a": "toxic shot"
+      },
+      {
+        "q": "What is the name of **Teemo's R**?",
+        "a": "noxious trap"
+      },
+      {
+        "q": "What is the name of **Annie's Q**?",
+        "a": "disintegrate"
+      },
+      {
+        "q": "What is the name of **Annie's W**?",
+        "a": "incinerate"
+      },
+      {
+        "q": "What is the name of **Annie's E**?",
+        "a": "molten shield"
+      },
+      {
+        "q": "What is the name of **Annie's R**?",
+        "a": "summon: tibbers"
+      },
+      {
+        "q": "What is the name of **Mordekaiser's Q**?",
+        "a": "mace of spades"
+      },
+      {
+        "q": "What is the name of **Mordekaiser's W**?",
+        "a": "harvesters of sorrow"
+      },
+      {
+        "q": "What is the name of **Mordekaiser's E**?",
+        "a": "siphon of destruction"
+      },
+      {
+        "q": "What is the name of **Mordekaiser's R**?",
+        "a": "children of the grave"
+      },
+      {
+        "q": "What is the name of **Azir's Q**?",
+        "a": "conquering sands"
+      },
+      {
+        "q": "What is the name of **Azir's W**?",
+        "a": "arise!"
+      },
+      {
+        "q": "What is the name of **Azir's E**?",
+        "a": "shifting sands"
+      },
+      {
+        "q": "What is the name of **Azir's R**?",
+        "a": "emperor's divide"
+      },
+      {
+        "q": "What is the name of **Kennen's Q**?",
+        "a": "thundering shuriken"
+      },
+      {
+        "q": "What is the name of **Kennen's W**?",
+        "a": "electrical surge"
+      },
+      {
+        "q": "What is the name of **Kennen's E**?",
+        "a": "lightning rush"
+      },
+      {
+        "q": "What is the name of **Kennen's R**?",
+        "a": "slicing maelstrom"
+      },
+      {
+        "q": "What is the name of **Riven's Q**?",
+        "a": "broken wings"
+      },
+      {
+        "q": "What is the name of **Riven's W**?",
+        "a": "ki burst"
+      },
+      {
+        "q": "What is the name of **Riven's E**?",
+        "a": "valor"
+      },
+      {
+        "q": "What is the name of **Riven's R**?",
+        "a": "blade of the exile"
+      },
+      {
+        "q": "What is the name of **Cho'Gath's Q**?",
+        "a": "rupture"
+      },
+      {
+        "q": "What is the name of **Cho'Gath's W**?",
+        "a": "feral scream"
+      },
+      {
+        "q": "What is the name of **Cho'Gath's E**?",
+        "a": "vorpal spikes"
+      },
+      {
+        "q": "What is the name of **Cho'Gath's R**?",
+        "a": "feast"
+      },
+      {
+        "q": "What is the name of **Aatrox's Q**?",
+        "a": "dark flight"
+      },
+      {
+        "q": "What is the name of **Aatrox's W**?",
+        "a": "blood thirst / blood price"
+      },
+      {
+        "q": "What is the name of **Aatrox's E**?",
+        "a": "blades of torment"
+      },
+      {
+        "q": "What is the name of **Aatrox's R**?",
+        "a": "massacre"
+      },
+      {
+        "q": "What is the name of **Poppy's Q**?",
+        "a": "hammer shock"
+      },
+      {
+        "q": "What is the name of **Poppy's W**?",
+        "a": "steadfast presence"
+      },
+      {
+        "q": "What is the name of **Poppy's E**?",
+        "a": "heroic charge"
+      },
+      {
+        "q": "What is the name of **Poppy's R**?",
+        "a": "keeper's verdict"
+      },
+      {
+        "q": "What is the name of **Taliyah's Q**?",
+        "a": "threaded volley"
+      },
+      {
+        "q": "What is the name of **Taliyah's W**?",
+        "a": "seismic shove"
+      },
+      {
+        "q": "What is the name of **Taliyah's E**?",
+        "a": "unraveled earth"
+      },
+      {
+        "q": "What is the name of **Taliyah's R**?",
+        "a": "weaver's wall"
+      },
+      {
+        "q": "What is the name of **Illaoi's Q**?",
+        "a": "tentacle smash"
+      },
+      {
+        "q": "What is the name of **Illaoi's W**?",
+        "a": "harsh lesson"
+      },
+      {
+        "q": "What is the name of **Illaoi's E**?",
+        "a": "test of spirit"
+      },
+      {
+        "q": "What is the name of **Illaoi's R**?",
+        "a": "leap of faith"
+      },
+      {
+        "q": "What is the name of **Heimerdinger's Q**?",
+        "a": "h-28g evolution turret"
+      },
+      {
+        "q": "What is the name of **Heimerdinger's W**?",
+        "a": "hextech micro-rockets"
+      },
+      {
+        "q": "What is the name of **Heimerdinger's E**?",
+        "a": "ch-2 electron storm grenade"
+      },
+      {
+        "q": "What is the name of **Heimerdinger's R**?",
+        "a": "upgrade!!!"
+      },
+      {
+        "q": "What is the name of **Alistar's Q**?",
+        "a": "pulverize"
+      },
+      {
+        "q": "What is the name of **Alistar's W**?",
+        "a": "headbutt"
+      },
+      {
+        "q": "What is the name of **Alistar's E**?",
+        "a": "trample"
+      },
+      {
+        "q": "What is the name of **Alistar's R**?",
+        "a": "unbreakable will"
+      },
+      {
+        "q": "What is the name of **Xin Zhao's Q**?",
+        "a": "three talon strike"
+      },
+      {
+        "q": "What is the name of **Xin Zhao's W**?",
+        "a": "battle cry"
+      },
+      {
+        "q": "What is the name of **Xin Zhao's E**?",
+        "a": "audacious charge"
+      },
+      {
+        "q": "What is the name of **Xin Zhao's R**?",
+        "a": "crescent sweep"
+      },
+      {
+        "q": "What is the name of **Lucian's Q**?",
+        "a": "piercing light"
+      },
+      {
+        "q": "What is the name of **Lucian's W**?",
+        "a": "ardent blaze"
+      },
+      {
+        "q": "What is the name of **Lucian's E**?",
+        "a": "relentless pursuit"
+      },
+      {
+        "q": "What is the name of **Lucian's R**?",
+        "a": "the culling"
+      },
+      {
+        "q": "What is the name of **Volibear's Q**?",
+        "a": "rolling thunder"
+      },
+      {
+        "q": "What is the name of **Volibear's W**?",
+        "a": "frenzy"
+      },
+      {
+        "q": "What is the name of **Volibear's E**?",
+        "a": "majestic roar"
+      },
+      {
+        "q": "What is the name of **Volibear's R**?",
+        "a": "thunder claws"
+      },
+      {
+        "q": "What is the name of **Sejuani's Q**?",
+        "a": "arctic assault"
+      },
+      {
+        "q": "What is the name of **Sejuani's W**?",
+        "a": "flail of the northern winds"
+      },
+      {
+        "q": "What is the name of **Sejuani's E**?",
+        "a": "permafrost"
+      },
+      {
+        "q": "What is the name of **Sejuani's R**?",
+        "a": "glacial prison"
+      },
+      {
+        "q": "What is the name of **Nidalee's Q**?",
+        "a": "javelin toss / takedown"
+      },
+      {
+        "q": "What is the name of **Nidalee's W**?",
+        "a": "bushwhack / pounce"
+      },
+      {
+        "q": "What is the name of **Nidalee's E**?",
+        "a": "primal surge / swipe"
+      },
+      {
+        "q": "What is the name of **Nidalee's R**?",
+        "a": "aspect of the cougar"
+      },
+      {
+        "q": "What is the name of **Garen's Q**?",
+        "a": "decisive strike"
+      },
+      {
+        "q": "What is the name of **Garen's W**?",
+        "a": "courage"
+      },
+      {
+        "q": "What is the name of **Garen's E**?",
+        "a": "judgment"
+      },
+      {
+        "q": "What is the name of **Garen's R**?",
+        "a": "demacian justice"
+      },
+      {
+        "q": "What is the name of **Leona's Q**?",
+        "a": "shield of daybreak"
+      },
+      {
+        "q": "What is the name of **Leona's W**?",
+        "a": "eclipse"
+      },
+      {
+        "q": "What is the name of **Leona's E**?",
+        "a": "zenith blade"
+      },
+      {
+        "q": "What is the name of **Leona's R**?",
+        "a": "solar flare"
+      },
+      {
+        "q": "What is the name of **Zed's Q**?",
+        "a": "razor shuriken"
+      },
+      {
+        "q": "What is the name of **Zed's W**?",
+        "a": "living shadow"
+      },
+      {
+        "q": "What is the name of **Zed's E**?",
+        "a": "shadow slash"
+      },
+      {
+        "q": "What is the name of **Zed's R**?",
+        "a": "death mark"
+      },
+      {
+        "q": "What is the name of **Blitzcrank's Q**?",
+        "a": "rocket grab"
+      },
+      {
+        "q": "What is the name of **Blitzcrank's W**?",
+        "a": "overdrive"
+      },
+      {
+        "q": "What is the name of **Blitzcrank's E**?",
+        "a": "power fist"
+      },
+      {
+        "q": "What is the name of **Blitzcrank's R**?",
+        "a": "static field"
+      },
+      {
+        "q": "What is the name of **Rammus's Q**?",
+        "a": "powerball"
+      },
+      {
+        "q": "What is the name of **Rammus's W**?",
+        "a": "defensive ball curl"
+      },
+      {
+        "q": "What is the name of **Rammus's E**?",
+        "a": "puncturing taunt"
+      },
+      {
+        "q": "What is the name of **Rammus's R**?",
+        "a": "tremors"
+      },
+      {
+        "q": "What is the name of **Vel'Koz's Q**?",
+        "a": "plasma fission"
+      },
+      {
+        "q": "What is the name of **Vel'Koz's W**?",
+        "a": "void rift"
+      },
+      {
+        "q": "What is the name of **Vel'Koz's E**?",
+        "a": "tectonic disruption"
+      },
+      {
+        "q": "What is the name of **Vel'Koz's R**?",
+        "a": "life form disintegration ray"
+      },
+      {
+        "q": "What is the name of **Caitlyn's Q**?",
+        "a": "piltover peacemaker"
+      },
+      {
+        "q": "What is the name of **Caitlyn's W**?",
+        "a": "yordle snap trap"
+      },
+      {
+        "q": "What is the name of **Caitlyn's E**?",
+        "a": "90 caliber net"
+      },
+      {
+        "q": "What is the name of **Caitlyn's R**?",
+        "a": "ace in the hole"
+      },
+      {
+        "q": "What is the name of **Trundle's Q**?",
+        "a": "chomp"
+      },
+      {
+        "q": "What is the name of **Trundle's W**?",
+        "a": "frozen domain"
+      },
+      {
+        "q": "What is the name of **Trundle's E**?",
+        "a": "pillar of ice"
+      },
+      {
+        "q": "What is the name of **Trundle's R**?",
+        "a": "subjugate"
+      },
+      {
+        "q": "What is the name of **Kindred's Q**?",
+        "a": "dance of arrows"
+      },
+      {
+        "q": "What is the name of **Kindred's W**?",
+        "a": "wolf's frenzy"
+      },
+      {
+        "q": "What is the name of **Kindred's E**?",
+        "a": "mounting dread"
+      },
+      {
+        "q": "What is the name of **Kindred's R**?",
+        "a": "lamb's respite"
+      },
+      {
+        "q": "What is the name of **Quinn's Q**?",
+        "a": "blinding assault"
+      },
+      {
+        "q": "What is the name of **Quinn's W**?",
+        "a": "heightened senses"
+      },
+      {
+        "q": "What is the name of **Quinn's E**?",
+        "a": "vault"
+      },
+      {
+        "q": "What is the name of **Quinn's R**?",
+        "a": "behind enemy lines"
+      },
+      {
+        "q": "What is the name of **Ekko's Q**?",
+        "a": "timewinder"
+      },
+      {
+        "q": "What is the name of **Ekko's W**?",
+        "a": "parallel convergence"
+      },
+      {
+        "q": "What is the name of **Ekko's E**?",
+        "a": "phase dive"
+      },
+      {
+        "q": "What is the name of **Ekko's R**?",
+        "a": "chronobreak"
+      },
+      {
+        "q": "What is the name of **Nami's Q**?",
+        "a": "aqua prison"
+      },
+      {
+        "q": "What is the name of **Nami's W**?",
+        "a": "ebb and flow"
+      },
+      {
+        "q": "What is the name of **Nami's E**?",
+        "a": "tidecaller's blessing"
+      },
+      {
+        "q": "What is the name of **Nami's R**?",
+        "a": "tidal wave"
+      },
+      {
+        "q": "What is the name of **Swain's Q**?",
+        "a": "decrepify"
+      },
+      {
+        "q": "What is the name of **Swain's W**?",
+        "a": "nevermove"
+      },
+      {
+        "q": "What is the name of **Swain's E**?",
+        "a": "torment"
+      },
+      {
+        "q": "What is the name of **Swain's R**?",
+        "a": "ravenous flock"
+      },
+      {
+        "q": "What is the name of **Taric's Q**?",
+        "a": "starlight's touch"
+      },
+      {
+        "q": "What is the name of **Taric's W**?",
+        "a": "bastion"
+      },
+      {
+        "q": "What is the name of **Taric's E**?",
+        "a": "dazzle"
+      },
+      {
+        "q": "What is the name of **Taric's R**?",
+        "a": "cosmic radiance"
+      },
+      {
+        "q": "What is the name of **Syndra's Q**?",
+        "a": "dark sphere"
+      },
+      {
+        "q": "What is the name of **Syndra's W**?",
+        "a": "force of will"
+      },
+      {
+        "q": "What is the name of **Syndra's E**?",
+        "a": "scatter the weak"
+      },
+      {
+        "q": "What is the name of **Syndra's R**?",
+        "a": "unleashed power"
+      },
+      {
+        "q": "What is the name of **Skarner's Q**?",
+        "a": "crystal slash"
+      },
+      {
+        "q": "What is the name of **Skarner's W**?",
+        "a": "crystalline exoskeleton"
+      },
+      {
+        "q": "What is the name of **Skarner's E**?",
+        "a": "fracture"
+      },
+      {
+        "q": "What is the name of **Skarner's R**?",
+        "a": "impale"
+      },
+      {
+        "q": "What is the name of **Braum's Q**?",
+        "a": "winter's bite"
+      },
+      {
+        "q": "What is the name of **Braum's W**?",
+        "a": "stand behind me"
+      },
+      {
+        "q": "What is the name of **Braum's E**?",
+        "a": "unbreakable"
+      },
+      {
+        "q": "What is the name of **Braum's R**?",
+        "a": "glacial fissure"
+      },
+      {
+        "q": "What is the name of **Veigar's Q**?",
+        "a": "baleful strike"
+      },
+      {
+        "q": "What is the name of **Veigar's W**?",
+        "a": "dark matter"
+      },
+      {
+        "q": "What is the name of **Veigar's E**?",
+        "a": "event horizon"
+      },
+      {
+        "q": "What is the name of **Veigar's R**?",
+        "a": "primordial burst"
+      },
+      {
+        "q": "What is the name of **Xerath's Q**?",
+        "a": "arcanopulse"
+      },
+      {
+        "q": "What is the name of **Xerath's W**?",
+        "a": "eye of destruction"
+      },
+      {
+        "q": "What is the name of **Xerath's E**?",
+        "a": "shocking orb"
+      },
+      {
+        "q": "What is the name of **Xerath's R**?",
+        "a": "rite of the arcane"
+      },
+      {
+        "q": "What is the name of **Corki's Q**?",
+        "a": "phosphorus bomb"
+      },
+      {
+        "q": "What is the name of **Corki's W**?",
+        "a": "valkyrie"
+      },
+      {
+        "q": "What is the name of **Corki's E**?",
+        "a": "gatling gun"
+      },
+      {
+        "q": "What is the name of **Corki's R**?",
+        "a": "missile barrage"
+      },
+      {
+        "q": "What is the name of **Nautilus's Q**?",
+        "a": "dredge line"
+      },
+      {
+        "q": "What is the name of **Nautilus's W**?",
+        "a": "titan's wrath"
+      },
+      {
+        "q": "What is the name of **Nautilus's E**?",
+        "a": "riptide"
+      },
+      {
+        "q": "What is the name of **Nautilus's R**?",
+        "a": "depth charge"
+      },
+      {
+        "q": "What is the name of **Ahri's Q**?",
+        "a": "orb of deception"
+      },
+      {
+        "q": "What is the name of **Ahri's W**?",
+        "a": "fox-fire"
+      },
+      {
+        "q": "What is the name of **Ahri's E**?",
+        "a": "charm"
+      },
+      {
+        "q": "What is the name of **Ahri's R**?",
+        "a": "spirit rush"
+      },
+      {
+        "q": "What is the name of **Jayce's Q**?",
+        "a": "to the skies! / shock blast"
+      },
+      {
+        "q": "What is the name of **Jayce's W**?",
+        "a": "lightning field / hyper charge"
+      },
+      {
+        "q": "What is the name of **Jayce's E**?",
+        "a": "thundering blow / acceleration gate"
+      },
+      {
+        "q": "What is the name of **Jayce's R**?",
+        "a": "mercury cannon / mercury hammer"
+      },
+      {
+        "q": "What is the name of **Darius's Q**?",
+        "a": "decimate"
+      },
+      {
+        "q": "What is the name of **Darius's W**?",
+        "a": "crippling strike"
+      },
+      {
+        "q": "What is the name of **Darius's E**?",
+        "a": "apprehend"
+      },
+      {
+        "q": "What is the name of **Darius's R**?",
+        "a": "noxian guillotine"
+      },
+      {
+        "q": "What is the name of **Tryndamere's Q**?",
+        "a": "bloodlust"
+      },
+      {
+        "q": "What is the name of **Tryndamere's W**?",
+        "a": "mocking shout"
+      },
+      {
+        "q": "What is the name of **Tryndamere's E**?",
+        "a": "spinning slash"
+      },
+      {
+        "q": "What is the name of **Tryndamere's R**?",
+        "a": "undying rage"
+      },
+      {
+        "q": "What is the name of **Janna's Q**?",
+        "a": "howling gale"
+      },
+      {
+        "q": "What is the name of **Janna's W**?",
+        "a": "zephyr"
+      },
+      {
+        "q": "What is the name of **Janna's E**?",
+        "a": "eye of the storm"
+      },
+      {
+        "q": "What is the name of **Janna's R**?",
+        "a": "monsoon"
+      },
+      {
+        "q": "What is the name of **Elise's Q**?",
+        "a": "neurotoxin / venomous bite"
+      },
+      {
+        "q": "What is the name of **Elise's W**?",
+        "a": "volatile spiderling / skittering frenzy"
+      },
+      {
+        "q": "What is the name of **Elise's E**?",
+        "a": "cocoon / rappel"
+      },
+      {
+        "q": "What is the name of **Elise's R**?",
+        "a": "spider form"
+      },
+      {
+        "q": "What is the name of **Vayne's Q**?",
+        "a": "tumble"
+      },
+      {
+        "q": "What is the name of **Vayne's W**?",
+        "a": "silver bolts"
+      },
+      {
+        "q": "What is the name of **Vayne's E**?",
+        "a": "condemn"
+      },
+      {
+        "q": "What is the name of **Vayne's R**?",
+        "a": "final hour"
+      },
+      {
+        "q": "What is the name of **Brand's Q**?",
+        "a": "sear"
+      },
+      {
+        "q": "What is the name of **Brand's W**?",
+        "a": "pillar of flame"
+      },
+      {
+        "q": "What is the name of **Brand's E**?",
+        "a": "conflagration"
+      },
+      {
+        "q": "What is the name of **Brand's R**?",
+        "a": "pyroclasm"
+      },
+      {
+        "q": "What is the name of **Graves's Q**?",
+        "a": "end of the line"
+      },
+      {
+        "q": "What is the name of **Graves's W**?",
+        "a": "smoke screen"
+      },
+      {
+        "q": "What is the name of **Graves's E**?",
+        "a": "quickdraw"
+      },
+      {
+        "q": "What is the name of **Graves's R**?",
+        "a": "collateral damage"
+      },
+      {
+        "q": "What is the name of **Soraka's Q**?",
+        "a": "starcall"
+      },
+      {
+        "q": "What is the name of **Soraka's W**?",
+        "a": "astral infusion"
+      },
+      {
+        "q": "What is the name of **Soraka's E**?",
+        "a": "equinox"
+      },
+      {
+        "q": "What is the name of **Soraka's R**?",
+        "a": "wish"
+      },
+      {
+        "q": "What is the name of **Karthus's Q**?",
+        "a": "lay waste"
+      },
+      {
+        "q": "What is the name of **Karthus's W**?",
+        "a": "wall of pain"
+      },
+      {
+        "q": "What is the name of **Karthus's E**?",
+        "a": "defile"
+      },
+      {
+        "q": "What is the name of **Karthus's R**?",
+        "a": "requiem"
+      },
+      {
+        "q": "What is the name of **Vladimir's Q**?",
+        "a": "transfusion"
+      },
+      {
+        "q": "What is the name of **Vladimir's W**?",
+        "a": "sanguine pool"
+      },
+      {
+        "q": "What is the name of **Vladimir's E**?",
+        "a": "tides of blood"
+      },
+      {
+        "q": "What is the name of **Vladimir's R**?",
+        "a": "hemoplague"
+      },
+      {
+        "q": "What is the name of **Zilean's Q**?",
+        "a": "time bomb"
+      },
+      {
+        "q": "What is the name of **Zilean's W**?",
+        "a": "rewind"
+      },
+      {
+        "q": "What is the name of **Zilean's E**?",
+        "a": "time warp"
+      },
+      {
+        "q": "What is the name of **Zilean's R**?",
+        "a": "chronoshift"
+      },
+      {
+        "q": "What is the name of **Katarina's Q**?",
+        "a": "bouncing blade"
+      },
+      {
+        "q": "What is the name of **Katarina's W**?",
+        "a": "preparation"
+      },
+      {
+        "q": "What is the name of **Katarina's E**?",
+        "a": "shunpo"
+      },
+      {
+        "q": "What is the name of **Katarina's R**?",
+        "a": "death lotus"
+      },
+      {
+        "q": "What is the name of **Shyvana's Q**?",
+        "a": "twin bite"
+      },
+      {
+        "q": "What is the name of **Shyvana's W**?",
+        "a": "burnout"
+      },
+      {
+        "q": "What is the name of **Shyvana's E**?",
+        "a": "flame breath"
+      },
+      {
+        "q": "What is the name of **Shyvana's R**?",
+        "a": "dragon's descent"
+      },
+      {
+        "q": "What is the name of **Warwick's Q**?",
+        "a": "jaws of the beast"
+      },
+      {
+        "q": "What is the name of **Warwick's W**?",
+        "a": "blood hunt"
+      },
+      {
+        "q": "What is the name of **Warwick's E**?",
+        "a": "primal howl"
+      },
+      {
+        "q": "What is the name of **Warwick's R**?",
+        "a": "infinite duress"
+      },
+      {
+        "q": "What is the name of **Ziggs's Q**?",
+        "a": "bouncing bomb"
+      },
+      {
+        "q": "What is the name of **Ziggs's W**?",
+        "a": "satchel charge"
+      },
+      {
+        "q": "What is the name of **Ziggs's E**?",
+        "a": "hexplosive minefield"
+      },
+      {
+        "q": "What is the name of **Ziggs's R**?",
+        "a": "mega inferno bomb"
+      },
+      {
+        "q": "What is the name of **Kled's Q**?",
+        "a": "bear trap on a rope"
+      },
+      {
+        "q": "What is the name of **Kled's W**?",
+        "a": "violent tendencies"
+      },
+      {
+        "q": "What is the name of **Kled's E**?",
+        "a": "jousting"
+      },
+      {
+        "q": "What is the name of **Kled's R**?",
+        "a": "chaaaaaaaarge!!!"
+      },
+      {
+        "q": "What is the name of **Kha'Zix's Q**?",
+        "a": "taste their fear"
+      },
+      {
+        "q": "What is the name of **Kha'Zix's W**?",
+        "a": "void spike"
+      },
+      {
+        "q": "What is the name of **Kha'Zix's E**?",
+        "a": "leap"
+      },
+      {
+        "q": "What is the name of **Kha'Zix's R**?",
+        "a": "void assault"
+      },
+      {
+        "q": "What is the name of **Olaf's Q**?",
+        "a": "undertow"
+      },
+      {
+        "q": "What is the name of **Olaf's W**?",
+        "a": "vicious strikes"
+      },
+      {
+        "q": "What is the name of **Olaf's E**?",
+        "a": "reckless swing"
+      },
+      {
+        "q": "What is the name of **Olaf's R**?",
+        "a": "ragnarok"
+      },
+      {
+        "q": "What is the name of **Twisted Fate's Q**?",
+        "a": "wild cards"
+      },
+      {
+        "q": "What is the name of **Twisted Fate's W**?",
+        "a": "pick a card"
+      },
+      {
+        "q": "What is the name of **Twisted Fate's E**?",
+        "a": "stacked deck"
+      },
+      {
+        "q": "What is the name of **Twisted Fate's R**?",
+        "a": "destiny"
+      },
+      {
+        "q": "What is the name of **Nunu's Q**?",
+        "a": "consume"
+      },
+      {
+        "q": "What is the name of **Nunu's W**?",
+        "a": "blood boil"
+      },
+      {
+        "q": "What is the name of **Nunu's E**?",
+        "a": "ice blast"
+      },
+      {
+        "q": "What is the name of **Nunu's R**?",
+        "a": "absolute zero"
+      },
+      {
+        "q": "What is the name of **Rengar's Q**?",
+        "a": "savagery"
+      },
+      {
+        "q": "What is the name of **Rengar's W**?",
+        "a": "battle roar"
+      },
+      {
+        "q": "What is the name of **Rengar's E**?",
+        "a": "bola strike"
+      },
+      {
+        "q": "What is the name of **Rengar's R**?",
+        "a": "thrill of the hunt"
+      },
+      {
+        "q": "What is the name of **Bard's Q**?",
+        "a": "cosmic binding"
+      },
+      {
+        "q": "What is the name of **Bard's W**?",
+        "a": "caretaker's shrine"
+      },
+      {
+        "q": "What is the name of **Bard's E**?",
+        "a": "magical journey"
+      },
+      {
+        "q": "What is the name of **Bard's R**?",
+        "a": "tempered fate"
+      },
+      {
+        "q": "What is the name of **Irelia's Q**?",
+        "a": "bladesurge"
+      },
+      {
+        "q": "What is the name of **Irelia's W**?",
+        "a": "hiten style"
+      },
+      {
+        "q": "What is the name of **Irelia's E**?",
+        "a": "equilibrium strike"
+      },
+      {
+        "q": "What is the name of **Irelia's R**?",
+        "a": "transcendent blades"
+      },
+      {
+        "q": "What is the name of **Ivern's Q**?",
+        "a": "rootcaller"
+      },
+      {
+        "q": "What is the name of **Ivern's W**?",
+        "a": "brushmaker"
+      },
+      {
+        "q": "What is the name of **Ivern's E**?",
+        "a": "triggerseed"
+      },
+      {
+        "q": "What is the name of **Ivern's R**?",
+        "a": "daisy!"
+      },
+      {
+        "q": "What is the name of **Wukong's Q**?",
+        "a": "crushing blow"
+      },
+      {
+        "q": "What is the name of **Wukong's W**?",
+        "a": "decoy"
+      },
+      {
+        "q": "What is the name of **Wukong's E**?",
+        "a": "nimbus strike"
+      },
+      {
+        "q": "What is the name of **Wukong's R**?",
+        "a": "cyclone"
+      },
+      {
+        "q": "What is the name of **Ashe's Q**?",
+        "a": "ranger's focus"
+      },
+      {
+        "q": "What is the name of **Ashe's W**?",
+        "a": "volley"
+      },
+      {
+        "q": "What is the name of **Ashe's E**?",
+        "a": "hawkshot"
+      },
+      {
+        "q": "What is the name of **Ashe's R**?",
+        "a": "enchanted crystal arrow"
+      },
+      {
+        "q": "What is the name of **Kalista's Q**?",
+        "a": "pierce"
+      },
+      {
+        "q": "What is the name of **Kalista's W**?",
+        "a": "sentinel"
+      },
+      {
+        "q": "What is the name of **Kalista's E**?",
+        "a": "rend"
+      },
+      {
+        "q": "What is the name of **Kalista's R**?",
+        "a": "fate's call"
+      },
+      {
+        "q": "What is the name of **Akali's Q**?",
+        "a": "mark of the assassin"
+      },
+      {
+        "q": "What is the name of **Akali's W**?",
+        "a": "twilight shroud"
+      },
+      {
+        "q": "What is the name of **Akali's E**?",
+        "a": "crescent slash"
+      },
+      {
+        "q": "What is the name of **Akali's R**?",
+        "a": "shadow dance"
+      },
+      {
+        "q": "What is the name of **Vi's Q**?",
+        "a": "vault breaker"
+      },
+      {
+        "q": "What is the name of **Vi's W**?",
+        "a": "denting blows"
+      },
+      {
+        "q": "What is the name of **Vi's E**?",
+        "a": "excessive force"
+      },
+      {
+        "q": "What is the name of **Vi's R**?",
+        "a": "assault and battery"
+      },
+      {
+        "q": "What is the name of **Amumu's Q**?",
+        "a": "bandage toss"
+      },
+      {
+        "q": "What is the name of **Amumu's W**?",
+        "a": "despair"
+      },
+      {
+        "q": "What is the name of **Amumu's E**?",
+        "a": "tantrum"
+      },
+      {
+        "q": "What is the name of **Amumu's R**?",
+        "a": "curse of the sad mummy"
+      },
+      {
+        "q": "What is the name of **Lulu's Q**?",
+        "a": "glitterlance"
+      },
+      {
+        "q": "What is the name of **Lulu's W**?",
+        "a": "whimsy"
+      },
+      {
+        "q": "What is the name of **Lulu's E**?",
+        "a": "help, pix!"
+      },
+      {
+        "q": "What is the name of **Lulu's R**?",
+        "a": "wild growth"
+      },
+      {
+        "q": "What is the name of **Morgana's Q**?",
+        "a": "dark binding"
+      },
+      {
+        "q": "What is the name of **Morgana's W**?",
+        "a": "tormented soil"
+      },
+      {
+        "q": "What is the name of **Morgana's E**?",
+        "a": "black shield"
+      },
+      {
+        "q": "What is the name of **Morgana's R**?",
+        "a": "soul shackles"
+      },
+      {
+        "q": "What is the name of **Nocturne's Q**?",
+        "a": "duskbringer"
+      },
+      {
+        "q": "What is the name of **Nocturne's W**?",
+        "a": "shroud of darkness"
+      },
+      {
+        "q": "What is the name of **Nocturne's E**?",
+        "a": "unspeakable horror"
+      },
+      {
+        "q": "What is the name of **Nocturne's R**?",
+        "a": "paranoia"
+      },
+      {
+        "q": "What is the name of **Diana's Q**?",
+        "a": "crescent strike"
+      },
+      {
+        "q": "What is the name of **Diana's W**?",
+        "a": "pale cascade"
+      },
+      {
+        "q": "What is the name of **Diana's E**?",
+        "a": "moonfall"
+      },
+      {
+        "q": "What is the name of **Diana's R**?",
+        "a": "lunar rush"
+      },
+      {
+        "q": "What is the name of **Aurelion Sol's Q**?",
+        "a": "starsurge"
+      },
+      {
+        "q": "What is the name of **Aurelion Sol's W**?",
+        "a": "celestial expansion"
+      },
+      {
+        "q": "What is the name of **Aurelion Sol's E**?",
+        "a": "comet of legend"
+      },
+      {
+        "q": "What is the name of **Aurelion Sol's R**?",
+        "a": "voice of light"
+      },
+      {
+        "q": "What is the name of **Zyra's Q**?",
+        "a": "deadly spines"
+      },
+      {
+        "q": "What is the name of **Zyra's W**?",
+        "a": "rampant growth"
+      },
+      {
+        "q": "What is the name of **Zyra's E**?",
+        "a": "grasping roots"
+      },
+      {
+        "q": "What is the name of **Zyra's R**?",
+        "a": "stranglethorns"
+      },
+      {
+        "q": "What is the name of **Viktor's Q**?",
+        "a": "siphon power"
+      },
+      {
+        "q": "What is the name of **Viktor's W**?",
+        "a": "gravity field"
+      },
+      {
+        "q": "What is the name of **Viktor's E**?",
+        "a": "death ray"
+      },
+      {
+        "q": "What is the name of **Viktor's R**?",
+        "a": "chaos storm"
+      },
+      {
+        "q": "What is the name of **Cassiopeia's Q**?",
+        "a": "noxious blast"
+      },
+      {
+        "q": "What is the name of **Cassiopeia's W**?",
+        "a": "miasma"
+      },
+      {
+        "q": "What is the name of **Cassiopeia's E**?",
+        "a": "twin fang"
+      },
+      {
+        "q": "What is the name of **Cassiopeia's R**?",
+        "a": "petrifying gaze"
+      },
+      {
+        "q": "What is the name of **Nasus's Q**?",
+        "a": "siphoning strike"
+      },
+      {
+        "q": "What is the name of **Nasus's W**?",
+        "a": "wither"
+      },
+      {
+        "q": "What is the name of **Nasus's E**?",
+        "a": "spirit fire"
+      },
+      {
+        "q": "What is the name of **Nasus's R**?",
+        "a": "fury of the sands"
+      },
+      {
+        "q": "What is the name of **Twitch's Q**?",
+        "a": "ambush"
+      },
+      {
+        "q": "What is the name of **Twitch's W**?",
+        "a": "venom cask"
+      },
+      {
+        "q": "What is the name of **Twitch's E**?",
+        "a": "contaminate"
+      },
+      {
+        "q": "What is the name of **Twitch's R**?",
+        "a": "spray and pray"
+      },
+      {
+        "q": "What is the name of **Dr. Mundo's Q**?",
+        "a": "infected cleaver"
+      },
+      {
+        "q": "What is the name of **Dr. Mundo's W**?",
+        "a": "burning agony"
+      },
+      {
+        "q": "What is the name of **Dr. Mundo's E**?",
+        "a": "masochism"
+      },
+      {
+        "q": "What is the name of **Dr. Mundo's R**?",
+        "a": "sadism"
+      },
+      {
+        "q": "What is the name of **Orianna's Q**?",
+        "a": "command: attack"
+      },
+      {
+        "q": "What is the name of **Orianna's W**?",
+        "a": "command: dissonance"
+      },
+      {
+        "q": "What is the name of **Orianna's E**?",
+        "a": "command: protect"
+      },
+      {
+        "q": "What is the name of **Orianna's R**?",
+        "a": "command: shockwave"
+      },
+      {
+        "q": "What is the name of **Evelynn's Q**?",
+        "a": "hate spike"
+      },
+      {
+        "q": "What is the name of **Evelynn's W**?",
+        "a": "dark frenzy"
+      },
+      {
+        "q": "What is the name of **Evelynn's E**?",
+        "a": "ravage"
+      },
+      {
+        "q": "What is the name of **Evelynn's R**?",
+        "a": "agony's embrace"
+      },
+      {
+        "q": "What is the name of **Rek'Sai's Q**?",
+        "a": "queen's wrath / prey seeker"
+      },
+      {
+        "q": "What is the name of **Rek'Sai's W**?",
+        "a": "burrow / un-burrow"
+      },
+      {
+        "q": "What is the name of **Rek'Sai's E**?",
+        "a": "furious bite / tunnel"
+      },
+      {
+        "q": "What is the name of **Rek'Sai's R**?",
+        "a": "void rush"
+      },
+      {
+        "q": "What is the name of **Lux's Q**?",
+        "a": "light binding"
+      },
+      {
+        "q": "What is the name of **Lux's W**?",
+        "a": "prismatic barrier"
+      },
+      {
+        "q": "What is the name of **Lux's E**?",
+        "a": "lucent singularity"
+      },
+      {
+        "q": "What is the name of **Lux's R**?",
+        "a": "final spark"
+      },
+      {
+        "q": "What is the name of **Sion's Q**?",
+        "a": "decimating smash"
+      },
+      {
+        "q": "What is the name of **Sion's W**?",
+        "a": "soul furnace"
+      },
+      {
+        "q": "What is the name of **Sion's E**?",
+        "a": "roar of the slayer"
+      },
+      {
+        "q": "What is the name of **Sion's R**?",
+        "a": "unstoppable onslaught"
+      },
+      {
+        "q": "What is the name of **Camille's Q**?",
+        "a": "precision protocol"
+      },
+      {
+        "q": "What is the name of **Camille's W**?",
+        "a": "tactical sweep"
+      },
+      {
+        "q": "What is the name of **Camille's E**?",
+        "a": "hookshot"
+      },
+      {
+        "q": "What is the name of **Camille's R**?",
+        "a": "the hextech ultimatum"
+      },
+      {
+        "q": "What is the name of **Master Yi's Q**?",
+        "a": "alpha strike"
+      },
+      {
+        "q": "What is the name of **Master Yi's W**?",
+        "a": "meditate"
+      },
+      {
+        "q": "What is the name of **Master Yi's E**?",
+        "a": "wuju style"
+      },
+      {
+        "q": "What is the name of **Master Yi's R**?",
+        "a": "highlander"
+      },
+      {
+        "q": "What is the name of **Ryze's Q**?",
+        "a": "overload"
+      },
+      {
+        "q": "What is the name of **Ryze's W**?",
+        "a": "rune prison"
+      },
+      {
+        "q": "What is the name of **Ryze's E**?",
+        "a": "spell flux"
+      },
+      {
+        "q": "What is the name of **Ryze's R**?",
+        "a": "realm warp"
+      },
+      {
+        "q": "What is the name of **Malphite's Q**?",
+        "a": "seismic shard"
+      },
+      {
+        "q": "What is the name of **Malphite's W**?",
+        "a": "brutal strikes"
+      },
+      {
+        "q": "What is the name of **Malphite's E**?",
+        "a": "ground slam"
+      },
+      {
+        "q": "What is the name of **Malphite's R**?",
+        "a": "unstoppable force"
+      },
+      {
+        "q": "What is the name of **Anivia's Q**?",
+        "a": "flash frost"
+      },
+      {
+        "q": "What is the name of **Anivia's W**?",
+        "a": "crystallize"
+      },
+      {
+        "q": "What is the name of **Anivia's E**?",
+        "a": "frostbite"
+      },
+      {
+        "q": "What is the name of **Anivia's R**?",
+        "a": "glacial storm"
+      },
+      {
+        "q": "What is the name of **Shen's Q**?",
+        "a": "twilight assault"
+      },
+      {
+        "q": "What is the name of **Shen's W**?",
+        "a": "spirit's refuge"
+      },
+      {
+        "q": "What is the name of **Shen's E**?",
+        "a": "shadow dash"
+      },
+      {
+        "q": "What is the name of **Shen's R**?",
+        "a": "stand united"
+      },
+      {
+        "q": "What is the name of **Jarvan IV's Q**?",
+        "a": "dragon strike"
+      },
+      {
+        "q": "What is the name of **Jarvan IV's W**?",
+        "a": "golden aegis"
+      },
+      {
+        "q": "What is the name of **Jarvan IV's E**?",
+        "a": "demacian standard"
+      },
+      {
+        "q": "What is the name of **Jarvan IV's R**?",
+        "a": "cataclysm"
+      },
+      {
+        "q": "What is the name of **Malzahar's Q**?",
+        "a": "call of the void"
+      },
+      {
+        "q": "What is the name of **Malzahar's W**?",
+        "a": "void swarm"
+      },
+      {
+        "q": "What is the name of **Malzahar's E**?",
+        "a": "malefic visions"
+      },
+      {
+        "q": "What is the name of **Malzahar's R**?",
+        "a": "nether grasp"
+      },
+      {
+        "q": "What is the name of **Zac's Q**?",
+        "a": "stretching strike"
+      },
+      {
+        "q": "What is the name of **Zac's W**?",
+        "a": "unstable matter"
+      },
+      {
+        "q": "What is the name of **Zac's E**?",
+        "a": "elastic slingshot"
+      },
+      {
+        "q": "What is the name of **Zac's R**?",
+        "a": "let's bounce!"
+      },
+      {
+        "q": "What is the name of **Gragas's Q**?",
+        "a": "barrel roll"
+      },
+      {
+        "q": "What is the name of **Gragas's W**?",
+        "a": "drunken rage"
+      },
+      {
+        "q": "What is the name of **Gragas's E**?",
+        "a": "body slam"
+      },
+      {
+        "q": "What is the name of **Gragas's R**?",
+        "a": "explosive cask"
+      }
+    ]
+  },
+  "random": {
+    "mode": "numbers",
+    "questions": [
+      {
+        "q": "What came first, the Egg or the Hen?",
+        "1": "The Egg",
+        "2": "The Hen",
+        "3": "Neither",
+        "a": "1"
+      },
+      {
+        "q": "What animals **digest stones** intentionally to **ease food consumption**?",
+        "1": "Dolphins",
+        "2": "Weasels",
+        "3": "Chickens",
+        "4": "Cranes",
+        "a": "3"
+      },
+      {
+        "q": "What was the name of **Salvador Dali's wife** and lifelong muse?",
+        "1": "Nala",
+        "2": "Sarah",
+        "3": "Ulala",
+        "4": "Gala",
+        "a": "4"
+      },
+      {
+        "q": "To aid with **navigation and sensation**, cats have dozens of **movable ...** over their body, especially their faces. These provide **information on the width of gaps and on the location of objects in the dark**, both by **touching objects directly** and by **sensing air currents**; they also **trigger protective blink reflexes** to protect the eyes from damage. Which word is replaced by **ellipsis**?",
+        "1": "Hairs",
+        "2": "Whiskers",
+        "3": "Skin Elements",
+        "4": "Spots",
+        "a": 2
+      }
+    ]
+  }
+}

@@ -1,14 +1,14 @@
 {
     "172226206375084032": {
-        "chance": 5,
+      "chance": 1,
         "channels": [
             172251363110027264
         ],
-        "total": 11,
+      "total": 35,
         "users": {
             "196989358165852160": {
                 "name": "Volcyy",
-                "amount": 0
+              "amount": 16
             },
             "143833693520134144": {
                 "name": "Chime Addict",
@@ -27,12 +27,12 @@
                 "amount": 0
             },
             "140329679159689216": {
-                "name": "Cata (NA flamer mod)",
-                "amount": 0
+              "name": "riceBOYE (Cata)",
+              "amount": 9
             },
             "135079599154528256": {
                 "name": "Bardie",
-                "amount": 0
+              "amount": 3
             },
             "215056515357343746": {
                 "name": "look at my sausage",
@@ -49,6 +49,18 @@
             "147723973340168192": {
                 "name": "Onno | Bradi",
                 "amount": 0
+            },
+            "295275450677067788": {
+                "name": "",
+                "amount": 0
+            },
+            "295283525819826178": {
+                "name": "",
+                "amount": 0
+            },
+          "85609003089924096": {
+            "name": "Heavy Lobster",
+            "amount": 6
             }
         }
     },
@@ -65,8 +77,33 @@
     },
     "226288553053782016": {
         "chance": 4,
+        "channels": [
+            226288553053782016,
+            226307470539227136,
+            272692718839398401
+        ],
+        "total": 2,
+        "users": {
+            "118271490364801027": {
+                "name": "Narwhalicorn",
+                "amount": 1
+            },
+            "196989358165852160": {
+                "name": "Volcyy",
+                "amount": 1
+            }
+        }
+    },
+    "210861353991274497": {
+        "chance": 4,
         "channels": [],
         "total": 0,
         "users": {}
+    },
+  "197391197935763457": {
+    "chance": 4,
+    "channels": [],
+    "total": 0,
+    "users": {}
     }
 }

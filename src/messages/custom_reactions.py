@@ -1,14 +1,16 @@
-import cassiopeia
-import discord
+import datetime
 import json
-import re
-import requests
 import urllib
 
+import cassiopeia
+import discord
+import re
+import requests
+
+from src import bot
 from src.events.reactions import create_custom_reaction_embed
 from src.util import embeds, lolapi
 from src.util.data_cruncher import data
-from src import bot
 
 
 async def invoke_leaderboard_build(msg):
@@ -29,6 +31,7 @@ async def _build_league_leaderboard(msg):
     :param msg: The Message invoking the Command 
     :return: The built Leaderboard. Takes some time.
     """
+    start = datetime.datetime.now()
     user_list = data.get_league_guild_users(msg.guild.id)
     info = await embeds.desc_only(msg.channel, f'Building League of Legends Leaderboard for '
                                                f'**{len(user_list)} Users**...')
@@ -43,6 +46,7 @@ async def _build_league_leaderboard(msg):
         score = '{:,}'.format(pair[0])
         leader_board.add_field(name=f'#{idx + 1}: {pair[1]}', value=f' with **{score} points**')
     await info.delete()
+    leader_board.set_footer(text=f'Took {str(datetime.datetime.now() - start)[6:]}s.')
     return await msg.channel.send(embed=leader_board)
 
 

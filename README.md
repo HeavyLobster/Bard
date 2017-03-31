@@ -1,5 +1,8 @@
 This is Heavy Lobster's fork of Volcyy's Bard.
 
-Currently the only change is a !unit command.
+Current changes:
 
-All configuration is the same as Volcyy's as of 2017-03-21.
+!unit command to convert between metric and US measurements
+!raffle to return a random user
+
+All configuration was the same as Volcyy's on 2017-03-21.

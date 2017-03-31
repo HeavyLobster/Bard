@@ -10,13 +10,36 @@ def datetime_from_struct_time(struct_time):
         pass
 
 
-async def desc_only(channel, desc: str):
+async def desc_only(channel, desc: str, color: discord.Colour=None):
+    embed = discord.Embed()
+    embed.description = desc
+    if color is not None:
+        embed.colour = color
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        pass
+
+
+async def title_and_desc(channel, title: str, desc: str, color: discord.Colour=None):
+    embed = discord.Embed()
+    embed.title = title
+    embed.description = desc
+    if color is not None:
+        embed.colour = color
+    try:
+        return await channel.send(embed=embed)
+    except discord.errors.HTTPException:
+        pass
+
+async def red_desc(channel, desc: str):
     embed = discord.Embed()
     embed.description = desc
     try:
         return await channel.send(embed=embed)
     except discord.errors.HTTPException:
         pass
+
 
 async def img_only(channel, link: str):
     embed = discord.Embed()
