@@ -21,7 +21,8 @@ replies = {
         'purge': administration.purge,
         'prune': administration.purge,
         'clear': administration.purge,
-        'ban': administration.ban
+        'ban': administration.ban,
+        'replace': administration.replace
     },
     data_cruncher.data.get_prefix('roles'): {
         'assign': roles.assign,
