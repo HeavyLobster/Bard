@@ -1,6 +1,8 @@
+import asyncio
 import discord
 import os
 import signal
+import uvloop
 
 from src.events import message, members, reactions, ready
 
@@ -8,6 +10,7 @@ print('Loading Bot... ', end='')
 
 # All Events go through here.
 client = discord.Client()
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 
 @client.event

@@ -1,14 +1,14 @@
 {
     "172226206375084032": {
-      "chance": 1,
+        "chance": 1,
         "channels": [
             172251363110027264
         ],
-      "total": 43,
+        "total": 45,
         "users": {
             "196989358165852160": {
-              "name": "voi-sea (\u0e51\u2022\u0300\u3142 \u2022\u0301)\u0648 \u2727",
-              "amount": 0
+                "name": "vao-sea (\u0e51\u2022\u0300\u3142 \u2022\u0301)\u0648 \u2727",
+                "amount": 2
             },
             "143833693520134144": {
                 "name": "Chime Addict",
@@ -16,7 +16,7 @@
             },
             "290324118665166849": {
                 "name": "Darb",
-              "amount": 4
+                "amount": 4
             },
             "137059214903214080": {
                 "name": "\u239dF\u239dU\u29f9L\u29f8L\u23a0Y\u239dM\u23a0\u239dA\u23a0Y\u23a0S\u23a0",
@@ -27,12 +27,12 @@
                 "amount": 0
             },
             "140329679159689216": {
-              "name": "riceBOYE (Cata)",
-              "amount": 0
+                "name": "tod",
+                "amount": 0
             },
             "135079599154528256": {
                 "name": "Bardie",
-              "amount": 1
+                "amount": 1
             },
             "215056515357343746": {
                 "name": "look at my sausage",
@@ -44,7 +44,7 @@
             },
             "174126034428493825": {
                 "name": "TheSeaPunCake",
-              "amount": 0
+                "amount": 0
             },
             "147723973340168192": {
                 "name": "Onno | Bradi",
@@ -58,29 +58,29 @@
                 "name": "",
                 "amount": 0
             },
-          "85609003089924096": {
-            "name": "Heavy Lobster",
-            "amount": 0
-          },
-          "170929033981329408": {
-            "name": "Cas",
-            "amount": 0
-          },
-          "197782592651526144": {
-            "name": "Lissy",
-            "amount": 2
-          },
-          "163403452205105153": {
-            "name": "Hobie \ud83d\udc9a",
-            "amount": 0
-          },
-          "194712891230912512": {
-            "name": "NyzoiB",
-            "amount": 0
-          },
-          "139357796767498240": {
-            "name": "Va\u00f8",
-            "amount": 0
+            "85609003089924096": {
+                "name": "Heavy Lobster",
+                "amount": 0
+            },
+            "170929033981329408": {
+                "name": "Cas",
+                "amount": 0
+            },
+            "197782592651526144": {
+                "name": "Lissy",
+                "amount": 2
+            },
+            "163403452205105153": {
+                "name": "Hobie \ud83d\udc9a",
+                "amount": 0
+            },
+            "194712891230912512": {
+                "name": "NyzoiB",
+                "amount": 0
+            },
+            "139357796767498240": {
+                "name": "Va\u00f8",
+                "amount": 0
             }
         }
     },
@@ -102,35 +102,39 @@
             226307470539227136,
             272692718839398401
         ],
-      "total": 21,
+        "total": 31,
         "users": {
             "118271490364801027": {
                 "name": "Narwhalicorn",
-              "amount": 14
+                "amount": 18
             },
             "196989358165852160": {
                 "name": "Volcyy",
-              "amount": 9
+                "amount": 9
             },
-          "252953970547359744": {
-            "name": "Achory",
-            "amount": 5
-          },
-          "190807993900597258": {
-            "name": "Vinkk",
-            "amount": 1
-          },
-          "175370545540366337": {
-            "name": "Ariangne",
-            "amount": 0
-          },
-          "235138780766535680": {
-            "name": "Wood 5 Support",
-            "amount": 0
-          },
-          "277197279226494977": {
-            "name": "dz321",
-            "amount": 1
+            "252953970547359744": {
+                "name": "Achory",
+                "amount": 6
+            },
+            "190807993900597258": {
+                "name": "Vinkk",
+                "amount": 1
+            },
+            "175370545540366337": {
+                "name": "Ariangne",
+                "amount": 1
+            },
+            "235138780766535680": {
+                "name": "Noot Noot",
+                "amount": 1
+            },
+            "277197279226494977": {
+                "name": "dz321",
+                "amount": 1
+            },
+            "258389365783396352": {
+                "name": "goat",
+                "amount": 1
             }
         }
     },
@@ -140,10 +144,10 @@
         "total": 0,
         "users": {}
     },
-  "197391197935763457": {
-    "chance": 4,
-    "channels": [],
-    "total": 0,
-    "users": {}
+    "197391197935763457": {
+        "chance": 4,
+        "channels": [],
+        "total": 0,
+        "users": {}
     }
 }
