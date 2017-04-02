@@ -205,3 +205,24 @@ async def help(msg):
     return await embeds.desc_only(msg.channel, "**You can view Bard's Commands here:** "
                                                "https://github.com/Volcyy/Bard/wiki")
 
+
+async def serverinfo(msg):
+    """
+    Show information about the Server / Guild this Command was used on.
+    
+    :param msg: The Message invoking the Command 
+    :return: The Bot's response
+    """
+    guild_info = f'**Name**: {msg.guild.name}\n' \
+                 f'**Region**: {msg.guild.region}\n' \
+                 f'**ID**: {msg.guild.id}\n' \
+                 f'**Owner**: {msg.guild.owner.mention}\n' \
+                 f'**Creation Date**: {msg.guild.created_at}\n' \
+                 f'**Amount of Roles**: {len(msg.guild.roles)}\n' \
+                 f'**Amount of Members**: {msg.guild.member_count}\n' \
+                 f'**Amount of Channels**: {len(msg.guild.channels)}\n' \
+                 f'**Default Channel**: {msg.guild.default_channel}\n' \
+                 f'**Icon**: <{msg.guild.icon_url}>\n' \
+                 f'**Splash**: <{msg.guild.splash_url}>\n' \
+                 f'**Emojis**: {x for x in msg.guild.emojis}'
+    return await embeds.title_and_desc(msg.channel, '- Guild Information -', guild_info)
