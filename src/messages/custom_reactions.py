@@ -221,8 +221,8 @@ async def serverinfo(msg):
                  f'**Amount of Roles**: {len(msg.guild.roles)}\n' \
                  f'**Amount of Members**: {msg.guild.member_count}\n' \
                  f'**Amount of Channels**: {len(msg.guild.channels)}\n' \
-                 f'**Default Channel**: {msg.guild.default_channel}\n' \
+                 f'**Default Channel**: <#{msg.guild.default_channel.id}>\n' \
                  f'**Icon**: <{msg.guild.icon_url}>\n' \
                  f'**Splash**: <{msg.guild.splash_url}>\n' \
-                 f'**Emojis**: {x for x in msg.guild.emojis}'
+                 f'**Emojis**: {"".join(f"<:{x.name}:{x.id}>" for x in msg.guild.emojis)}'
     return await embeds.title_and_desc(msg.channel, '- Guild Information -', guild_info)
