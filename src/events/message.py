@@ -56,7 +56,11 @@ replies = {
         'viewall': custom_reactions.build_list,
         'showall': custom_reactions.build_list,
         'hm': custom_reactions.hugemoji,
-        'help': custom_reactions.help
+        'help': custom_reactions.help,
+        'serverinfo': custom_reactions.serverinfo,
+        'server': custom_reactions.serverinfo,
+        'guildinfo': custom_reactions.serverinfo,
+        'guild': custom_reactions.serverinfo
     },
     data_cruncher.data.get_prefix('currency'): {
         'c': currency.get_money,
