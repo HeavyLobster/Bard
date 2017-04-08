@@ -160,7 +160,6 @@ async def on_member_unban(server, user):
 
 
 def start():
-    client.loop.add_signal_handler(signal.SIGTERM, lambda: client.loop.create_task(client.close()))
     client.run(os.environ['DISCORD_TOKEN'])
     message.data_cruncher.data.save_all()
 
