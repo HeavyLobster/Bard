@@ -34,6 +34,7 @@ replies = {
         'getmyrole': roles.get_league_role,
         'leaguerole': roles.get_league_role,
         'roles': roles.list_self_assignable,
+        'inrole': roles.in_role,
         'lsar': roles.list_self_assignable,
         'addselfassignable': roles.add_self_assignable,
         'asar': roles.add_self_assignable,
