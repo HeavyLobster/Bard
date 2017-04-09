@@ -43,6 +43,35 @@ def _get_role_by_name(name, guild_roles):
     return discord.utils.find(lambda r: r.name == name, guild_roles)
 
 
+async def in_role(msg):
+    """
+    Shows the count and a list of all members that are in the role that was looked up.
+    
+    :param msg: The Message invoking the Command 
+    :return: A discord.Message instance representing the Bot's response
+    """
+    if len(msg.content.split()) < 2:
+        return await embeds.desc_only(msg.channel, 'You need to name the Role for which you would like to lookup its '
+                                                   'members to use this Command!', discord.Color.red())
+    searched_role = ' '.join(msg.content.split()[1:])
+    searched_role_lower = searched_role.lower()
+    members_with_role = []
+    if searched_role_lower not in (role.name.lower() for role in msg.guild.roles):
+        return await embeds.desc_only(msg.channel, f'This Server does not have any Role named {searched_role}.',
+                                      discord.Color.red())
+    response = await embeds.desc_only(msg.channel, 'Finding Members...')
+    for member in msg.guild.members:
+        for role in member.roles:
+            if role.name.lower() == searched_role_lower:
+                members_with_role.append(member)
+    await response.delete()
+    members_with_role_as_string = ', '.join(x.name for x in members_with_role)
+    if len(members_with_role_as_string) > 2000:
+        members_with_role_as_string = 'There are too many players to list them here.'
+    return await embeds.title_and_desc(msg.channel, f'- Members with Role "{searched_role}" -',
+                                       f'{members_with_role_as_string}\n\n'
+                                       f'**{len(members_with_role)} total**.')
+
 async def assign(msg):
     role = await _perform_checks(msg)
     if not isinstance(role, discord.Role):  # checks didn't pass, it sent a warning instead of the Role
@@ -174,19 +203,3 @@ async def get_league_role(msg):
         elif champion_points >= 1500000:
             return await add_league_role_with_log(msg, '1.5M')
 
-
-async def fetch_role_assignment_messages():
-    print('Fetching up to 25 Messages in #role-assignment... ', end='')
-    try:
-        ctr = 0
-        async for msg in bot.client.get_channel(265551115901206528).history(limit=25):
-            if msg.author.id == bot.client.user.id or msg.author.id == 290324118665166849:  # darb or bard
-                print(f'- stopped, message #{ctr} - ', end='')
-                break
-            await message.handle_message(msg)
-            await msg.delete()
-            ctr += 1
-    except AttributeError as e:
-        print('it failed...')
-    else:
-        print('done.')

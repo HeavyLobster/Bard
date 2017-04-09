@@ -32,7 +32,7 @@ async def get_stream(stream_name: str):
                 except KeyError:
                     # Something is wrong here with the Twitch API.
                     return [stream_name, None]
-        except aiohttp.errors.ClientOSError:
+        except aiohttp.ClientOSError:
             print('Can\'t fetch Stream Data...')
         else:
             return stream
@@ -69,4 +69,5 @@ async def update_streams(channel):
                 await asyncio.sleep(5)
             last_streamers = curr_streamers
             curr_streamers = []  # Reset List so it doesn't fill up infinitely
+
         print('Shut Down Twitch Stream Update Listener, Bot logged off.')

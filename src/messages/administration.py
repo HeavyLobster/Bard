@@ -262,10 +262,10 @@ async def replace(msg):
     if msg.guild.me.top_role.permissions.manage_nicknames:
         result += '**Bot has permissions to manage the Nicknames.**\n'
         for member in msg.guild.members:
-            if member.nick is not None and find in member.name:
+            if member.nick is not None and find in member.nick:
                 old_nick = member.nick
                 await member.edit(nick=member.nick.replace(find, replace_with))
-                result += f'Replaced Member {member}\'s nickname "{old_nick}" with "{member.nick}".\n'
+                result += f'Replaced {member}\'s nickname "{old_nick}" with "{member.nick}".\n'
     else:
         result += '**Bot has no permissions to manage the Nicknames.**\n'
 

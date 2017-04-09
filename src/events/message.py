@@ -34,6 +34,7 @@ replies = {
         'getmyrole': roles.get_league_role,
         'leaguerole': roles.get_league_role,
         'roles': roles.list_self_assignable,
+        'inrole': roles.in_role,
         'lsar': roles.list_self_assignable,
         'addselfassignable': roles.add_self_assignable,
         'asar': roles.add_self_assignable,
@@ -57,6 +58,10 @@ replies = {
         'showall': custom_reactions.build_list,
         'hm': custom_reactions.hugemoji,
         'help': custom_reactions.help,
+        'serverinfo': custom_reactions.serverinfo,
+        'server': custom_reactions.serverinfo,
+        'guildinfo': custom_reactions.serverinfo,
+        'guild': custom_reactions.serverinfo,
         'unit': unit.convert,
         'raffle': raffle.raffle
     },

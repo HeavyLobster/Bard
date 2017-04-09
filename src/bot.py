@@ -1,6 +1,8 @@
+import asyncio
 import discord
 import os
 import signal
+import uvloop
 
 from src.events import message, members, reactions, ready
 
@@ -8,6 +10,7 @@ print('Loading Bot... ', end='')
 
 # All Events go through here.
 client = discord.Client()
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 
 # Declare boolean to keep track of whether Volcyy's bot is online
@@ -207,7 +210,6 @@ async def on_member_unban(server, user):
 
 
 def start():
-    client.loop.add_signal_handler(signal.SIGTERM, lambda: client.loop.create_task(client.close()))
     client.run(os.environ['DISCORD_TOKEN'])
     message.data_cruncher.data.save_all()
 
