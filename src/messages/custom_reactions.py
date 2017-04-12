@@ -135,6 +135,20 @@ async def woof(msg):
     return await msg.channel.send(url)
 
 
+async def fox(msg):
+    """Send a random Fox GIF."""
+    url = requests.get('https://api.giphy.com/v1/gifs/random?'
+                       'api_key=dc6zaTOxFJmzC&tag=fox').json()['data']['image_original_url']
+    return await msg.channel.send(url)
+
+
+async def hedgehog(msg):
+    """Send a random Hedgehog GIF."""
+    url = requests.get('https://api.giphy.com/v1/gifs/random?'
+                       'api_key=dc6zaTOxFJmzC&tag=hedgehog').json()['data']['image_original_url']
+    return await msg.channel.send(url)
+
+
 async def get_one(msg):
     """
     Sends a Custom Reaction with the specified name.
