@@ -1,3 +1,4 @@
+import sys
 import datetime
 import json
 import urllib
@@ -11,6 +12,48 @@ from src import bot
 from src.events.reactions import create_custom_reaction_embed
 from src.util import embeds, lolapi
 from src.util.data_cruncher import data
+
+
+async def fetch_leaderboard(msg):
+    """
+    Fetches leaderboard data from a URI and formats
+    it into a discord.Embed().
+    """
+    localFilePath = '/srv/http/heavylobster/bard-discord-lb.json'
+    uri = 'http://heavylobster.asuscomm.com/bard-discord-lb.json'
+    leaderboard = discord.Embed()
+
+    # Fetch user data
+    try:
+        with open(localFilePath) as localUserData:
+            userData = json.load(localUserData)
+    except FileNotFoundError:
+        try:
+            with urllib.request.urlopen(uri) as onlineUserData:
+                userData = json.load(onlineUserData)
+        except urllib.error.URLError:
+            print(
+                'Unable to get leaderboard data online or locally',
+                file=sys.stderr
+            )
+            return await embeds.desc_only(
+                msg.channel,
+                'Could not find leaderboard data'
+            )
+
+    # Start building embed
+    leaderboard.title = '- Bard Mastery Score Leaderboard -'
+    for position in userData:
+        if position.isdigit():
+            leaderboard.add_field(
+                name='#{0}: {1}'.format(str(position), userData[position]['Name']),
+                value=' with **{0}** points'.format(
+                    format(userData[position]['Mastery'], ',d')
+                )
+            )
+    leaderboard.set_footer(text='{0} UTC'.format(userData['Time']))
+
+    return await msg.channel.send(embed=leaderboard)
 
 
 async def invoke_leaderboard_build(msg):

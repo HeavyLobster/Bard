@@ -49,7 +49,7 @@ replies = {
         'removeleague': custom_reactions.remove_league_id,
         'rmleague': custom_reactions.remove_league_id,
         'rmlol': custom_reactions.remove_league_id,
-        'lb': custom_reactions.invoke_leaderboard_build,
+        'lb': custom_reactions.fetch_leaderboard,
         'leaderboard': custom_reactions.invoke_leaderboard_build,
         'leagueboard': custom_reactions.invoke_leaderboard_build,
         'meow': custom_reactions.meow,
